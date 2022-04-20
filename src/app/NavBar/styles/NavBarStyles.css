@@ -1,0 +1,14 @@
+@font-face {
+  font-family: circular;
+  src: url(Circular-Std-Font.otf);
+}
+
+.nav-text {
+  font-family: circular;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.nav-app {
+  padding-bottom: 20px;
+}

@@ -1,0 +1,35 @@
+@font-face {
+  font-family: gagalin;
+  src: url(Gagalin-Regular.otf);
+}
+
+@font-face {
+  font-family: circular;
+  src: url(Circular-Std-Font.otf);
+}
+
+.title-name {
+  font-family: gagalin;
+  color: black;
+  display: inline;
+  float: inline-end;
+  font-size: 80px;
+}
+
+.title-img {
+  margin: auto;
+  display: inline;
+  float: none;
+}
+
+.home-container-img {
+  padding-top: 50px;
+  width: 550px;
+  margin: auto;
+}
+
+.home-container {
+  padding-top: 50px;
+  width: 750px;
+  margin: 0 auto;
+}
