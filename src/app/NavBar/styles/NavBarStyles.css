@@ -3,8 +3,13 @@
   src: url(Circular-Std-Font.otf);
 }
 
+@font-face {
+  font-family: roboto_bold;
+  src: url(RobotoCondensed-Bold.ttf);
+}
+
 .nav-text {
-  font-family: circular;
+  font-family: roboto_bold;
   font-weight: bold;
   font-size: 25px;
 }
