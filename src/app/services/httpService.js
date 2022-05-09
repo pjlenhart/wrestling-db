@@ -1,7 +1,6 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://localhost:8001/";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -11,7 +10,6 @@ axios.interceptors.response.use(null, (error) => {
   if (expectedError) {
     return Promise.reject(error);
   }
-  toast.error("An unexpected Error occurred");
   return Promise.reject(error);
 });
 

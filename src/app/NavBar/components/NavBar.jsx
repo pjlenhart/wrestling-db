@@ -7,7 +7,15 @@ const NavBar = () => {
     background: "#800000",
   };
 
-  const pages = ["Home", "About", "Seasons", "Matches", "Articles"];
+  const pages = [
+    { link: "home", display: "Home" },
+    { link: "about", display: "About" },
+    { link: "seasons", display: "Seasons" },
+    { link: "matches", display: "Team Matches" },
+    { link: "articles", display: "Articles" },
+    { link: "schools", display: "School Directory" },
+    { link: "staff", display: "Coaching Staff" },
+  ];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark nav-app" style={color}>
@@ -15,12 +23,8 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav nav-text">
             {pages.map((page) => (
-              <NavLink
-                to={`/${page.toLowerCase()}`}
-                className="nav-link"
-                exact={true}
-              >
-                {page}
+              <NavLink to={`/${page.link}`} className="nav-link" exact={true}>
+                {page.display}
               </NavLink>
             ))}
           </div>
