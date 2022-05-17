@@ -1,8 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import {
-  getTeamMatches,
-  getTeamMatchById,
-} from "./../services/teamMatchSerice";
+import { getTeamMatches, getTeamMatchById } from "../services/teamMatchService";
 import MatchTable from "./MatchTable";
 import "../styles/matchStyles.css";
 
