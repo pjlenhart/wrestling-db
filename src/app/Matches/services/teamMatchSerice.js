@@ -1,9 +1,10 @@
 import http from "../../services/httpService";
 
-const apiEndpoint = "/wrestling-api/matches/";
+const apiEndpoint = "/wrestling-api/team-matches";
 
-export async function getTeamMatches() {
-  return http.get(apiEndpoint);
+export async function getTeamMatches(order = "asc") {
+  if (order === "asc") return http.get(`${apiEndpoint}/?ordering=match_date`);
+  return http.get(`${apiEndpoint}/?ordering=-match_date`);
 }
 
 export function getTeamMatchById(teamMatchId) {
