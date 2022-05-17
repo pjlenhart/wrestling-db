@@ -1,0 +1,14 @@
+.footer-container {
+  background-color: maroon;
+  color: white;
+  text-align: right;
+  padding-top: 5px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.footer-text {
+  padding-right: 5px;
+}

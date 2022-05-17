@@ -59,9 +59,11 @@ figcaption {
 .right-half {
   float: left;
   width: 50%;
+  padding-bottom: 50px;
 }
 
 .left-half {
   float: left;
   width: 50%;
+  padding-bottom: 50px;
 }

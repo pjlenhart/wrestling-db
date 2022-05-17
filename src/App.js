@@ -4,6 +4,7 @@ import About from "./app/About/components/About";
 import Seasons from "./app/Seasons/components/Seasons";
 import SeasonPage from "./app/Seasons/components/SeasonPage";
 import NavBar from "./app/NavBar/components/NavBar";
+import Footer from "./app/Footer/components/Footer";
 import Articles from "./app/Articles/components/Articles";
 import Matches from "./app/Matches/components/Matches";
 import Schools from "./app/Schools/components/Schools";
@@ -28,6 +29,7 @@ function App() {
         {/* This should be the last route; 404 - Not found */}
         <Route component={NotFound} />
       </Switch>
+      {/* <Footer /> */}
     </React.Fragment>
   );
 }
