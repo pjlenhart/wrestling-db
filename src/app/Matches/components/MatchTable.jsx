@@ -4,9 +4,34 @@ import Table from "../../common/Table/Table";
 import "../styles/matchStyles.css";
 
 const MatchTable = (props) => {
-  const { data, columns, sortColumn } = props;
+  const { data, sortColumn } = props;
 
-  return <Table columns={columns} data={data} sortColumn={sortColumn} />;
+  const teamMatchColumns = [
+    {
+      path: "opponent_school",
+      label: "Opponent",
+    },
+    {
+      path: "match_date_formatted",
+      label: "Match Date",
+    },
+    {
+      path: "team_score",
+      label: "Team Score",
+    },
+    {
+      path: "opponent_score",
+      label: "Opponent Score",
+    },
+    {
+      path: "team_result",
+      label: "Result",
+    },
+  ];
+
+  return (
+    <Table columns={teamMatchColumns} data={data} sortColumn={sortColumn} />
+  );
 };
 
 export default MatchTable;

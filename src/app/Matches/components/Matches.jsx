@@ -1,45 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getTeamMatches, getTeamMatchById } from "../services/teamMatchService";
+
 import MatchTable from "./MatchTable";
 import "../styles/matchStyles.css";
 
-const Matches = () => {
-  const [matches, setMatches] = useState([]);
-
-  const getAllTeamMatches = async () => {
-    const response = await getTeamMatches();
-    const data = response.data;
-    setMatches(data);
-  };
-
-  useEffect(() => {
-    getAllTeamMatches();
-  }, []);
-
-  const columns = [
-    {
-      path: "opponent_school",
-      label: "Opponent",
-    },
-    {
-      path: "match_date_formatted",
-      label: "Match Date",
-    },
-    {
-      path: "team_score",
-      label: "Team Score",
-    },
-    {
-      path: "opponent_score",
-      label: "Opponent Score",
-    },
-    {
-      path: "team_result",
-      label: "Result",
-    },
-  ];
-
-  const seasons = [...new Set(matches.map((match) => match.season))];
+const Matches = (props) => {
+  const { seasons, teamMatchData } = props;
 
   return (
     <div className="container">
@@ -51,8 +16,7 @@ const Matches = () => {
               <b>Season {season}</b>
             </h2>
             <MatchTable
-              data={matches.filter((match) => (match.season = season))}
-              columns={columns}
+              data={teamMatchData.filter((match) => (match.season = season))}
               sortColumn="match_date"
             />
           </>

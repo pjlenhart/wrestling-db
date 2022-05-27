@@ -1,0 +1,35 @@
+@font-face {
+  font-family: roboto-regular;
+  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+}
+
+@font-face {
+  font-family: gagalin;
+  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+}
+
+.h-home {
+  font-family: gagalin;
+  color: black;
+  display: inline;
+  font-size: 80px;
+  padding: 25px 0px 50px 0px;
+}
+
+.div-top {
+  padding-top: 25px;
+}
+
+table {
+  font-family: roboto_regular;
+}
+
+td,
+th,
+tr {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: lightgray;
+}

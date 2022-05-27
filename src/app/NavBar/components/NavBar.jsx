@@ -12,7 +12,7 @@ const NavBar = () => {
     { link: "about", display: "About" },
     { link: "seasons", display: "Seasons" },
     { link: "matches", display: "Team Matches" },
-    { link: "articles", display: "Articles" },
+    //{ link: "articles", display: "Articles" },
     { link: "schools", display: "School Directory" },
     { link: "staff", display: "Coaching Staff" },
   ];

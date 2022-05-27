@@ -1,4 +1,4 @@
-import http from "../../services/httpService";
+import http from "./httpService";
 
 const apiEndpoint = "/wrestling-api/team-matches";
 
