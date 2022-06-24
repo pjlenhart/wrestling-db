@@ -19,7 +19,9 @@ const MatchContainer = () => {
   }, []);
 
   const seasons = [...new Set(matches.map((match) => match.season))];
-  return <Matches seasons={seasons} teamMatchData={matches} />;
+  const seasonList = seasons.filter((season) => season !== "N/A");
+  const teamMatchList = matches.filter((match) => match.team_match_id !== 24);
+  return <Matches seasons={seasonList} teamMatchData={teamMatchList} />;
 };
 
 export default MatchContainer;

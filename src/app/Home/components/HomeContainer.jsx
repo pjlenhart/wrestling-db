@@ -28,7 +28,9 @@ const HomeContainer = () => {
   }, []);
 
   return (
-    <Home wrestlerData={wrestlers} teamMatchData={teamMatches.slice(0, 5)} />
+    <>
+      <Home wrestlerData={wrestlers} teamMatchData={teamMatches.slice(0, 5)} />
+    </>
   );
 };
 

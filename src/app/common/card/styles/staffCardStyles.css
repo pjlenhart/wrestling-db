@@ -3,17 +3,17 @@
   justify-content: flex-start;
 }
 
-.card-title {
+.staff-card-title {
   font-weight: bold;
   padding: 15px;
 }
 
-.card-text {
+.staff-card-text {
   padding: 0px 15px 5px 15px;
 }
 
-.card-img-cust {
+.staff-card-img-cust {
   min-height: 100%;
-  max-height: 400px;
+  max-height: 600px;
   width: 100%;
 }

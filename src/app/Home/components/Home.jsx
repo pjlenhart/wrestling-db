@@ -3,7 +3,6 @@ import HomeCarousel from "./HomeCarousel";
 import RosterTable from "./RosterTable";
 import MatchTable from "../../Matches/components/MatchTable";
 import SeasonCountdown from "./SeasonCountdown";
-import { getWrestlers, getWrestlerById } from "../../services/rosterService";
 import "../styles/homeStyles.css";
 
 const Home = (props) => {
@@ -24,13 +23,16 @@ const Home = (props) => {
             <b>Photo Gallery</b>
           </h2>
           <HomeCarousel />
+          <h2>
+            <b>Season Countdown</b>
+          </h2>
+          <SeasonCountdown />
         </div>
         <div className="col-4">
           <h2>
             <b>Recent Team Results</b>
           </h2>
           <MatchTable data={teamMatchData} sortColumn="match_date" />
-          <SeasonCountdown />
         </div>
       </div>
     </div>

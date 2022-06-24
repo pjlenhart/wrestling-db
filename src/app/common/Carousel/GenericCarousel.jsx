@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -8,7 +9,7 @@ const GenericCarousel = (props) => {
     <Carousel>
       {images.map((img) => (
         <div>
-          <img src={img.path} alt={img.alt ? img.alt : ""} />
+          <img src={img.path} alt={img.alt ? img.alt : ""} key={img.path} />
           <p>{img.caption}</p>
         </div>
       ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import WrestlingLogo from "../pictures/towson_wrestling_medium.jpg";
 import "../styles/HomeStyles.css";
+import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
@@ -10,35 +11,7 @@ const Login = () => {
       </div>
       <div className="home-container">
         <h1 className="title-name">Towson Wrestling DB</h1>
-        <form>
-          <div className="home-container">
-            <label for="username" className="labels">
-              Username
-            </label>
-            <div>
-              <input
-                type="text"
-                placeholder="Enter Username"
-                name="username"
-                required
-              />
-            </div>
-            <label for="password" className="labels">
-              Password
-            </label>
-            <div>
-              <input
-                type="text"
-                placeholder="Enter Password"
-                name="password"
-                required
-              />
-            </div>
-          </div>
-          <button type="submit" className="home-button">
-            Login
-          </button>
-        </form>
+        <LoginForm />
       </div>
     </div>
   );

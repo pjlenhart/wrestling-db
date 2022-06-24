@@ -1,0 +1,49 @@
+@font-face {
+  font-family: roboto-regular;
+  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+}
+
+@font-face {
+  font-family: roboto-bold;
+  src: url("/src/app/common/fonts/RobotoCondensed-Bold.ttf");
+}
+
+@font-face {
+  font-family: roboto-italic;
+  src: url("/src/app/common/fonts/RobotoCondensed-Italic.ttf");
+}
+
+@font-face {
+  font-family: gagalin;
+  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+}
+
+.h1-staff {
+  font-family: gagalin;
+  color: black;
+  display: inline;
+  font-size: 80px;
+  padding: 25px 0px 50px 0px;
+}
+
+.img-staff {
+  max-height: 1100px;
+  max-width: 600px;
+  justify-content: center;
+}
+
+.h2-staff {
+  font-family: roboto-italic;
+  color: black;
+  display: inline;
+  float: inline-end;
+}
+
+p {
+  font-family: roboto_regular;
+  font-size: 20px;
+}
+
+.staff-card-format {
+  padding-top: 50px;
+}

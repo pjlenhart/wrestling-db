@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import FlipClock from "x-react-flipclock";
 
 const SeasonCountdown = () => {
-  const calcDayDiff = () => {
+  const calcCountdownDay = () => {
     const today = new Date();
-    const startDate = new Date(`11/15/${today.getFullYear()}`);
-    const diffTime = Math.abs(startDate - today);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
+    return `${today.getFullYear()}-11-15 00:00:00`;
   };
-  return <p>There are {calcDayDiff()} days until next season</p>;
+
+  return (
+    <FlipClock
+      type="countdown"
+      count_to={calcCountdownDay()}
+      units={[
+        {
+          sep: "",
+          type: "days",
+          title: "days",
+        },
+        {
+          sep: " ",
+          type: "hours",
+          title: "hours",
+        },
+        {
+          sep: ":",
+          type: "minutes",
+          title: "minutes",
+        },
+      ]}
+    />
+  );
 };
 
 export default SeasonCountdown;

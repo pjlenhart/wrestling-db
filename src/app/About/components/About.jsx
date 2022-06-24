@@ -14,7 +14,7 @@ const About = () => {
     {
       header: "What Data is Available on this Website?",
       description:
-        "Student athletes will have access to both post-season and regular season data and will be able to see career statistics starting from the 2021-2022 season. However, due to the way scoring is conducted throughout the season, post-season statistics are more limited than regular season data which tracks all scoring actions. All wins, losses, match times, methods of result, period the match ended in, and in some cases, points for/against, are common data points that are available for both regular season and post-seasonmatches.",
+        "Student athletes will have access to both post-season and regular season data and will be able to see career statistics starting from the 2021-2022 season. However, due to the way scoring is conducted throughout the season, post-season statistics are more limited than regular season data which tracks all scoring actions. All wins, losses, match times, methods of result, period the match ended in, and in some cases, points for/against, are common data points that are available for both regular season and post-season matches. Regular season individual tournament match data will be collected and scored similar to how post-season matches are, with fewer data points, but still contributing to career numbers.",
     },
     {
       header: "How is the Data Obtained?",

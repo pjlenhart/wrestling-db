@@ -17,3 +17,21 @@
 .nav-app {
   padding-bottom: 20px;
 }
+
+.hello-text {
+  padding-right: 25px;
+}
+
+.logout-button {
+  background-color: white;
+  color: black;
+  font-family: roboto-bold;
+  text-align: center;
+  font-size: 22px;
+}
+
+.logout-button:hover {
+  color: white;
+  background-color: black;
+  border: 2px solid white;
+}
