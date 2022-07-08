@@ -12,16 +12,18 @@ import AuthRoute from "./app/Routing/AuthRoute";
 //import Footer from "./app/Footer/components/Footer";
 import Articles from "./app/Articles/components/Articles";
 import MatchContainer from "./app/Matches/components/MatchContainer";
-import Schools from "./app/Schools/components/Schools";
+import SchoolContainer from "./app/Schools/components/SchoolContainer";
 import NotFound from "./app/NotFound/components/NotFound";
 import { Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import auth from "./app/services/authService";
+import Register from "./app/HomePage/components/Register";
 
 function App() {
   return (
     <Switch>
       <Route path="/login" exact component={Login} />
+      <Route path="/register" exact component={Register} />
       <AuthRoute path="/" exact component={HomeContainer} />
       <AuthRoute path="/home" exact component={HomeContainer} />
       <AuthRoute path="/about" exact component={About} />
@@ -33,7 +35,7 @@ function App() {
       />
       <AuthRoute path="/articles" exact component={Articles} />
       <AuthRoute path="/matches" exact component={MatchContainer} />
-      <AuthRoute path="/schools" exact component={Schools} />
+      <AuthRoute path="/schools" exact component={SchoolContainer} />
       <AuthRoute path="/staff" exact component={Staff} />
       <AuthRoute path="/wrestlers" exact component={WrestlerContainer} />
       <AuthRoute

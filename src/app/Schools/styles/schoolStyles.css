@@ -1,0 +1,22 @@
+@font-face {
+  font-family: roboto-regular;
+  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+}
+
+.school-table {
+  font-family: roboto_regular;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.school-table-td {
+  text-align: left;
+  min-width: 200px;
+  max-width: 200px;
+}
+.school-table-th {
+  text-align: left;
+}
+.school-table-tr {
+  text-align: Left;
+}

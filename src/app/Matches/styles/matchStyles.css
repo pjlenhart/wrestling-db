@@ -18,17 +18,17 @@
   src: url(RobotoCondensed-Italic.ttf);
 }
 
-table {
+.match-table {
   font-family: roboto_regular;
 }
 
-td,
-th,
-tr {
+.match-table-td,
+.match-table-th,
+.match-table-tr {
   text-align: center;
 }
 
-tr:nth-child(even) {
+.match-table-tr:nth-child(even) {
   background-color: lightgray;
 }
 

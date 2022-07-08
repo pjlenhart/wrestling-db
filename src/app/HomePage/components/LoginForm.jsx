@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import auth from "../../services/authService";
 import { Redirect, useHistory } from "react-router-dom";
-import RegisterModal from "../../common/Modal/RegisterModal";
 import "../styles/HomeStyles.css";
 
 const LoginForm = (props) => {

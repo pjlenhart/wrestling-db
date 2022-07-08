@@ -21,7 +21,12 @@ const RosterTable = (props) => {
     { path: "classOf", label: "Class" },
   ];
   return (
-    <Table columns={wrestlerColumns} data={data} sortColumn={sortColumn} />
+    <Table
+      columns={wrestlerColumns}
+      data={data}
+      sortColumn={sortColumn}
+      classNamePrefix="home"
+    />
   );
 };
 

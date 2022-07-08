@@ -38,7 +38,10 @@ const WrestlerPage = (props) => {
           <h2>Individual/Postseason - Career</h2>
           <WrestlerPageTable data={individualData} type="individual" />
         </div>
-        <div className="col-4">{calculateRecord()}</div>
+        <div className="col-4">
+          <h2>Wrestler Statistics</h2>
+          {calculateRecord()}
+        </div>
       </div>
     </div>
   ) : null;

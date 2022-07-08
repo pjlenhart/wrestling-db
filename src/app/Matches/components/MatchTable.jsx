@@ -30,7 +30,12 @@ const MatchTable = (props) => {
   ];
 
   return (
-    <Table columns={teamMatchColumns} data={data} sortColumn={sortColumn} />
+    <Table
+      columns={teamMatchColumns}
+      data={data}
+      sortColumn={sortColumn}
+      classNamePrefix="match-table"
+    />
   );
 };
 

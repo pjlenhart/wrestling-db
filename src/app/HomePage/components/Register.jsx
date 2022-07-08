@@ -1,0 +1,17 @@
+import React from "react";
+import RegisterForm from "./RegisterForm";
+
+const Register = () => {
+  return (
+    <div className="container">
+      <h1 className="h-home">Registration Request</h1>
+      <h2>
+        Please fill out the below form to request registration to the system.
+        You will contacted if approved with further details.
+      </h2>
+      <RegisterForm />
+    </div>
+  );
+};
+
+export default Register;

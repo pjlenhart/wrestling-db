@@ -20,16 +20,16 @@
   padding-top: 25px;
 }
 
-table {
+.home-table {
   font-family: roboto_regular;
 }
 
-td,
-th,
-tr {
+.home-td,
+.home-th,
+.home-tr {
   text-align: center;
 }
 
-tr:nth-child(even) {
+.home-tr:nth-child(even) {
   background-color: lightgray;
 }

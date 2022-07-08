@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getWrestlers, getWrestlerById } from "../../services/rosterService";
-import {
-  getTeamMatches,
-  getTeamMatchById,
-} from "../../services/teamMatchService";
+import { getWrestlers } from "../../services/rosterService";
+import { getTeamMatches } from "../../services/teamMatchService";
 import Home from "./Home";
 
 const HomeContainer = () => {
@@ -13,7 +10,8 @@ const HomeContainer = () => {
   const getRoster = async () => {
     const response = await getWrestlers();
     const data = response.data;
-    setWrestlers(data);
+    const activeData = data.filter((item) => item.active_roster === true);
+    setWrestlers(activeData);
   };
 
   const getTeamMatchesAll = async () => {

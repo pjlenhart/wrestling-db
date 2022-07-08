@@ -22,9 +22,12 @@ class TableHeader extends Component {
   render() {
     return (
       <thead>
-        <tr>
+        <tr className={`${this.props.classNamePrefix}-tr`}>
           {this.props.columns.map((column) => (
-            <th className="clickable" key={column.path || column.key}>
+            <th
+              key={column.path || column.key}
+              className={`${this.props.classNamePrefix}-th`}
+            >
               {column.label} {this.renderSortIcon(column)}
             </th>
           ))}

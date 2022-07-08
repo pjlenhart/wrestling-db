@@ -17,9 +17,14 @@ class TableBody extends Component {
     return (
       <tbody>
         {data.map((item) => (
-          <tr key={_.uniqueId()}>
+          <tr key={_.uniqueId()} className={`${this.props.classNamePrefix}-tr`}>
             {columns.map((col) => (
-              <td key={_.uniqueId()}>{this.renderCell(item, col)}</td>
+              <td
+                key={_.uniqueId()}
+                className={`${this.props.classNamePrefix}-td`}
+              >
+                {this.renderCell(item, col)}
+              </td>
             ))}
           </tr>
         ))}
