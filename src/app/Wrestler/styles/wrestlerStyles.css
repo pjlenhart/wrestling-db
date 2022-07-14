@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: roboto-bold;
+  src: url("/src/app/common/fonts/RobotoCondensed-Bold.ttf");
+}
+
+@font-face {
   font-family: gagalin;
   src: url("/src/app/common/fonts/Gagalin-Regular.otf");
 }
@@ -21,4 +26,26 @@
   display: inline;
   font-size: 80px;
   padding: 25px 0px 50px 0px;
+}
+
+.stat-table {
+  font-family: roboto-regular;
+  min-width: 350px;
+  max-width: 500px;
+}
+
+.stat-table-tr-th {
+  background-color: maroon;
+  color: white;
+}
+
+.stat-table-th {
+  border: 2px solid black;
+  text-align: center;
+}
+
+.stat-table-td {
+  min-width: 200px;
+  border: 2px solid black;
+  text-align: center;
 }

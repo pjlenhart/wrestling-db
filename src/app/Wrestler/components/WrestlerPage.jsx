@@ -1,30 +1,14 @@
 import React from "react";
 import WrestlerPageTable from "./WrestlerPageTable";
+import WrestlerStatBox from "./WrestlerStatBox";
 import "../styles/wrestlerStyles.css";
 
 const WrestlerPage = (props) => {
-  const { regularSeasonData, individualData, wrestlerData } = props;
+  const { regularSeasonData, individualData, wrestlerData, careerStats } =
+    props;
   const wrestlerName = wrestlerData ? wrestlerData.wrestler_name : null;
-
-  const calculateRecord = () => {
-    const regSeason = [...regularSeasonData];
-    const individual = [...individualData];
-    const regSeasonWins = regSeason.filter(
-      (match) => match.match_result === "Win"
-    );
-    const individualWins = individual.filter(
-      (match) => match.match_result === "Win"
-    );
-    const wins = regSeasonWins.length + individualWins.length;
-    const regSeasonLosses = regSeason.filter(
-      (match) => match.match_result === "Loss"
-    );
-    const individualLosses = individual.filter(
-      (match) => match.match_result === "Loss"
-    );
-    const losses = regSeasonLosses.length + individualLosses.length;
-    return `${wins} - ${losses}`;
-  };
+  const careerArr = careerStats.filter((stats) => stats.season === "Career");
+  const career = careerArr[0] ? careerArr[0] : null;
 
   return regularSeasonData ? (
     <div className="container-fluid">
@@ -40,9 +24,12 @@ const WrestlerPage = (props) => {
         </div>
         <div className="col-4">
           <h2>Wrestler Statistics</h2>
-          {calculateRecord()}
+          <WrestlerStatBox data={career} />
         </div>
       </div>
+      {/* make this a full width div (container-fluid) and then a tabbed interface with different tabs comparing season over season performance for certain stats
+      the season over season should be a multi-line line graph where each line is a different season. Then create tabs for each stat. For example, wins season by season, 
+      reversals, points scored, matches total, etc */}
     </div>
   ) : null;
 };

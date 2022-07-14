@@ -22,7 +22,7 @@ class TableHeader extends Component {
   render() {
     return (
       <thead>
-        <tr className={`${this.props.classNamePrefix}-tr`}>
+        <tr className={`${this.props.classNamePrefix}-tr-th`}>
           {this.props.columns.map((column) => (
             <th
               key={column.path || column.key}
