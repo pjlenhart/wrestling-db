@@ -450,8 +450,14 @@ const WrestlerPageTable = (props) => {
     );
   };
 
-  return (
+  return type === "regularSeason" ? (
     <div style={{ height: 750, width: "100%" }}>
+      <div style={{ display: "flex", height: "100%" }}>
+        <ThemeProvider theme={theme}>{renderTable()}</ThemeProvider>
+      </div>
+    </div>
+  ) : (
+    <div style={{ height: 1180, width: "100%" }}>
       <div style={{ display: "flex", height: "100%" }}>
         <ThemeProvider theme={theme}>{renderTable()}</ThemeProvider>
       </div>

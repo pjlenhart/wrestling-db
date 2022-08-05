@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -238,11 +239,6 @@ const WrestlerStatBox = (props) => {
         },
       };
 
-  //************************************************************************************************* */
-  // make charts variable an array and use the already created common table to make the table more dynamic.
-  // define the columns and rows. Columns should just be 3 blank headers
-  // rows are Statistic name, number, and then graph, much easier than defining every tr and td separately
-  //************************************************************************************************* */
   const chartNames = [
     "winLoss",
     "takedowns",
@@ -270,64 +266,6 @@ const WrestlerStatBox = (props) => {
           <Doughnut data={graphData[`${chart}`]} />
         </div>
       ));
-  //   const charts = {
-  //     winLoss: (
-  //       <div
-  //         style={{ width: "150px", height: "100px" }}
-  //         className="container-fluid"
-  //       >
-  //         <Doughnut data={graphData?.winLoss} />
-  //       </div>
-  //     ),
-  //     takedowns: (
-  //       <div
-  //         style={{ width: "150px", height: "100px" }}
-  //         className="container-fluid"
-  //       >
-  //         <Doughnut data={graphData?.takedowns} />
-  //       </div>
-  //     ),
-  //     reversals: (
-  //       <div
-  //         style={{ width: "150px", height: "100px" }}
-  //         className="container-fluid"
-  //       >
-  //         <Doughnut data={graphData?.reversals} />
-  //       </div>
-  //     ),
-  //     escapes: (
-  //         <div
-  //           style={{ width: "150px", height: "100px" }}
-  //           className="container-fluid"
-  //         >
-  //           <Doughnut data={graphData?.escapes} />
-  //         </div>
-  //       ),
-  //       nearFalls: (
-  //         <div
-  //           style={{ width: "150px", height: "100px" }}
-  //           className="container-fluid"
-  //         >
-  //           <Doughnut data={graphData?.nearFalls} />
-  //         </div>
-  //       ),
-  //       takedownPoints: (
-  //         <div
-  //           style={{ width: "150px", height: "100px" }}
-  //           className="container-fluid"
-  //         >
-  //           <Doughnut data={graphData?.takedownPoints} />
-  //         </div>
-  //       ),
-  //       reversals: (
-  //         <div
-  //           style={{ width: "150px", height: "100px" }}
-  //           className="container-fluid"
-  //         >
-  //           <Doughnut data={graphData?.reversals} />
-  //         </div>
-  //       ),
-  //   };
 
   const columns = [
     { path: "stat", label: "Statistic" },
@@ -414,10 +352,16 @@ const WrestlerStatBox = (props) => {
           stat: "Loss Method Breakdown",
           numerical: (
             <ul style={{ textAlign: "left" }}>
-              <li>{`${data.losses_by_pin} by Pin`}</li>
-              <li>{`${data.losses_by_minor_decision} by Minor Dec.`}</li>
-              <li>{`${data.losses_by_major_decision} by Maj. Dec.`}</li>
-              <li>{`${data.losses_by_tech_fall} by Tech Fall`}</li>
+              <li key={_.uniqueId()}>{`${data.losses_by_pin} by Pin`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.losses_by_minor_decision} by Minor Dec.`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.losses_by_major_decision} by Maj. Dec.`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.losses_by_tech_fall} by Tech Fall`}</li>
             </ul>
           ),
           graph: charts[13],
@@ -426,10 +370,16 @@ const WrestlerStatBox = (props) => {
           stat: "Period Match Ended Breakdown",
           numerical: (
             <ul style={{ textAlign: "left" }}>
-              <li>{`${data.matches_end_first_period} in 1st`}</li>
-              <li>{`${data.matches_end_second_period} in 2nd`}</li>
-              <li>{`${data.matches_end_third_period} in 3rd`}</li>
-              <li>{`${data.matches_end_overtime} in OT`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.matches_end_first_period} in 1st`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.matches_end_second_period} in 2nd`}</li>
+              <li
+                key={_.uniqueId()}
+              >{`${data.matches_end_third_period} in 3rd`}</li>
+              <li key={_.uniqueId()}>{`${data.matches_end_overtime} in OT`}</li>
             </ul>
           ),
           graph: charts[14],
@@ -458,7 +408,6 @@ const WrestlerStatBox = (props) => {
 
   return data ? (
     <>
-      {console.log(charts)}
       <Table
         columns={columns}
         data={rows}

@@ -49,3 +49,25 @@
   border: 2px solid black;
   text-align: center;
 }
+
+.notes {
+  font-family: roboto-regular;
+  font-size: 14px;
+}
+
+ul.accolades {
+  font-family: roboto-regular;
+  list-style-image: url("/src/app/Wrestler/pictures/medal.png");
+}
+
+.h2-wrestler {
+  font-family: roboto-bold;
+  font-size: 35px;
+}
+
+.radar-box {
+  border: 3px;
+  border-color: maroon;
+  width: 500px;
+  height: 500px;
+}
