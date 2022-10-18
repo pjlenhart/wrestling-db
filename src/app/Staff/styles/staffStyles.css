@@ -47,3 +47,7 @@ p {
 .staff-card-format {
   padding-top: 50px;
 }
+
+.staff-info {
+  width: 80%;
+}

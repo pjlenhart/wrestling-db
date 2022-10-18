@@ -4,6 +4,7 @@ import phil from "../images/phil.jpg";
 import pete from "../images/pete (2).jpg";
 import StaffCard from "../../common/card/components/StaffCard";
 import "../styles/staffStyles.css";
+import AboutFAQSection from "./../../About/components/AboutFAQSection";
 
 const Staff = () => {
   const staffInfo = [
@@ -35,18 +36,15 @@ const Staff = () => {
       <h2 className="h2-staff">
         <b> Meet the coaches of Towson High School Wrestling!</b>
       </h2>
-      <div className="row staff-card-format">
+      <div>
         {staffInfo.map((staff) => (
-          <div className="col-4">
-            <StaffCard
-              img={staff.img}
-              title={staff.title}
-              subtitle={staff.subtitle}
-              cardClasses="img-staff season-card"
+          <div className="staff-info">
+            <AboutFAQSection
+              sectionHeader={staff.title}
+              description={staff.subtitle}
             />
           </div>
         ))}
-        )
       </div>
     </div>
   );

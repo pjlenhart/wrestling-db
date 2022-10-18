@@ -9,7 +9,11 @@ const Register = () => {
         Please fill out the below form to request registration to the system.
         You will contacted if approved with further details.
       </h2>
-      <RegisterForm />
+      {/* <RegisterForm /> */}
+      <p>
+        To request access to this website please send an email to
+        thswdb@gmail.com
+      </p>
     </div>
   );
 };
