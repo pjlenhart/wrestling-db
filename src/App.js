@@ -6,7 +6,6 @@ import Seasons from "./app/Seasons/components/Seasons";
 import SeasonPageContainer from "./app/Seasons/components/SeasonPageContainer";
 import WrestlerContainer from "./app/Wrestler/components/WrestlerContainer";
 import WrestlerPageContainer from "./app/Wrestler/components/WrestlerPageContainer";
-import NavBar from "./app/NavBar/components/NavBar";
 import Staff from "./app/Staff/components/Staff";
 import AuthRoute from "./app/Routing/AuthRoute";
 //import Footer from "./app/Footer/components/Footer";
@@ -15,8 +14,7 @@ import MatchContainer from "./app/Matches/components/MatchContainer";
 import SchoolContainer from "./app/Schools/components/SchoolContainer";
 import NotFound from "./app/NotFound/components/NotFound";
 import { Route, Switch } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import auth from "./app/services/authService";
+import React, { useEffect } from "react";
 import Register from "./app/HomePage/components/Register";
 
 function App() {

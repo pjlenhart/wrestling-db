@@ -36,8 +36,8 @@
 
 .tile {
   margin-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-bottom: 25px;
   height: fit-content;
   box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
@@ -58,13 +58,14 @@
 }
 
 .home-table {
-  font-family: roboto_regular;
+  font-family: roboto-regular;
 }
 
 .home-td,
 .home-th,
 .home-tr {
   text-align: center;
+  font-family: roboto-regular;
 }
 
 .home-tr:nth-child(even) {

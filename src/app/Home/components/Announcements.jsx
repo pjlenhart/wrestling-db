@@ -15,7 +15,7 @@ const Announcements = () => {
     },
     {
       title: "Mat Setup",
-      details: ["Monday, November 14th. All should plan to come help"],
+      details: ["Monday, November 14th, all should plan to come help"],
     },
   ];
   return (
