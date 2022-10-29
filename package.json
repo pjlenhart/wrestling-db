@@ -28,13 +28,8 @@
     "x-react-flipclock": "^0.1.184153"
   },
   "scripts": {
-<<<<<<< HEAD
     "start": "react-scripts start",
     "build": "NODE_ENV=production react-scripts build",
-=======
-    "start": "call env.bat && react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
->>>>>>> 877ed986952e77bf5171602fe2443240c4ed7e0f
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
