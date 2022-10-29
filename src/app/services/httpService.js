@@ -1,7 +1,7 @@
 import axios from "axios";
 
 axios.defaults.baseURL =
-  !process.env.NODE_ENV === "production"
+  process.env.NODE_ENV !== "production"
     ? "http://localhost:8001/"
     : "http://135.148.121.36:8001/";
 
