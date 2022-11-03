@@ -1,6 +1,6 @@
 import React from "react";
 import auth from "../../services/authService";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "../styles/NavBarStyles.css";
 
 const NavBar = (props) => {
@@ -8,6 +8,8 @@ const NavBar = (props) => {
   const color = {
     background: "#800000",
   };
+
+  const history = useHistory();
 
   const pages = [
     { link: "home", display: "Home" },
@@ -22,7 +24,7 @@ const NavBar = (props) => {
 
   const handleLogout = () => {
     auth.logout();
-    window.location.reload();
+    history.push("/");
   };
 
   return (
