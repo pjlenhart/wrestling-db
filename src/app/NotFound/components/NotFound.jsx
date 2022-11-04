@@ -12,7 +12,7 @@ const NotFound = () => {
       </p>
       <p className="p-404">
         Any further issues please contact the site admin via email at{" "}
-        <a href="mailto:lenhartpj@gmail.com">lenhartpj@gmail.com</a>
+        <a href="mailto:thswdb@gmail.com">thswdb@gmail.com</a>
       </p>
     </div>
   );
