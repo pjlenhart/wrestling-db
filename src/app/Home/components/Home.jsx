@@ -8,7 +8,7 @@ import SeasonCountdown from "./SeasonCountdown";
 import "../styles/homeStyles.css";
 
 const Home = (props) => {
-  const { wrestlerData, teamMatchData } = props;
+  const { wrestlerData, teamMatchData, announcements } = props;
 
   return (
     <div className="container-fluid">
@@ -42,7 +42,7 @@ const Home = (props) => {
             <h2 className="center-header">
               <b>Announcements</b>
             </h2>
-            <Announcements />
+            <Announcements announcements={announcements} />
           </div>
           <div className="tile">
             <h2 className="center-header">

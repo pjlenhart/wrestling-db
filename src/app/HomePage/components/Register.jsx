@@ -10,10 +10,7 @@ const Register = () => {
         You will be contacted if approved with further details.
       </h2>
       {/* <RegisterForm /> */}
-      <p>
-        To request access to this website please send an email to
-        thswdb@gmail.com
-      </p>
+      <p>To request access to this website please contact Coach PJ.</p>
     </div>
   );
 };
