@@ -27,7 +27,7 @@ const HomeContainer = () => {
     const data = response.data;
     const today = new Date().toISOString().slice(0, 10);
     const currentAnnoucements = data.filter(
-      (ann) => (ann.start_date >= today && ann.expiration_date > today) === true
+      (ann) => ann.expiration_date > today
     );
     setAnnouncements(currentAnnoucements);
   };
