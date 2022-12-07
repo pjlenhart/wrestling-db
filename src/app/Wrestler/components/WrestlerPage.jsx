@@ -11,7 +11,7 @@ const WrestlerPage = (props) => {
   const wrestlerName = wrestlerData ? wrestlerData.wrestler_name : null;
   const careerArr = careerStats.filter((stats) => stats.season === "Career");
   const seasons = [...new Set(careerStats.map((stat) => stat.season))];
-  const seasonList = seasons.filter((season) => season !== "Career");
+  const seasonList = seasons.filter((season) => season !== "Career").reverse();
   const career = careerArr[0] ? careerArr[0] : null;
 
   return regularSeasonData ? (
