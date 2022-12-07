@@ -5,11 +5,12 @@ import "../styles/matchStyles.css";
 
 const Matches = (props) => {
   const { seasons, teamMatchData } = props;
+  const orderSeasons = seasons.reverse();
 
   return (
     <div className="container">
       <h1 className="h1-match">Team Match Results</h1>
-      {seasons.map((season) => {
+      {orderSeasons.map((season) => {
         return (
           <>
             <h2>
