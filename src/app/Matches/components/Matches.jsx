@@ -16,7 +16,7 @@ const Matches = (props) => {
               <b>Season {season}</b>
             </h2>
             <MatchTable
-              data={teamMatchData.filter((match) => (match.season = season))}
+              data={teamMatchData.filter((match) => match.season === season)}
               sortColumn="match_date"
             />
           </>
