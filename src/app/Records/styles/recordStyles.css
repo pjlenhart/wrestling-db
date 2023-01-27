@@ -1,0 +1,25 @@
+@font-face {
+  font-family: roboto-regular;
+  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+}
+
+@font-face {
+  font-family: gagalin;
+  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+}
+
+.record-table {
+  font-family: roboto-regular;
+}
+
+.record-td,
+.record-th,
+.record-tr {
+  text-align: center;
+  font-family: roboto-regular;
+}
+
+.form-img {
+  height: 50px;
+  width: 50px;
+}

@@ -4,7 +4,6 @@ const Announcements = (props) => {
   const { announcements } = props;
   return (
     <div>
-      {console.log(announcements)}
       {announcements ? (
         announcements.map((ann) => (
           <div>

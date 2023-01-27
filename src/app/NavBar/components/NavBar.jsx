@@ -17,7 +17,7 @@ const NavBar = (props) => {
     { link: "seasons", display: "Seasons" },
     { link: "matches", display: "Team Matches" },
     { link: "wrestlers", display: "Wrestlers" },
-    //{ link: "articles", display: "Articles" },
+    { link: "records", display: "Records" },
     { link: "schools", display: "School Directory" },
     { link: "staff", display: "Coaching Staff" },
   ];

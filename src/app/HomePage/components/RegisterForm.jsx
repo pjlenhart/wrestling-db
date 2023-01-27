@@ -20,7 +20,6 @@ const RegisterForm = () => {
       email: email,
       message: message,
     };
-    console.log(resp);
     history.push("/login");
   };
 
