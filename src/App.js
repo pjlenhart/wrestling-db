@@ -4,6 +4,7 @@ import Login from "./app/HomePage/components/Login";
 import About from "./app/About/components/About";
 import Seasons from "./app/Seasons/components/Seasons";
 import SeasonPageContainer from "./app/Seasons/components/SeasonPageContainer";
+import RecordsContainer from "./app/Records/components/RecordsContainer";
 import WrestlerContainer from "./app/Wrestler/components/WrestlerContainer";
 import WrestlerPageContainer from "./app/Wrestler/components/WrestlerPageContainer";
 import Staff from "./app/Staff/components/Staff";
@@ -34,6 +35,7 @@ function App() {
       <AuthRoute path="/articles" exact component={Articles} />
       <AuthRoute path="/matches" exact component={MatchContainer} />
       <AuthRoute path="/schools" exact component={SchoolContainer} />
+      <AuthRoute path="/records" exact component={RecordsContainer} />
       <AuthRoute path="/staff" exact component={Staff} />
       <AuthRoute path="/wrestlers" exact component={WrestlerContainer} />
       <AuthRoute
