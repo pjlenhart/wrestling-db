@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.baseURL =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:8001/"
-    : "https://135.148.121.36:8000/";
+    : "https://135.148.121.36/";
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
