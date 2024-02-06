@@ -1,20 +1,11 @@
-import http from "./httpService";
-import auth from "./authService";
+import http from './httpService';
 
-const apiEndpoint = "/wrestling-api/career-stats";
+const apiEndpoint = '/wrestling-api/statistics';
 
 export async function getCareerStats() {
-  return http.get(`${apiEndpoint}/`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${apiEndpoint}/career-stats`);
 }
 
 export function getCareerStatsByWrestler(wrestlerId) {
-  return http.get(`${apiEndpoint}/${wrestlerId}`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${apiEndpoint}/career-stats/${wrestlerId}`);
 }

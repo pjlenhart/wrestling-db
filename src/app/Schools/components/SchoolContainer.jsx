@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { getSchools, getSchoolById } from "../../services/schoolService";
-import Schools from "./Schools";
+import React, { useState, useEffect } from 'react';
+import { getSchools, getSchoolById } from '../../services/schoolService';
+import Schools from './Schools';
 
 const SchoolContainer = () => {
-  const [schools, setSchools] = useState([]);
+    const [schools, setSchools] = useState([]);
 
-  const getAllSchools = async () => {
-    const response = await getSchools();
-    const data = response.data;
-    setSchools(data);
-  };
+    const getAllSchools = async () => {
+        const response = await getSchools();
+        const data = response.data?.data;
+        setSchools(data);
+    };
 
-  useEffect(() => {
-    getAllSchools();
-  }, []);
+    useEffect(() => {
+        getAllSchools();
+    }, []);
 
-  const regions = [...new Set(schools.map((school) => school.region))];
+    const regions = [...new Set(schools.map((school) => school.region))];
 
-  return <Schools schools={schools} regions={regions} />;
+    return <Schools schools={schools} regions={regions} />;
 };
 
 export default SchoolContainer;
