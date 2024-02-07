@@ -27,17 +27,28 @@ const Seasons = (props) => {
         <div className="col-6">
           <ImgCard
             img={images[Math.floor(Math.random() * images.length)]}
-            title="2022-2023"
+            title="2023-2024"
             subtitle="Data and statistics from the 2022-2023 season"
+            buttonText="Explore"
+            cardClasses="season-card"
+            buttonClasses="season-button"
+            link="seasons/2023-2024"
+          />
+        </div>
+      </div>
+      <br />
+      <div className="row">
+        <div className="col-6">
+          <ImgCard
+            img={images[Math.floor(Math.random() * images.length)]}
+            title="2022-2023"
+            subtitle="Data and statistics from the 2021-2022 season"
             buttonText="Explore"
             cardClasses="season-card"
             buttonClasses="season-button"
             link="seasons/2022-2023"
           />
         </div>
-      </div>
-      <br />
-      <div className="row">
         <div className="col-6">
           <ImgCard
             img={images[Math.floor(Math.random() * images.length)]}

@@ -1,12 +1,7 @@
-import http from "./httpService";
-import auth from "./authService";
+import http from './httpService';
 
-const announcementsEndpoint = "/wrestling-api/announcements";
+const announcementsEndpoint = '/wrestling-api/announcements';
 
 export async function getAnnouncements() {
-  return http.get(`${announcementsEndpoint}/`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${announcementsEndpoint}/`);
 }

@@ -1,20 +1,11 @@
-import http from "./httpService";
-import auth from "./authService";
+import http from './httpService';
 
-const apiEndpoint = "/wrestling-api/wrestlers";
+const apiEndpoint = '/wrestling-api/wrestlers';
 
 export async function getWrestlers() {
-  return http.get(`${apiEndpoint}/`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${apiEndpoint}/`);
 }
 
 export function getWrestlerById(wrestlerId) {
-  return http.get(`${apiEndpoint}/${wrestlerId}`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${apiEndpoint}/${wrestlerId}`);
 }

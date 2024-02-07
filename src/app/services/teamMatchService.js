@@ -1,26 +1,11 @@
-import http from "./httpService";
-import auth from "./authService";
+import http from './httpService';
 
-const apiEndpoint = "/wrestling-api/team-matches";
+const apiEndpoint = '/wrestling-api/matches/team-matches';
 
-export async function getTeamMatches(order = "asc") {
-  if (order === "asc")
-    return http.get(`${apiEndpoint}/?ordering=match_date`, {
-      headers: {
-        Authorization: `JWT ${auth.getJwt()}`,
-      },
-    });
-  return http.get(`${apiEndpoint}/?ordering=-match_date`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+export async function getTeamMatches(order = 'asc') {
+    return http.get(`${apiEndpoint}/`);
 }
 
 export function getTeamMatchById(teamMatchId) {
-  return http.get(`${apiEndpoint}/${teamMatchId}`, {
-    headers: {
-      Authorization: `JWT ${auth.getJwt()}`,
-    },
-  });
+    return http.get(`${apiEndpoint}/${teamMatchId}`);
 }
