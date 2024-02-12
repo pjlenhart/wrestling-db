@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Table from '../../common/Table/Table';
 import '../styles/matchStyles.css';
+import MaterialTable from '../../common/Table/MaterialTable';
 
 const MatchTable = (props) => {
     const { data, sortColumn } = props;
@@ -29,14 +30,7 @@ const MatchTable = (props) => {
         },
     ];
 
-    return (
-        <Table
-            columns={teamMatchColumns}
-            data={data}
-            sortColumn={sortColumn}
-            classNamePrefix="match-table"
-        />
-    );
+    return <MaterialTable columns={teamMatchColumns} data={data} />;
 };
 
 export default MatchTable;
