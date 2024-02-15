@@ -1,98 +1,171 @@
-import React from "react";
-import Table from "../../common/Table/Table";
-import green from "../styles/green.png";
-import yellow from "../styles/yellow.png";
-import red from "../styles/red.png";
+import React from 'react';
+import MaterialTable from '../../common/Table/MaterialTable';
+import {
+    ArrowCircleUp,
+    ArrowCircleDown,
+    RemoveCircleOutline,
+} from '@mui/icons-material';
+import green from '../styles/green.png';
+import yellow from '../styles/yellow.png';
+import red from '../styles/red.png';
+import { Typography } from '@mui/material';
 
 const RecordsTable = (props) => {
-  const { records } = props;
-  const recordColumns = [
-    {
-      path: "wrestler_name",
-      label: "Name",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.wrestler_name}</b>
-        ) : (
-          wrestler.wrestler_name
-        ),
-    },
-    {
-      path: "season",
-      label: "Season",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.season}</b>
-        ) : (
-          wrestler.season
-        ),
-    },
-    {
-      path: "wins",
-      label: "Wins",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? <b>{wrestler.wins}</b> : wrestler.wins,
-    },
-    {
-      path: "losses",
-      label: "Losses",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.losses}</b>
-        ) : (
-          wrestler.losses
-        ),
-    },
-    {
-      path: "wins_by_pin",
-      label: "Pins",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.wins_by_pin}</b>
-        ) : (
-          wrestler.wins_by_pin
-        ),
-    },
-    {
-      path: "total_match_time",
-      label: "Total Match Time",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.total_match_time}</b>
-        ) : (
-          wrestler.total_match_time
-        ),
-    },
-    {
-      path: "avg_match_time",
-      label: "Average Match Length",
-      content: (wrestler) =>
-        wrestler.season === "Career" ? (
-          <b>{wrestler.avg_match_time}</b>
-        ) : (
-          wrestler.avg_match_time
-        ),
-    },
-    {
-      path: "wins",
-      label: "Form",
-      content: (wrestler) => {
-        if (wrestler.wins > wrestler.losses)
-          return <img src={green} alt="winning season" className="form-img" />;
-        else if (wrestler.wins < wrestler.losses)
-          return <img src={red} alt="losing season" className="form-img" />;
-        else return <img src={yellow} alt="even season" className="form-img" />;
-      },
-    },
-  ];
-  return (
-    <Table
-      columns={recordColumns}
-      data={records}
-      sortColumn={""}
-      classNamePrefix="record"
-    />
-  );
+    const { records } = props;
+    const recordColumns = [
+        {
+            path: 'wrestler_name',
+            label: 'Name',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.wrestler_name}
+                    </Typography>
+                ) : (
+                    wrestler.wrestler_name
+                ),
+        },
+        {
+            path: 'season',
+            label: 'Season',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.season}
+                    </Typography>
+                ) : (
+                    wrestler.season
+                ),
+        },
+        {
+            path: 'wins',
+            label: 'Wins',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.wins}
+                    </Typography>
+                ) : (
+                    wrestler.wins
+                ),
+        },
+        {
+            path: 'losses',
+            label: 'Losses',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.losses}
+                    </Typography>
+                ) : (
+                    wrestler.losses
+                ),
+        },
+        {
+            path: 'wins_by_pin',
+            label: 'Pins',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.wins_by_pin}
+                    </Typography>
+                ) : (
+                    wrestler.wins_by_pin
+                ),
+        },
+        {
+            path: 'team_points_earned',
+            label: 'Team Points Earned',
+            content: (wrestler) =>
+                wrestler.season === 'Career' ? (
+                    <Typography
+                        sx={{
+                            color: 'black',
+                            fontSize: 16,
+                            fontFamily: 'Baloo-Bold',
+                        }}
+                    >
+                        {wrestler.team_points_earned}
+                    </Typography>
+                ) : (
+                    wrestler.team_points_earned
+                ),
+        },
+        {
+            path: 'wins',
+            label: 'Form',
+            content: (wrestler) => {
+                console.log('wrestler', wrestler);
+                if (parseInt(wrestler.wins) > parseInt(wrestler.losses))
+                    return (
+                        <ArrowCircleUp
+                            sx={{
+                                color: 'green',
+                                fontSize: 35,
+                            }}
+                        />
+                    );
+                else if (parseInt(wrestler.wins) < parseInt(wrestler.losses))
+                    return (
+                        <ArrowCircleDown
+                            sx={{
+                                color: 'red',
+                                fontSize: 35,
+                            }}
+                        />
+                    );
+                else
+                    return (
+                        <RemoveCircleOutline
+                            sx={{
+                                color: 'goldenrod',
+                                fontSize: 35,
+                            }}
+                        />
+                    );
+            },
+        },
+    ];
+    return (
+        <>
+            <MaterialTable
+                columns={recordColumns}
+                data={records}
+                unstriped={true}
+            />
+            {console.log('records', records)}
+        </>
+    );
 };
 
 export default RecordsTable;

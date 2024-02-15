@@ -8,9 +8,14 @@
     src: url('/src/app/common/fonts/static/BalooBhaijaan2-SemiBold.ttf');
 }
 
+@font-face {
+    font-family: Baloo-Bold;
+    src: url('/src/app/common/fonts/static/BalooBhaijaan2-ExtraBold.ttf');
+}
+
 body {
     margin: 0;
-    font-family: Barlow, Baloo, sans-serif;
+    font-family: Barlow, Baloo, Baloo-Bold, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

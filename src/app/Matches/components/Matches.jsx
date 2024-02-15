@@ -3,9 +3,7 @@ import Box from '@mui/material/Box';
 import MatchTable from './MatchTable';
 import '../styles/matchStyles.css';
 import PageHeader from './../../common/Header/PageHeader';
-import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
-import StarIcon from '@mui/icons-material/Star';
+import Subheader from '../../common/Header/Subheader';
 
 const Matches = (props) => {
     const { seasons, teamMatchData } = props;
@@ -29,41 +27,11 @@ const Matches = (props) => {
                                     pb: 5,
                                 }}
                             >
-                                <Box
-                                    sx={{
-                                        pl: 2,
-                                    }}
-                                >
-                                    <Chip
-                                        label={`Season ${season}`}
-                                        size="large"
-                                        sx={{
-                                            fontFamily: 'Baloo',
-                                            bgcolor: 'black',
-                                            color: 'white',
-                                            width: 300,
-                                            fontSize: 18,
-                                        }}
-                                    />
-                                </Box>
-                                {/* <Typography
-                                    component="h5"
-                                    variant="h5"
-                                    color="gray"
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: {
-                                            xs: 'column',
-                                            md: 'row',
-                                        },
-                                        alignSelf: 'center',
-                                        textAlign: 'center',
-                                        fontFamily: 'Baloo',
-                                        pb: 2,
-                                    }}
-                                >
-                                    Season {season}
-                                </Typography> */}
+                                <Subheader
+                                    label={`Season ${season}`}
+                                    width={300}
+                                    paddingLeft={2}
+                                />
                                 <Box
                                     sx={{
                                         width: '100%',

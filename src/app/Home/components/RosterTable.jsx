@@ -8,6 +8,10 @@ const RosterTable = (props) => {
     const { data, sortColumn } = props;
     const wrestlerColumns = [
         {
+            path: 'wrestler_id',
+            label: 'Wrestler ID',
+        },
+        {
             path: 'wrestler_name',
             label: 'Name',
             content: (wrestler) => (
@@ -20,6 +24,12 @@ const RosterTable = (props) => {
             ),
         },
         { path: 'classOf', label: 'Class' },
+        {
+            path: 'active_roster',
+            label: 'Active Roster',
+            content: (wrestler) =>
+                wrestler.active_roster === 1 ? 'On Active Roster' : 'Alumni',
+        },
     ];
     return <MaterialTable columns={wrestlerColumns} data={data} />;
 };

@@ -9,7 +9,16 @@ import Paper from '@mui/material/Paper';
 import _ from 'lodash';
 
 const MaterialTable = (props) => {
-    const { columns, data, headerHex, headerFontColor } = props;
+    const {
+        columns,
+        data,
+        headerHex,
+        headerFontColor,
+        unstriped,
+        minWidth,
+        alignCell,
+        alignHeaderCells,
+    } = props;
 
     const renderCell = (item, column) => {
         if (column.content) return column.content(item);
@@ -19,13 +28,16 @@ const MaterialTable = (props) => {
     return (
         <Paper>
             <TableContainer>
-                <Table sx={{ minWidth: 550 }} aria-label="simple table">
+                <Table
+                    sx={{ minWidth: minWidth || 550 }}
+                    aria-label="simple table"
+                >
                     <TableHead>
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
                                     key={_.uniqueId()}
-                                    align="center"
+                                    align={alignHeaderCells || 'center'}
                                     sx={{
                                         [`&.${tableCellClasses.head}`]: {
                                             backgroundColor:
@@ -47,7 +59,7 @@ const MaterialTable = (props) => {
                                 key={_.uniqueId()}
                                 sx={{
                                     '&:nth-of-type(odd)': {
-                                        backgroundColor: '#D3D3D3',
+                                        backgroundColor: unstriped || '#D3D3D3',
                                     },
                                 }}
                             >
@@ -60,7 +72,7 @@ const MaterialTable = (props) => {
                                                 fontFamily: 'Baloo',
                                             },
                                         }}
-                                        align="center"
+                                        align={alignCell || 'center'}
                                     >
                                         {renderCell(item, col)}
                                     </TableCell>
