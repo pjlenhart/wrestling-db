@@ -11,7 +11,8 @@ import {
     ArcElement,
 } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
-import Table from '../../common/Table/Table';
+import MaterialTable from '../../common/Table/MaterialTable';
+import Box from '@mui/material/Box';
 
 const WrestlerStatBox = (props) => {
     const { data } = props;
@@ -280,12 +281,9 @@ const WrestlerStatBox = (props) => {
     const charts = !graphData
         ? null
         : chartNames.map((chart) => (
-              <div
-                  style={{ width: '150px', height: '100px' }}
-                  className="container-fluid"
-              >
+              <Box sx={{ width: '150px', height: '150px' }}>
                   <Doughnut data={graphData[`${chart}`]} />
-              </div>
+              </Box>
           ));
 
     const columns = [
@@ -423,12 +421,7 @@ const WrestlerStatBox = (props) => {
 
     return data ? (
         <>
-            <Table
-                columns={columns}
-                data={rows}
-                sortColumn=""
-                classNamePrefix="stat-table"
-            />
+            <MaterialTable columns={columns} data={rows} />
         </>
     ) : null;
 };

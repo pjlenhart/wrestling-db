@@ -1,73 +1,68 @@
 @font-face {
-  font-family: roboto-regular;
-  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+    font-family: roboto-regular;
+    src: url('/src/app/common/fonts/RobotoCondensed-Regular.ttf');
 }
 
 @font-face {
-  font-family: roboto-bold;
-  src: url("/src/app/common/fonts/RobotoCondensed-Bold.ttf");
+    font-family: roboto-bold;
+    src: url('/src/app/common/fonts/RobotoCondensed-Bold.ttf');
 }
 
 @font-face {
-  font-family: gagalin;
-  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+    font-family: gagalin;
+    src: url('/src/app/common/fonts/Gagalin-Regular.otf');
 }
 
 .wrestler-table {
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .h-home {
-  font-family: gagalin;
-  color: black;
-  display: inline;
-  font-size: 80px;
-  padding: 25px 0px 50px 0px;
+    font-family: gagalin;
+    color: black;
+    display: inline;
+    font-size: 80px;
+    padding: 25px 0px 50px 0px;
 }
 
 .stat-table {
-  font-family: roboto-regular;
-  min-width: 350px;
-  max-width: 500px;
+    font-family: roboto-regular;
+    min-width: 350px;
+    max-width: 500px;
 }
 
 .stat-table-tr-th {
-  background-color: maroon;
-  color: white;
+    background-color: maroon;
+    color: white;
 }
 
 .stat-table-th {
-  border: 2px solid black;
-  text-align: center;
+    border: 2px solid black;
+    text-align: center;
 }
 
 .stat-table-td {
-  min-width: 200px;
-  border: 2px solid black;
-  text-align: center;
+    min-width: 200px;
+    border: 2px solid black;
+    text-align: center;
 }
 
 .notes {
-  font-family: roboto-regular;
-  font-size: 14px;
-}
-
-ul.accolades {
-  font-family: roboto-regular;
-  list-style-image: url("/src/app/Wrestler/pictures/medal.png");
+    font-family: roboto-regular;
+    font-size: 14px;
 }
 
 .h2-wrestler {
-  font-family: roboto-bold;
-  font-size: 35px;
+    font-family: roboto-bold;
+    font-size: 35px;
 }
 
 .radar-box {
-  border: 3px;
-  border-color: maroon;
-  width: 500px;
-  height: 500px;
+    border: 3px;
+    border-color: maroon;
+    width: 500px;
+    height: 500px;
 }
