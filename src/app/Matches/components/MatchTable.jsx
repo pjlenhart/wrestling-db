@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import Table from '../../common/Table/Table';
 import '../styles/matchStyles.css';
 import MaterialTable from '../../common/Table/MaterialTable';
 

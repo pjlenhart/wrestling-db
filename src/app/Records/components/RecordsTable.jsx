@@ -5,9 +5,6 @@ import {
     ArrowCircleDown,
     RemoveCircleOutline,
 } from '@mui/icons-material';
-import green from '../styles/green.png';
-import yellow from '../styles/yellow.png';
-import red from '../styles/red.png';
 import { Typography } from '@mui/material';
 
 const RecordsTable = (props) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import '../styles/cardStyles.css';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -9,15 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 const ImgCard = (props) => {
-    const {
-        img,
-        title,
-        subtitle,
-        buttonText,
-        link,
-        buttonClasses,
-        cardClasses,
-    } = props;
+    const { img, title, subtitle, buttonText, link } = props;
 
     return (
         <Grid item>

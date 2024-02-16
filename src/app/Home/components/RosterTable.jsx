@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { getWrestlers, getWrestlerById } from '../../services/rosterService';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Table from '../../common/Table/Table';
 import MaterialTable from '../../common/Table/MaterialTable';
 
 const RosterTable = (props) => {
-    const { data, sortColumn } = props;
+    const { data } = props;
     const wrestlerColumns = [
         {
             path: 'wrestler_id',

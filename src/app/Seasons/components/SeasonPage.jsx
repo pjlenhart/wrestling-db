@@ -36,7 +36,7 @@ const SeasonPage = (props) => {
                     type="regularSeason"
                 />
                 <Subheader
-                    label={`Individual/Post-Season Matches - ${
+                    label={`Individual/Postseason Matches - ${
                         season === 'all' ? 'All Time' : season
                     }`}
                     paddingBottom={2}

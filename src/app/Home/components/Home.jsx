@@ -3,7 +3,6 @@ import Announcements from './Announcements';
 import MatchTable from '../../Matches/components/MatchTable';
 import SeasonCountdown from './SeasonCountdown';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import '../styles/homeStyles.css';
 import MainContent from './MainContent';

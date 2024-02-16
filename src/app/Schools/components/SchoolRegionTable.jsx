@@ -1,5 +1,6 @@
 import React from 'react';
 import MaterialTable from '../../common/Table/MaterialTable';
+import Box from '@mui/material/Box';
 
 const SchoolRegionTable = (props) => {
     const { header, data } = props;
@@ -9,7 +10,7 @@ const SchoolRegionTable = (props) => {
     ];
 
     return (
-        <>
+        <Box sx={{ pb: 2 }}>
             <MaterialTable
                 data={data}
                 columns={columns}
@@ -18,9 +19,9 @@ const SchoolRegionTable = (props) => {
                 unstriped
                 alignCell="left"
                 alignHeaderCells="left"
-                minWidth={400}
+                minWidth={390}
             />
-        </>
+        </Box>
     );
 };
 

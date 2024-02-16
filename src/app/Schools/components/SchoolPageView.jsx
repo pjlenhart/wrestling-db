@@ -7,7 +7,7 @@ const SchoolPageView = (props) => {
     const { schools } = props;
     return (
         <Grid>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} sx={{ pb: 2 }}>
                 <Grid item xs={6} md={3}>
                     <SchoolRegionTable
                         data={schools.filter(
@@ -41,11 +41,6 @@ const SchoolPageView = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Divider
-                sx={{
-                    py: 3,
-                }}
-            />
             <Grid container spacing={1}>
                 <Grid item xs={6} md={3}>
                     <SchoolRegionTable
@@ -55,7 +50,7 @@ const SchoolPageView = (props) => {
                         header={'3A North'}
                     />
                 </Grid>
-                <Grid itemxs={6} md={3}>
+                <Grid item xs={6} md={3}>
                     <SchoolRegionTable
                         data={schools.filter(
                             (school) => school.region === '3A East'
@@ -71,7 +66,7 @@ const SchoolPageView = (props) => {
                         header={'3A West'}
                     />
                 </Grid>
-                <Grid itemxs={6} md={3}>
+                <Grid item xs={6} md={3}>
                     <SchoolRegionTable
                         data={schools.filter(
                             (school) => school.region === '3A South'
@@ -80,11 +75,6 @@ const SchoolPageView = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Divider
-                sx={{
-                    py: 3,
-                }}
-            />
             <Grid container spacing={1}>
                 <Grid item xs={6} md={3}>
                     <SchoolRegionTable
@@ -119,11 +109,6 @@ const SchoolPageView = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Divider
-                sx={{
-                    py: 3,
-                }}
-            />
             <Grid container spacing={1}>
                 <Grid item xs={6} md={3}>
                     <SchoolRegionTable

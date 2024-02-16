@@ -9,9 +9,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from '@mui/material/Link';
 import beast_otw_maroon from '../../Home/images/beast_otw-removebg.png';
-import beast_otw_white from '../../Home/images/beast_otw_white-removebg.png';
 import '../styles/NavBarStyles.css';
-import { Typography, Divider } from '@mui/material';
 
 const NavBar = (props) => {
     const [open, setOpen] = useState(false);

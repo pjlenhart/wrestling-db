@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import React, { useState } from 'react';
 import FlipClock from 'x-react-flipclock';
 
