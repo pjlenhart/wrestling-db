@@ -4,12 +4,22 @@ import WrestlerStatBox from './WrestlerStatBox';
 import Accolades from './Accolades';
 import '../styles/wrestlerStyles.css';
 import RadarChart from './RadarCharts';
+import PageHeader from '../../common/Header/PageHeader';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Grid';
+import Subheader from '../../common/Header/Subheader';
+import Typography from '@mui/material/Typography';
 
 const WrestlerPage = (props) => {
-    const { regularSeasonData, individualData, wrestlerData, careerStats } =
-        props;
+    const {
+        regularSeasonData,
+        individualData,
+        wrestlerData,
+        careerStats,
+        accolades,
+    } = props;
     const wrestlerName = wrestlerData ? wrestlerData.wrestler_name : null;
-    console.log('stats', careerStats);
     const careerArr = careerStats.filter((stats) => stats.season === 'Career');
     const seasons = [...new Set(careerStats.map((stat) => stat.season))];
     const seasonList = seasons
@@ -18,54 +28,92 @@ const WrestlerPage = (props) => {
     const career = careerArr[0] ? careerArr[0] : null;
 
     return regularSeasonData ? (
-        <div className="container-fluid">
-            <h1 className="h-home">{wrestlerName}</h1>
-            <Accolades accolades={wrestlerData} />
-            <div className="row">
-                <div className="col-8">
-                    <h2 className="h2-wrestler">Regular Season - Career</h2>
-                    <WrestlerPageTable
-                        data={regularSeasonData}
-                        type="regularSeason"
-                    />
-                    <br />
-                    <br />
-                    <h2 className="h2-wrestler">
-                        Individual/Postseason - Career
-                    </h2>
-                    <WrestlerPageTable
-                        data={individualData}
-                        type="individual"
-                    />
-                </div>
-                <div className="col-4">
-                    <h2 className="h2-wrestler">Wrestler Statistics</h2>
-                    <p className="notes">
-                        *Note: some statistics are only counted in the regular
-                        season, wins/losses, match times, and periods are
-                        counted in regular and post season.
-                    </p>
-                    <WrestlerStatBox data={career} />
-                </div>
-            </div>
-            <div>
-                <h2 className="h2-wrestler">
-                    Scoring Actions Breakdown Compared to Opponents, by Season
-                </h2>
-                {seasonList.map((season) => {
-                    return (
-                        <>
-                            <h2>Season {season}</h2>
-                            <RadarChart
-                                chartData={careerStats.filter(
-                                    (sea) => sea.season === season
-                                )}
+        <>
+            <PageHeader header={wrestlerName} />
+
+            <Box
+                sx={{
+                    width: 'auto',
+                    alignItems: 'center',
+                    px: 5,
+                    pb: 5,
+                }}
+            >
+                <Accolades accolades={accolades} />
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={8}>
+                        <Stack>
+                            <Subheader
+                                label="Regular Season - Career"
+                                paddingTop={2}
+                                paddingBottom={2}
                             />
-                        </>
-                    );
-                })}
-            </div>
-        </div>
+                            <WrestlerPageTable
+                                data={regularSeasonData}
+                                type="regularSeason"
+                            />
+                            <br />
+                            <br />
+                            <Subheader
+                                label="Individual/Postseason - Career"
+                                paddingTop={2}
+                                paddingBottom={2}
+                            />
+                            <WrestlerPageTable
+                                data={individualData}
+                                type="individual"
+                            />
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Subheader
+                            label="Wrestler Statistics"
+                            paddingTop={2}
+                            paddingBottom={2}
+                        />
+                        <Typography
+                            variant="body1"
+                            color="text.secondary"
+                            fontFamily="Baloo"
+                        >
+                            *Note: some statistics are only counted in the
+                            regular season, wins/losses, match times, and
+                            periods are counted in regular and post season.
+                        </Typography>
+                        <WrestlerStatBox data={career} />
+                    </Grid>
+                </Grid>
+
+                <Box>
+                    <Subheader
+                        label="Scoring Actions Breakdown Compared to Opponents, by Season"
+                        paddingTop={5}
+                        paddingBottom={3}
+                    />
+                    <Grid container>
+                        {seasonList.map((season) => {
+                            return (
+                                <Grid item xs={12} md={6}>
+                                    <Typography
+                                        component="h5"
+                                        variant="h5"
+                                        color="text.secondary"
+                                        fontFamily="Baloo"
+                                    >
+                                        Season {season}
+                                    </Typography>
+                                    <RadarChart
+                                        chartData={careerStats.filter(
+                                            (sea) => sea.season === season
+                                        )}
+                                    />
+                                </Grid>
+                            );
+                        })}
+                    </Grid>
+                </Box>
+            </Box>
+        </>
     ) : null;
 };
 

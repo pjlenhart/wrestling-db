@@ -6,12 +6,14 @@ import {
 import { getWrestlerById } from '../../services/rosterService';
 import { getCareerStatsByWrestler } from '../../services/statisticsService';
 import WrestlerPage from './WrestlerPage';
+import { getAccoladesByWrestler } from '../../services/widgetService';
 
 const WrestlerPageContainer = (props) => {
     const [regularSeasonMatches, setRegularSeasonMatches] = useState([]);
     const [individualMatches, setIndividualMatches] = useState([]);
     const [wrestlerInfo, setWrestlerInfo] = useState([]);
     const [careerStats, setCareerStats] = useState([]);
+    const [accolades, setAccolades] = useState([]);
 
     const getRegularSeason = async () => {
         const response = await getRegularSeasonMatchByWrestler(
@@ -41,11 +43,18 @@ const WrestlerPageContainer = (props) => {
         setCareerStats(data);
     };
 
+    const getAwards = async () => {
+        const response = await getAccoladesByWrestler(props.match.params.id);
+        const data = response.data?.data;
+        setAccolades(data);
+    };
+
     useEffect(() => {
         getRegularSeason();
         getIndividual();
         getWrestlerInfo();
         getStatistics();
+        getAwards();
     }, []);
 
     return (
@@ -56,6 +65,7 @@ const WrestlerPageContainer = (props) => {
                     individualData={individualMatches}
                     wrestlerData={wrestlerInfo}
                     careerStats={careerStats}
+                    accolades={accolades}
                 />
             ) : null}
         </>

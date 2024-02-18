@@ -1,22 +1,28 @@
-import React from "react";
-import Table from "../../common/Table/Table";
+import React from 'react';
+import MaterialTable from '../../common/Table/MaterialTable';
+import Box from '@mui/material/Box';
 
 const SchoolRegionTable = (props) => {
-  const columns = [
-    { path: "school_name", label: props.header },
-    { path: "county", label: "" },
-  ];
+    const { header, data } = props;
+    const columns = [
+        { path: 'school_name', label: header },
+        { path: 'county', label: '' },
+    ];
 
-  return (
-    <>
-      <Table
-        data={props.data}
-        columns={columns}
-        sortColumn=""
-        classNamePrefix="school-table"
-      />
-    </>
-  );
+    return (
+        <Box sx={{ pb: 2 }}>
+            <MaterialTable
+                data={data}
+                columns={columns}
+                headerHex="#C0C0C0"
+                headerFontColor="black"
+                unstriped
+                alignCell="left"
+                alignHeaderCells="left"
+                minWidth={390}
+            />
+        </Box>
+    );
 };
 
 export default SchoolRegionTable;

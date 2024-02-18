@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    getTeamMatches,
-    getTeamMatchById,
-} from '../../services/teamMatchService';
+import { getTeamMatches } from '../../services/teamMatchService';
 import Matches from './Matches';
 
 const MatchContainer = () => {

@@ -8,7 +8,7 @@ export async function getRegularSeasonMatches() {
 }
 
 export function getRegularSeasonMatchByWrestler(wrestlerId) {
-    return http.get(`${apiEndpointRegularSeason}/?wrestler_id=${wrestlerId}`);
+    return http.get(`${apiEndpointRegularSeason}/${wrestlerId}`);
 }
 
 export async function getIndividualMatches() {
@@ -16,5 +16,5 @@ export async function getIndividualMatches() {
 }
 
 export function getIndividualMatchByWrestler(wrestlerId) {
-    return http.get(`${apiEndpointIndividual}/?wrestler_id=${wrestlerId}`);
+    return http.get(`${apiEndpointIndividual}/${wrestlerId}`);
 }

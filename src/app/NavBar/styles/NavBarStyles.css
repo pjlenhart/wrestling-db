@@ -1,37 +1,27 @@
 @font-face {
-  font-family: circular;
-  src: url(Circular-Std-Font.otf);
+    font-family: circular;
+    src: url(Circular-Std-Font.otf);
 }
 
 @font-face {
-  font-family: roboto_bold;
-  src: url(RobotoCondensed-Bold.ttf);
+    font-family: roboto_bold;
+    src: url(RobotoCondensed-Bold.ttf);
 }
 
-.nav-text {
-  font-family: roboto_bold;
-  font-weight: bold;
-  font-size: 25px;
+.navbar-main {
+    font-family: roboto_bold;
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom: 20px;
+    background-color: maroon;
+    height: 50px;
 }
 
-.nav-app {
-  padding-bottom: 20px;
+.nav-button {
+    height: 15px;
 }
 
-.hello-text {
-  padding-right: 25px;
-}
-
-.logout-button {
-  background-color: white;
-  color: black;
-  font-family: roboto-bold;
-  text-align: center;
-  font-size: 22px;
-}
-
-.logout-button:hover {
-  color: white;
-  background-color: black;
-  border: 2px solid white;
+.siteLogo {
+    height: 65px;
+    width: 85px;
 }

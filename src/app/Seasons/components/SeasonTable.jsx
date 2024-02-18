@@ -6,16 +6,6 @@ import { Link } from 'react-router-dom';
 const SeasonTable = (props) => {
     const { data, type } = props;
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#800000',
-            },
-            secondary: {
-                main: '#000000',
-            },
-        },
-    });
     const individualColumns = [
         {
             field: 'wrestler_name',
@@ -58,6 +48,7 @@ const SeasonTable = (props) => {
             width: 150,
             filterable: true,
             type: 'date',
+            valueGetter: (params) => new Date(params.row.match_date),
         },
         {
             field: 'tournament',
@@ -378,7 +369,7 @@ const SeasonTable = (props) => {
                 sx={{
                     pl: 5,
                     boxShadow: 2,
-                    fontFamily: 'Roboto-Regular',
+                    fontFamily: 'Baloo',
                     fontSize: 18,
                     border: 2,
                     borderColor: 'maroon',
@@ -386,7 +377,7 @@ const SeasonTable = (props) => {
                         color: 'maroon',
                     },
                     '& .MuiDataGrid-columnHeaderTitle': {
-                        fontWeight: 'bold',
+                        fontWeight: 'semibold',
                     },
                 }}
                 columns={regularSeasonColumns}
@@ -418,7 +409,7 @@ const SeasonTable = (props) => {
                 sx={{
                     pl: 5,
                     boxShadow: 2,
-                    fontFamily: 'Roboto-Regular',
+                    fontFamily: 'Baloo',
                     fontSize: 18,
                     border: 2,
                     borderColor: 'maroon',
@@ -426,7 +417,7 @@ const SeasonTable = (props) => {
                         color: 'maroon',
                     },
                     '& .MuiDataGrid-columnHeaderTitle': {
-                        fontWeight: 'bold',
+                        fontWeight: 'semibold',
                     },
                 }}
                 columns={individualColumns}
@@ -442,7 +433,7 @@ const SeasonTable = (props) => {
     return (
         <div style={{ height: 750, width: '100%' }}>
             <div style={{ display: 'flex', height: '100%' }}>
-                <ThemeProvider theme={theme}>{renderTable()}</ThemeProvider>
+                {renderTable()}
             </div>
         </div>
     );

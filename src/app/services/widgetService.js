@@ -1,7 +1,11 @@
 import http from './httpService';
 
-const announcementsEndpoint = '/wrestling-api/announcements';
+const infoEndpoint = '/wrestling-api/info';
 
 export async function getAnnouncements() {
-    return http.get(`${announcementsEndpoint}/`);
+    return http.get(`${infoEndpoint}/announcements`);
+}
+
+export async function getAccoladesByWrestler(id) {
+    return http.get(`${infoEndpoint}/accolades/${id}`);
 }

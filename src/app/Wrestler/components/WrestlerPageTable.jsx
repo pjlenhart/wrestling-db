@@ -1,20 +1,10 @@
 import React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 
 const WrestlerPageTable = (props) => {
     const { data, type } = props;
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#800000',
-            },
-            secondary: {
-                main: '#000000',
-            },
-        },
-    });
     const individualColumns = [
         {
             field: 'wrestler_name',
@@ -56,6 +46,7 @@ const WrestlerPageTable = (props) => {
             width: 150,
             filterable: true,
             type: 'date',
+            valueGetter: (params) => new Date(params.row.match_date),
         },
         {
             field: 'tournament',
@@ -154,21 +145,13 @@ const WrestlerPageTable = (props) => {
             width: 200,
             filterable: true,
             type: 'date',
+            valueGetter: (params) => new Date(params.row.match_date),
         },
         {
             field: 'match_result',
             headerName: 'Result',
             width: 150,
             filterable: true,
-        },
-        {
-            field: 'match_time',
-            headerName: 'Match Time',
-            width: 150,
-            type: 'time',
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.match_time,
         },
         {
             field: 'takedowns_for',
@@ -392,7 +375,7 @@ const WrestlerPageTable = (props) => {
                 sx={{
                     pl: 5,
                     boxShadow: 2,
-                    fontFamily: 'Roboto-Regular',
+                    fontFamily: 'Baloo',
                     fontSize: 18,
                     border: 2,
                     borderColor: 'maroon',
@@ -432,7 +415,7 @@ const WrestlerPageTable = (props) => {
                 sx={{
                     pl: 5,
                     boxShadow: 2,
-                    fontFamily: 'Roboto-Regular',
+                    fontFamily: 'Baloo',
                     fontSize: 18,
                     border: 2,
                     borderColor: 'maroon',
@@ -454,17 +437,13 @@ const WrestlerPageTable = (props) => {
     };
 
     return type === 'regularSeason' ? (
-        <div style={{ height: 750, width: '100%' }}>
-            <div style={{ display: 'flex', height: '100%' }}>
-                <ThemeProvider theme={theme}>{renderTable()}</ThemeProvider>
-            </div>
-        </div>
+        <Box sx={{ height: 1500, width: '100%' }}>
+            <Box sx={{ display: 'flex', height: '100%' }}>{renderTable()}</Box>
+        </Box>
     ) : (
-        <div style={{ height: 1180, width: '100%' }}>
-            <div style={{ display: 'flex', height: '100%' }}>
-                <ThemeProvider theme={theme}>{renderTable()}</ThemeProvider>
-            </div>
-        </div>
+        <Box sx={{ height: 1380, width: '100%' }}>
+            <Box sx={{ display: 'flex', height: '100%' }}>{renderTable()}</Box>
+        </Box>
     );
 };
 

@@ -7,8 +7,6 @@ import RecordsContainer from './app/Records/components/RecordsContainer';
 import WrestlerContainer from './app/Wrestler/components/WrestlerContainer';
 import WrestlerPageContainer from './app/Wrestler/components/WrestlerPageContainer';
 import Staff from './app/Staff/components/Staff';
-//import Footer from "./app/Footer/components/Footer";
-import Articles from './app/Articles/components/Articles';
 import MatchContainer from './app/Matches/components/MatchContainer';
 import SchoolContainer from './app/Schools/components/SchoolContainer';
 import NotFound from './app/NotFound/components/NotFound';
@@ -19,7 +17,9 @@ import NavBar from './app/NavBar/components/NavBar';
 function App() {
     return (
         <>
-            <NavBar user={'Wrestler'} />
+            <div className="nav-space">
+                <NavBar />
+            </div>
             <Switch>
                 <Route path="/" exact component={HomeContainer} />
                 <Route path="/home" exact component={HomeContainer} />
@@ -30,7 +30,6 @@ function App() {
                     exact
                     component={SeasonPageContainer}
                 />
-                <Route path="/articles" exact component={Articles} />
                 <Route path="/matches" exact component={MatchContainer} />
                 <Route path="/schools" exact component={SchoolContainer} />
                 <Route path="/records" exact component={RecordsContainer} />
