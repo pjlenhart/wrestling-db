@@ -18,6 +18,7 @@ const MaterialTable = (props) => {
         minWidth,
         alignCell,
         alignHeaderCells,
+        sticky,
     } = props;
 
     const renderCell = (item, column) => {
@@ -26,11 +27,12 @@ const MaterialTable = (props) => {
     };
 
     return (
-        <Paper>
+        <Paper sx={{ overflow: 'hidden' }}>
             <TableContainer>
                 <Table
                     sx={{ minWidth: minWidth || 550 }}
                     aria-label="simple table"
+                    stickyHeader
                 >
                     <TableHead>
                         <TableRow>

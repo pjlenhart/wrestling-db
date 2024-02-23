@@ -9,13 +9,13 @@ const HomeContainer = () => {
 
     const getTeamMatchesAll = async () => {
         const response = await getTeamMatches('desc');
-        const data = response.data?.data;
+        const data = response?.data;
         setTeamMatches(data);
     };
 
     const getCurrentAnnoucements = async () => {
         const response = await getAnnouncements();
-        const data = response.data?.data;
+        const data = response?.data;
         const today = new Date().toISOString().slice(0, 10);
         const currentAnnoucements = data.filter(
             (ann) =>

@@ -7,7 +7,7 @@ const WrestlerContainer = () => {
 
     const getAllWrestlers = async () => {
         const response = await getWrestlers();
-        const data = response.data?.data;
+        const data = response?.data;
         setWrestlers(data);
     };
 

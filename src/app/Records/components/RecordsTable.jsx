@@ -5,7 +5,7 @@ import {
     ArrowCircleDown,
     RemoveCircleOutline,
 } from '@mui/icons-material';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const RecordsTable = (props) => {
     const { records } = props;
@@ -159,6 +159,7 @@ const RecordsTable = (props) => {
                 columns={recordColumns}
                 data={records}
                 unstriped={true}
+                sticky={true}
             />
             {console.log('records', records)}
         </>

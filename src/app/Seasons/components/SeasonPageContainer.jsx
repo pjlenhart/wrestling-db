@@ -12,13 +12,13 @@ const SeasonPageContainer = (props) => {
 
     const getRegularSeason = async () => {
         const response = await getRegularSeasonMatches();
-        const data = response.data?.data;
+        const data = response?.data;
         setRegularSeasonMatches(data);
     };
 
     const getIndividual = async () => {
         const response = await getIndividualMatches();
-        const data = response.data?.data;
+        const data = response?.data;
         setIndividualMatches(data);
     };
 
