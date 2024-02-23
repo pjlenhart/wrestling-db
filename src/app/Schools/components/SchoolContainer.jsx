@@ -7,7 +7,7 @@ const SchoolContainer = () => {
 
     const getAllSchools = async () => {
         const response = await getSchools();
-        const data = response.data?.data;
+        const data = response?.data;
         setSchools(data);
     };
 

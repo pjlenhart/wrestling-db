@@ -19,7 +19,7 @@ const WrestlerPageContainer = (props) => {
         const response = await getRegularSeasonMatchByWrestler(
             props.match.params.id
         );
-        const data = response.data?.data;
+        const data = response?.data;
         setRegularSeasonMatches(data);
     };
 
@@ -27,25 +27,25 @@ const WrestlerPageContainer = (props) => {
         const response = await getIndividualMatchByWrestler(
             props.match.params.id
         );
-        const data = response.data?.data;
+        const data = response?.data;
         setIndividualMatches(data);
     };
 
     const getWrestlerInfo = async () => {
         const response = await getWrestlerById(props.match.params.id);
-        const data = response.data.data[0];
+        const data = response?.data[0];
         setWrestlerInfo(data);
     };
 
     const getStatistics = async () => {
         const response = await getCareerStatsByWrestler(props.match.params.id);
-        const data = response.data?.data;
+        const data = response?.data;
         setCareerStats(data);
     };
 
     const getAwards = async () => {
         const response = await getAccoladesByWrestler(props.match.params.id);
-        const data = response.data?.data;
+        const data = response?.data;
         setAccolades(data);
     };
 

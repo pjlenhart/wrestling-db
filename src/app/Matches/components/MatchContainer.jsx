@@ -7,7 +7,7 @@ const MatchContainer = () => {
 
     const getAllTeamMatches = async () => {
         const response = await getTeamMatches();
-        const data = response.data?.data;
+        const data = response?.data;
         setMatches(data);
     };
 

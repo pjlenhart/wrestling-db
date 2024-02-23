@@ -7,7 +7,7 @@ const RecordsContainer = () => {
 
     const getAllRecords = async () => {
         const response = await getCareerStats();
-        const data = response.data?.data;
+        const data = response?.data;
         setRecords(data);
     };
 
