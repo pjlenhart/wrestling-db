@@ -51,3 +51,11 @@ p {
 .staff-info {
   width: 80%;
 }
+
+/* Staff Page Container */
+.staff-page-container {
+  width: auto;
+  align-items: center;
+  padding-left: 7.5rem;
+  padding-right: 7.5rem;
+}

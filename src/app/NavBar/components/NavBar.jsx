@@ -27,66 +27,31 @@ const NavBar = (props) => {
         { link: 'matches', display: 'Team Matches' },
         { link: 'wrestlers', display: 'Wrestlers' },
         { link: 'records', display: 'Records' },
+        { link: 'moveSearch', display: 'Move Search' },
         { link: 'schools', display: 'School Directory' },
-        { link: 'staff', display: 'Coaching Staff' },
     ];
 
     return (
         <>
             <div>
-                <AppBar
-                    position="fixed"
-                    sx={{
-                        boxShadow: 0,
-                        bgcolor: 'transparent',
-                        backgroundImage: 'none',
-                        mt: 2,
-                    }}
-                >
-                    <Container maxWidth="md">
-                        <Toolbar
-                            variant="regular"
-                            sx={(theme) => ({
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                flexShrink: 0,
-                                borderRadius: '999px',
-                                bgcolor: 'rgba(0, 0, 0, 0)',
-                                backdropFilter: 'blur(24px)',
-                                maxHeight: 40,
-                                border: '1px solid',
-                                borderColor: 'divider',
-                                boxShadow:
-                                    '0 0 1px rgba(128, 0, 0, .7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(128, 0, 0, .7)',
-                            })}
-                        >
-                            <Box
-                                sx={{
-                                    flexGrow: 1,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    ml: '-18px',
-                                    px: 0,
-                                    height: 60,
-                                }}
-                            >
+                <AppBar position="fixed" className="navbar-appbar">
+                    <Container maxWidth="lg">
+                        <Toolbar variant="regular" className="navbar-toolbar">
+                            <Box className="navbar-logo-container">
                                 <img
                                     src={beast_otw_maroon}
                                     alt="Beast of the week"
                                     className="siteLogo"
                                 />
-                                <Box
-                                    sx={{ display: { xs: 'none', md: 'flex' } }}
-                                >
-                                    {pages.map((page) => (
+                                <Box className="navbar-desktop-menu">
+                                    {pages.map((page, index) => (
                                         <MenuItem
-                                            sx={{ py: '6px', px: '12px' }}
+                                            key={index}
+                                            className="navbar-menu-item"
                                         >
                                             <Link
                                                 variant="body2"
-                                                color="#800000"
-                                                fontFamily="text.primary"
+                                                className="navbar-link-desktop"
                                                 href={`/${page.link}`}
                                             >
                                                 {page.display}
@@ -95,13 +60,13 @@ const NavBar = (props) => {
                                     ))}
                                 </Box>
                             </Box>
-                            <Box sx={{ display: { sm: '', md: 'none' } }}>
+                            <Box className="navbar-mobile-button">
                                 <Button
                                     variant="text"
                                     color="primary"
                                     aria-label="menu"
                                     onClick={toggleDrawer(true)}
-                                    sx={{ minWidth: '30px', p: '4px' }}
+                                    className="navbar-menu-button"
                                 >
                                     <MenuIcon />
                                 </Button>
@@ -110,29 +75,16 @@ const NavBar = (props) => {
                                     open={open}
                                     onClose={toggleDrawer(false)}
                                 >
-                                    <Box
-                                        sx={{
-                                            minWidth: '60dvw',
-                                            p: 2,
-                                            backgroundColor: 'background.paper',
-                                            flexGrow: 1,
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'end',
-                                                flexGrow: 1,
-                                            }}
-                                        ></Box>
-                                        {pages.map((page) => (
+                                    <Box className="navbar-drawer-content">
+                                        <Box className="navbar-drawer-header"></Box>
+                                        {pages.map((page, index) => (
                                             <MenuItem
-                                                sx={{ py: '6px', px: '12px' }}
+                                                key={index}
+                                                className="navbar-menu-item"
                                             >
                                                 <Link
                                                     variant="body2"
-                                                    color="text.secondary"
+                                                    className="navbar-link-mobile"
                                                     href={`/${page.link}`}
                                                 >
                                                     {page.display}

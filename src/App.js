@@ -13,6 +13,7 @@ import NotFound from './app/NotFound/components/NotFound';
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import NavBar from './app/NavBar/components/NavBar';
+import MoveSearchContainer from './app/MoveSearch/MoveSearchContainer';
 
 function App() {
     return (
@@ -33,6 +34,11 @@ function App() {
                 <Route path="/matches" exact component={MatchContainer} />
                 <Route path="/schools" exact component={SchoolContainer} />
                 <Route path="/records" exact component={RecordsContainer} />
+                <Route
+                    path="/moveSearch"
+                    exact
+                    component={MoveSearchContainer}
+                />
                 <Route path="/staff" exact component={Staff} />
                 <Route path="/wrestlers" exact component={WrestlerContainer} />
                 <Route

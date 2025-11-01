@@ -1,73 +1,545 @@
 @font-face {
-  font-family: roboto-regular;
-  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+    font-family: roboto-regular;
+    src: url('/src/app/common/fonts/RobotoCondensed-Regular.ttf');
 }
 
 @font-face {
-  font-family: gagalin;
-  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+    font-family: gagalin;
+    src: url('/src/app/common/fonts/Gagalin-Regular.otf');
+}
+
+/* Home Page - Instagram Image */
+.instagram-image {
+    height: 450px;
+    width: 450px;
+}
+
+/* Home Page - Main Content */
+.main-content-wrapper {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    padding-bottom: 1rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.main-content-stack {
+    width: 100%;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content-paper {
+    align-self: center;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content-title {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+    color: #800000;
+}
+
+.main-content-description {
+    text-align: center;
+    color: #6c757d;
+}
+
+.beast-image {
+    width: 400px;
+    height: 350px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Home Page - Featured Content */
+.featured-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+.featured-highlights-desc {
+    margin-bottom: 1rem;
+}
+
+.featured-chip-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Hide chips on larger screens - they should only show on mobile */
+@media (min-width: 576px) {
+    .featured-chip-container {
+        display: none !important;
+    }
+}
+
+.featured-chip {
+    cursor: pointer;
+    border-color: #dee2e6;
+}
+
+.featured-chip.selected {
+    background-color: #800000 !important;
+    color: #fff !important;
+    border-color: #800000 !important;
+}
+
+.featured-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-card {
+    padding: 1rem;
+    height: fit-content;
+    width: 100%;
+    background: none;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.featured-card.selected {
+    background-color: rgba(128, 0, 0, 0.04);
+    border-color: rgba(128, 0, 0, 0.5);
+}
+
+.featured-card-content {
+    width: 100%;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.featured-icon {
+    color: #bbb;
+}
+
+.featured-icon.selected {
+    color: #800000;
+}
+
+.featured-link {
+    display: inline-flex;
+    align-items: center;
+    color: #800000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.featured-link:hover svg {
+    transform: translateX(2px);
+}
+
+.featured-link svg {
+    margin-top: 1px;
+    margin-left: 2px;
+    transition: 0.2s;
+}
+
+.featured-content-display {
+    height: 100%;
+    width: 100%;
+    display: none;
+    pointer-events: none;
+    background-color: white;
+    justify-content: center;
+}
+
+.featured-description-margin {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Home Page - Announcements */
+.announcements-paper {
+    width: 500px;
+    padding: 2.5rem;
+    align-content: center;
+}
+
+.announcements-header {
+    font-family: Baloo, sans-serif;
+}
+
+.announcements-list {
+    font-family: Baloo, sans-serif;
+}
+
+/* Home Page - Season Countdown */
+.season-countdown-paper {
+    padding: 2.5rem;
+}
+
+.season-countdown-box {
+    margin-bottom: 2rem;
+}
+
+.season-countdown-title {
+    color: #800000;
+    margin-bottom: 1rem;
 }
 
 .h-home {
-  font-family: gagalin;
-  color: black;
-  display: inline;
-  font-size: 80px;
-  padding: 25px 0px 50px 0px;
+    font-family: gagalin;
+    color: black;
+    display: inline;
+    font-size: 80px;
+    padding: 25px 0px 50px 0px;
 }
 
 .home-img {
-  width: 100%;
+    width: 100%;
 }
 
 .h4-home {
-  font-family: roboto-regular;
-  font-weight: bold;
+    font-family: roboto-regular;
+    font-weight: bold;
 }
 
 .list-home {
-  font-family: roboto-regular;
+    font-family: roboto-regular;
 }
 
 .center-header {
-  display: block;
-  text-align: center;
+    display: block;
+    text-align: center;
 }
 
 .tile {
-  margin-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 25px;
-  height: fit-content;
-  box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
-  border: 1px solid #800000;
-  background-color: #fff;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 25px;
+    height: fit-content;
+    box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
+    border: 1px solid #800000;
+    background-color: #fff;
 }
 
 .tile-img {
-  margin-bottom: 10px;
-  height: auto;
-  box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
-  border: 1px solid #800000;
-  background-color: #fff;
+    margin-bottom: 10px;
+    height: auto;
+    box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
+    border: 1px solid #800000;
+    background-color: #fff;
 }
 
 .div-top {
-  padding-top: 25px;
+    padding-top: 25px;
 }
 
 .home-table {
-  font-family: roboto-regular;
+    font-family: roboto-regular;
 }
 
 .home-td,
 .home-th,
 .home-tr {
-  text-align: center;
-  font-family: roboto-regular;
+    text-align: center;
+    font-family: roboto-regular;
 }
 
 .home-tr:nth-child(even) {
-  background-color: lightgray;
+    background-color: lightgray;
+}
+
+/* Home Page - Responsive Styles */
+@media (min-width: 576px) {
+    .main-content-stack {
+        width: 70%;
+    }
+
+    .main-content-wrapper {
+        padding-bottom: 2rem;
+    }
+
+    .featured-container {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+
+    .featured-highlights-desc {
+        margin-bottom: 2rem;
+    }
+
+    .featured-stack {
+        display: flex;
+    }
+
+    .featured-content-display {
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content-title {
+        flex-direction: row;
+    }
+
+    .featured-card-content {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media (max-width: 575px) {
+    .featured-stack {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .beast-image {
+        width: 300px;
+        height: 262px;
+        margin-left: 0;
+    }
+
+    .instagram-image {
+        height: 300px;
+        width: 300px;
+    }
+
+    .announcements-paper {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+/* Instagram Image */
+.instagram-image {
+    height: 450px;
+    width: 450px;
+}
+
+/* Beast of the Week Image */
+.beast-image {
+    width: 400px;
+    height: 350px;
+    margin-left: 35px;
+}
+
+/* Main Content Container */
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.main-content-stack {
+    width: 100%;
+}
+
+.main-content-paper {
+    align-self: center;
+    padding-top: 0.5rem;
+}
+
+.main-content-title {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+    color: #800000;
+}
+
+.main-content-description {
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Featured Content */
+.featured-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+.featured-highlights-desc {
+    margin-bottom: 2rem;
+}
+
+.featured-chip-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.featured-chip {
+    cursor: pointer;
+    border-color: #dee2e6;
+}
+
+.featured-chip.selected {
+    background-color: #800000;
+    color: #fff;
+    border-color: #800000;
+}
+
+.featured-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-card {
+    padding: 1rem;
+    height: fit-content;
+    width: 100%;
+    background: none;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+}
+
+.featured-card.selected {
+    background-color: rgba(128, 0, 0, 0.04);
+    border-color: rgba(128, 0, 0, 0.5);
+}
+
+.featured-card-content {
+    width: 100%;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.featured-icon {
+    color: #bbb;
+}
+
+.featured-icon.selected {
+    color: #800000;
+}
+
+.featured-link {
+    display: inline-flex;
+    align-items: center;
+    color: #800000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.featured-link:hover svg {
+    transform: translateX(2px);
+}
+
+.featured-link svg {
+    margin-top: 1px;
+    margin-left: 2px;
+    transition: 0.2s;
+}
+
+.featured-content-display {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    pointer-events: none;
+    background-color: white;
+    justify-content: center;
+}
+
+/* Announcements */
+.announcements-paper {
+    width: 500px;
+    padding: 2.5rem;
+    align-content: center;
+}
+
+.announcements-header {
+    font-family: Baloo;
+}
+
+.announcements-list {
+    font-family: Baloo;
+}
+
+/* Season Countdown */
+.season-countdown-paper {
+    padding: 2.5rem;
+}
+
+.season-countdown-box {
+    margin-bottom: 2rem;
+}
+
+.season-countdown-title {
+    color: #800000;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Styles */
+@media (min-width: 576px) {
+    .main-content-stack {
+        width: 70%;
+    }
+
+    .main-content-container {
+        padding-bottom: 2rem;
+    }
+
+    .featured-container {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content-title {
+        flex-direction: row;
+    }
+
+    .featured-card-content {
+        flex-direction: row;
+    }
+
+    .featured-chip-container {
+        display: none;
+    }
+
+    .featured-content-display {
+        display: flex;
+    }
+}
+
+@media (max-width: 767px) {
+    .featured-stack {
+        display: none;
+    }
+
+    .featured-content-display {
+        display: none;
+    }
+
+    .beast-image {
+        width: 300px;
+        height: 262px;
+        margin-left: 0;
+    }
+
+    .instagram-image {
+        height: 300px;
+        width: 300px;
+    }
+
+    .announcements-paper {
+        width: 100%;
+        padding: 1.5rem;
+    }
 }

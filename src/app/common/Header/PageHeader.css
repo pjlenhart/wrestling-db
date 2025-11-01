@@ -1,0 +1,38 @@
+/* Page Header Component Styles */
+.page-header-divider {
+  padding-bottom: 2.5rem !important;
+  text-align: left !important;
+  width: 100% !important;
+  border-color: black !important;
+}
+
+.page-header-divider::before,
+.page-header-divider::after {
+  border-color: black !important;
+  border-width: 2px !important;
+}
+
+.page-header-title {
+  display: flex !important;
+  flex-direction: column;
+  align-self: center;
+  text-align: center !important;
+  color: #800000 !important;
+  font-family: Baloo, sans-serif !important;
+  font-size: 3rem !important;
+  font-weight: 700;
+  margin: 0 !important;
+}
+
+@media (min-width: 900px) {
+  .page-header-title {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header-title {
+    font-size: 2rem !important;
+  }
+}
+

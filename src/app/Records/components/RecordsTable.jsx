@@ -15,13 +15,7 @@ const RecordsTable = (props) => {
             label: 'Name',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.wrestler_name}
                     </Typography>
                 ) : (
@@ -33,13 +27,7 @@ const RecordsTable = (props) => {
             label: 'Season',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.season}
                     </Typography>
                 ) : (
@@ -51,13 +39,7 @@ const RecordsTable = (props) => {
             label: 'Wins',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.wins}
                     </Typography>
                 ) : (
@@ -69,13 +51,7 @@ const RecordsTable = (props) => {
             label: 'Losses',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.losses}
                     </Typography>
                 ) : (
@@ -87,13 +63,7 @@ const RecordsTable = (props) => {
             label: 'Pins',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.wins_by_pin}
                     </Typography>
                 ) : (
@@ -105,13 +75,7 @@ const RecordsTable = (props) => {
             label: 'Team Points Earned',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
-                    <Typography
-                        sx={{
-                            color: 'black',
-                            fontSize: 16,
-                            fontFamily: 'Baloo-Bold',
-                        }}
-                    >
+                    <Typography className="record-career-text">
                         {wrestler.team_points_earned}
                     </Typography>
                 ) : (

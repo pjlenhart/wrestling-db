@@ -11,10 +11,7 @@ const AboutFAQImageSection = (props) => {
                 <Typography
                     variant="body2"
                     color="text.primary"
-                    sx={{
-                        width: '175%',
-                        fontFamily: 'Baloo',
-                    }}
+                    className="about-faq-image-text"
                 >
                     {caption}
                 </Typography>

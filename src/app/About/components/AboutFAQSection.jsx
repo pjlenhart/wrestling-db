@@ -8,33 +8,19 @@ const AboutFAQSection = (props) => {
     const { sectionHeader, description } = props;
 
     return (
-        <Box
-            sx={{
-                py: 1,
-            }}
-        >
+        <Box className="about-faq-section">
             <Typography
                 component="h4"
                 variant="h4"
-                sx={{
-                    fontFamily: 'Baloo',
-                    pb: 1,
-                }}
+                className="about-faq-title"
             >
                 {sectionHeader}
             </Typography>
-            <Divider
-                sx={{
-                    bgcolor: '#800000',
-                }}
-            />
+            <Divider className="about-faq-divider" />
             <Typography
                 variant="paragraph"
                 color="black"
-                sx={{
-                    fontFamily: 'Baloo',
-                    fontWeight: 700,
-                }}
+                className="about-faq-description"
             >
                 {description}
             </Typography>

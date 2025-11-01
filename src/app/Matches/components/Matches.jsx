@@ -12,33 +12,13 @@ const Matches = (props) => {
     return (
         <>
             <PageHeader header="Dual Meet Results" />
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 15,
-                }}
-            >
+            <Box className="matches-page-container">
                 {orderSeasons.map((season) => {
                     return (
                         <>
-                            <Box
-                                sx={{
-                                    pb: 5,
-                                }}
-                            >
-                                <Subheader
-                                    label={`Season ${season}`}
-                                    width={300}
-                                    paddingLeft={2}
-                                />
-                                <Box
-                                    sx={{
-                                        width: '100%',
-                                        alignItems: 'center',
-                                        p: 2,
-                                    }}
-                                >
+                            <Subheader label={`Season ${season}`} />
+                            <Box className="matches-season-box">
+                                <Box className="matches-table-box">
                                     <MatchTable
                                         data={teamMatchData.filter(
                                             (match) => match.season === season

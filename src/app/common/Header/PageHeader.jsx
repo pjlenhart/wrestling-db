@@ -1,5 +1,6 @@
 import React from 'react';
 import { Divider, Typography } from '@mui/material';
+import './PageHeader.css';
 
 const PageHeader = (props) => {
     const { header } = props;
@@ -7,25 +8,12 @@ const PageHeader = (props) => {
         <Divider
             textAlign="left"
             fullWidth={true}
-            sx={{
-                pb: 5,
-                '&::before, &::after': {
-                    borderColor: 'black',
-                    border: 2,
-                },
-            }}
+            className="page-header-divider"
         >
             <Typography
                 component="h3"
                 variant="h3"
-                color="#800000"
-                sx={{
-                    display: 'flex',
-                    flexDirection: { xs: 'column', md: 'row' },
-                    alignSelf: 'center',
-                    textAlign: 'center',
-                    fontFamily: 'Baloo',
-                }}
+                className="page-header-title"
             >
                 {header}
             </Typography>

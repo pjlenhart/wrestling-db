@@ -10,13 +10,7 @@ const Records = (props) => {
     return (
         <>
             <PageHeader header="Records" />
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 15,
-                }}
-            >
+            <Box className="records-page-container">
                 <Subheader
                     label={`Records by Wrestler, by Year`}
                     width={300}

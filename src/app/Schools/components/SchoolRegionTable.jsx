@@ -10,7 +10,7 @@ const SchoolRegionTable = (props) => {
     ];
 
     return (
-        <Box sx={{ pb: 2 }}>
+        <Box className="school-region-box">
             <MaterialTable
                 data={data}
                 columns={columns}

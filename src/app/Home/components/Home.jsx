@@ -39,7 +39,7 @@ const Home = (props) => {
                 <img
                     src={ig}
                     alt="ths wrestling instagram"
-                    style={{ height: 450, width: 450 }}
+                    className="instagram-image"
                 />
             ),
             link: 'https://www.instagram.com/towson_high_wrestling/',
@@ -51,8 +51,8 @@ const Home = (props) => {
         <Container disableGutters={true}>
             <MainContent />
             <FeaturedContent featureItems={featureContent} />
-            <Box>
-                <Typography component="h2" variant="h4" color="text.primary">
+            <Box className="season-countdown-box">
+                <Typography component="h2" variant="h4" className="season-countdown-title">
                     Season Countdown
                 </Typography>
                 <SeasonCountdown />

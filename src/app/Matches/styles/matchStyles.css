@@ -1,46 +1,64 @@
 @font-face {
-  font-family: gagalin;
-  src: url(Gagalin-Regular.otf);
+    font-family: gagalin;
+    src: url(Gagalin-Regular.otf);
 }
 
 @font-face {
-  font-family: roboto_regular;
-  src: url(RobotoCondensed-Regular.ttf);
+    font-family: roboto_regular;
+    src: url(RobotoCondensed-Regular.ttf);
 }
 
 @font-face {
-  font-family: roboto_bold;
-  src: url(RobotoCondensed-Bold.ttf);
+    font-family: roboto_bold;
+    src: url(RobotoCondensed-Bold.ttf);
 }
 
 @font-face {
-  font-family: roboto_italics;
-  src: url(RobotoCondensed-Italic.ttf);
+    font-family: roboto_italics;
+    src: url(RobotoCondensed-Italic.ttf);
 }
 
 .match-table {
-  font-family: roboto_regular;
+    font-family: roboto_regular;
 }
 
 .match-table-td,
 .match-table-th,
 .match-table-tr {
-  text-align: center;
+    text-align: center;
 }
 
 .match-table-tr:nth-child(even) {
-  background-color: lightgray;
+    background-color: lightgray;
 }
 
 .h1-match {
-  font-family: gagalin;
-  color: black;
-  display: inline;
-  font-size: 80px;
-  padding: 25px 0px 50px 0px;
+    font-family: gagalin;
+    color: black;
+    display: inline;
+    font-size: 80px;
+    padding: 25px 0px 50px 0px;
 }
 
 h2 {
-  font-family: roboto_italics;
-  padding: 25px 0px 25px 0px;
+    font-family: roboto_italics;
+    padding: 35px 0px 25px 0px;
+}
+
+/* Matches Page Container */
+.matches-page-container {
+    width: auto;
+    align-items: center;
+    padding-left: 6rem;
+    padding-right: 7rem;
+}
+
+.matches-season-box {
+    padding-bottom: 2.5rem;
+}
+
+.matches-table-box {
+    width: 100%;
+    align-items: center;
+    padding: 1rem;
 }

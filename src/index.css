@@ -24,3 +24,22 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+/* Material-UI Container Max-Width Overrides */
+/* Make containers wider across the site */
+.MuiContainer-maxWidthLg {
+    max-width: 1400px !important;
+}
+
+.MuiContainer-maxWidthMd {
+    max-width: 1200px !important;
+}
+
+.MuiContainer-maxWidthSm {
+    max-width: 800px !important;
+}
+
+/* Default container without specified maxWidth */
+.MuiContainer-root {
+    max-width: 1400px !important;
+}

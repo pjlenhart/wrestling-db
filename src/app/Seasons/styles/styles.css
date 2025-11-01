@@ -52,3 +52,23 @@
 h2 {
   font-family: roboto_italics;
 }
+
+/* Seasons Page Container */
+.seasons-page-container {
+  width: auto;
+  align-items: center;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.seasons-grid-pb {
+  padding-bottom: 2.5rem;
+}
+
+/* Season Page Container */
+.season-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

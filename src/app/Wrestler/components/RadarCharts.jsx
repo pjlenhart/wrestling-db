@@ -126,7 +126,7 @@ const RadarChart = (props) => {
 
     return (
         <>
-            <Box sx={{ width: 750, height: 750, fontFamily: 'Baloo' }}>
+            <Box className="wrestler-radar-chart">
                 <Radar data={radarData} options={radarOptions} />
             </Box>
         </>
