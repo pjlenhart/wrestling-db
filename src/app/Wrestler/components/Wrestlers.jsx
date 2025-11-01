@@ -11,14 +11,7 @@ const Wrestlers = (props) => {
     return (
         <>
             <PageHeader header="Wrestler Directory" />
-            <Box
-                sx={{
-                    px: 5,
-                    width: 'auto',
-                    alignItems: 'center',
-                    pb: 10,
-                }}
-            >
+            <Box className="wrestlers-box">
                 <Subheader
                     label="All Towson Wrestlers - Click a name to explore their page!"
                     minWidth={800}

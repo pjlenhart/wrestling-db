@@ -11,13 +11,7 @@ const Schools = (props) => {
     return (
         <>
             <PageHeader header="School Directory" />
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 5,
-                }}
-            >
+            <Box className="schools-page-container">
                 <Subheader
                     label={`Current MPSSAA Regions and Divisions`}
                     width={500}

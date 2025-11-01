@@ -7,7 +7,7 @@ const SchoolPageView = (props) => {
     const { schools } = props;
     return (
         <Grid>
-            <Grid container spacing={1} sx={{ pb: 2 }}>
+            <Grid container spacing={1} className="school-grid-container">
                 <Grid item xs={6} md={3}>
                     <SchoolRegionTable
                         data={schools.filter(
@@ -143,11 +143,7 @@ const SchoolPageView = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Divider
-                sx={{
-                    py: 3,
-                }}
-            />
+            <Divider className="school-divider" />
         </Grid>
     );
 };

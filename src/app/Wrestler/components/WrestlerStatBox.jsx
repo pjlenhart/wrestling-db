@@ -281,7 +281,7 @@ const WrestlerStatBox = (props) => {
     const charts = !graphData
         ? null
         : chartNames.map((chart) => (
-              <Box sx={{ width: '150px', height: '150px' }}>
+              <Box className="wrestler-stat-chart">
                   <Doughnut data={graphData[`${chart}`]} />
               </Box>
           ));

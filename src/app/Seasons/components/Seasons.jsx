@@ -15,21 +15,12 @@ const Seasons = (props) => {
     return (
         <>
             <SeasonTitle />
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 5,
-                    pb: 5,
-                }}
-            >
+            <Box className="seasons-page-container">
                 <Grid>
                     <Grid
                         container
                         spacing={3}
-                        sx={{
-                            pb: 5,
-                        }}
+                        className="seasons-grid-pb"
                     >
                         <Grid item xs={12} md={6}>
                             <ImgCard

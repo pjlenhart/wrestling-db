@@ -19,7 +19,7 @@ const FeaturedContent = (props) => {
     };
 
     return (
-        <Container id="features" sx={{ py: { xs: 2, sm: 4 } }}>
+        <Container id="features" className="featured-container">
             <Grid container spacing={6}>
                 <Grid item xs={12} md={6}>
                     <div>
@@ -33,7 +33,7 @@ const FeaturedContent = (props) => {
                         <Typography
                             variant="body1"
                             color="text.secondary"
-                            sx={{ mb: { xs: 2, sm: 4 } }}
+                            className="featured-highlights-desc"
                         >
                             Check out some highlights of our site!
                         </Typography>
@@ -42,45 +42,14 @@ const FeaturedContent = (props) => {
                         container
                         item
                         gap={1}
-                        sx={{ display: { xs: 'auto', sm: 'none' } }}
+                        className="featured-chip-container"
                     >
                         {items.map(({ title }, index) => (
                             <Chip
                                 key={index}
                                 label={title}
                                 onClick={() => handleItemClick(index)}
-                                sx={{
-                                    borderColor: (theme) => {
-                                        if (theme.palette.mode === 'light') {
-                                            return selectedItemIndex === index
-                                                ? 'primary.light'
-                                                : '';
-                                        }
-                                        return selectedItemIndex === index
-                                            ? 'primary.light'
-                                            : '';
-                                    },
-                                    background: (theme) => {
-                                        if (theme.palette.mode === 'light') {
-                                            return selectedItemIndex === index
-                                                ? 'none'
-                                                : '';
-                                        }
-                                        return selectedItemIndex === index
-                                            ? 'none'
-                                            : '';
-                                    },
-                                    backgroundColor:
-                                        selectedItemIndex === index
-                                            ? 'primary.main'
-                                            : '',
-                                    '& .MuiChip-label': {
-                                        color:
-                                            selectedItemIndex === index
-                                                ? '#fff'
-                                                : '',
-                                    },
-                                }}
+                                className={`featured-chip ${selectedItemIndex === index ? 'selected' : ''}`}
                             />
                         ))}
                     </Grid>
@@ -148,10 +117,7 @@ const FeaturedContent = (props) => {
                         alignItems="flex-start"
                         spacing={2}
                         useFlexGap
-                        sx={{
-                            width: '100%',
-                            display: { xs: 'none', sm: 'flex' },
-                        }}
+                        className="featured-stack"
                     >
                         {items.map(
                             ({ icon, title, description, link }, index) => (
@@ -159,62 +125,10 @@ const FeaturedContent = (props) => {
                                     key={index}
                                     component={Button}
                                     onClick={() => handleItemClick(index)}
-                                    sx={{
-                                        p: 2,
-                                        height: 'fit-content',
-                                        width: '100%',
-                                        background: 'none',
-                                        backgroundColor:
-                                            selectedItemIndex === index
-                                                ? 'action.selected'
-                                                : undefined,
-                                        borderColor: (theme) => {
-                                            if (
-                                                theme.palette.mode === 'light'
-                                            ) {
-                                                return selectedItemIndex ===
-                                                    index
-                                                    ? 'primary.light'
-                                                    : 'grey.200';
-                                            }
-                                            return selectedItemIndex === index
-                                                ? 'primary.dark'
-                                                : 'grey.800';
-                                        },
-                                    }}
+                                    className={`featured-card ${selectedItemIndex === index ? 'selected' : ''}`}
                                 >
-                                    <Box
-                                        sx={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            textAlign: 'left',
-                                            flexDirection: {
-                                                xs: 'column',
-                                                md: 'row',
-                                            },
-                                            alignItems: { md: 'center' },
-                                            gap: 2.5,
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                color: (theme) => {
-                                                    if (
-                                                        theme.palette.mode ===
-                                                        'light'
-                                                    ) {
-                                                        return selectedItemIndex ===
-                                                            index
-                                                            ? 'primary.main'
-                                                            : 'grey.300';
-                                                    }
-                                                    return selectedItemIndex ===
-                                                        index
-                                                        ? 'primary.main'
-                                                        : 'grey.700';
-                                                },
-                                            }}
-                                        >
+                                    <Box className="featured-card-content">
+                                        <Box className={`featured-icon ${selectedItemIndex === index ? 'selected' : ''}`}>
                                             {icon}
                                         </Box>
                                         <div>
@@ -228,7 +142,7 @@ const FeaturedContent = (props) => {
                                             <Typography
                                                 color="text.secondary"
                                                 variant="body2"
-                                                sx={{ my: 0.5 }}
+                                                className="featured-description-margin"
                                             >
                                                 {description}
                                             </Typography>
@@ -238,26 +152,10 @@ const FeaturedContent = (props) => {
                                                     variant="body2"
                                                     fontWeight="bold"
                                                     href={link}
-                                                    sx={{
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        '& > svg': {
-                                                            transition: '0.2s',
-                                                        },
-                                                        '&:hover > svg': {
-                                                            transform:
-                                                                'translateX(2px)',
-                                                        },
-                                                    }}
+                                                    className="featured-link"
                                                 >
                                                     <span>See more</span>
-                                                    <ChevronRightRoundedIcon
-                                                        fontSize="small"
-                                                        sx={{
-                                                            mt: '1px',
-                                                            ml: '2px',
-                                                        }}
-                                                    />
+                                                    <ChevronRightRoundedIcon fontSize="small" />
                                                 </Link>
                                             ) : null}
                                         </div>
@@ -271,18 +169,8 @@ const FeaturedContent = (props) => {
                     item
                     xs={12}
                     md={6}
-                    sx={{ display: { xs: 'none', sm: 'flex' }, width: '100%' }}
                 >
-                    <Card
-                        sx={{
-                            height: '100%',
-                            width: '100%',
-                            display: { xs: 'none', sm: 'flex' },
-                            pointerEvents: 'none',
-                            backgroundColor: 'white',
-                            justifyContent: 'center',
-                        }}
-                    >
+                    <Card className="featured-content-display">
                         {items[selectedItemIndex].content}
                     </Card>
                 </Grid>

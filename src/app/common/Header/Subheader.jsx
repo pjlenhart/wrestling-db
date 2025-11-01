@@ -1,36 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import './Subheader.css';
 
 const Subheader = (props) => {
-    const {
-        label,
-        paddingLeft,
-        paddingRight,
-        paddingBottom,
-        paddingTop,
-        width,
-    } = props;
+    const { label } = props;
+
     return (
-        <Box
-            sx={{
-                pl: paddingLeft,
-                pr: paddingRight,
-                pb: paddingBottom,
-                pt: paddingTop,
-            }}
-        >
-            <Chip
-                label={label}
-                size="large"
-                sx={{
-                    fontFamily: 'Baloo',
-                    bgcolor: 'black',
-                    color: 'white',
-                    width: width,
-                    fontSize: 18,
-                }}
-            />
+        <Box className="subheader-box">
+            <Chip label={label} size="large" className="subheader-chip" />
         </Box>
     );
 };

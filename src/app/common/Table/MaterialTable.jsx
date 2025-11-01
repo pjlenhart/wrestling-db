@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import _ from 'lodash';
+import './MaterialTable.css';
 
 const MaterialTable = (props) => {
     const {
@@ -26,13 +27,18 @@ const MaterialTable = (props) => {
         return _.get(item, column.path);
     };
 
+    const tableStyle = {
+        minWidth: minWidth || 550,
+    };
+
     return (
-        <Paper sx={{ overflow: 'hidden' }}>
+        <Paper className="material-table-paper">
             <TableContainer>
                 <Table
-                    sx={{ minWidth: minWidth || 550 }}
+                    style={tableStyle}
                     aria-label="simple table"
                     stickyHeader
+                    className="material-table"
                 >
                     <TableHead>
                         <TableRow>
@@ -40,6 +46,11 @@ const MaterialTable = (props) => {
                                 <TableCell
                                     key={_.uniqueId()}
                                     align={alignHeaderCells || 'center'}
+                                    className="material-table-head-cell"
+                                    style={{
+                                        backgroundColor: headerHex || '#800000',
+                                        color: headerFontColor || 'white',
+                                    }}
                                     sx={{
                                         [`&.${tableCellClasses.head}`]: {
                                             backgroundColor:
@@ -56,25 +67,25 @@ const MaterialTable = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((item) => (
+                        {data.map((item, index) => (
                             <TableRow
                                 key={_.uniqueId()}
-                                sx={{
-                                    '&:nth-of-type(odd)': {
-                                        backgroundColor: unstriped || '#D3D3D3',
-                                    },
+                                className={index % 2 !== 0 ? 'material-table-row-odd' : ''}
+                                style={{
+                                    backgroundColor: index % 2 !== 0 && !unstriped ? '#D3D3D3' : 'transparent',
                                 }}
                             >
                                 {columns.map((col) => (
                                     <TableCell
                                         key={_.uniqueId()}
+                                        className="material-table-body-cell"
+                                        align={alignCell || 'center'}
                                         sx={{
                                             [`&.${tableCellClasses.body}`]: {
                                                 fontSize: 14,
                                                 fontFamily: 'Baloo',
                                             },
                                         }}
-                                        align={alignCell || 'center'}
                                     >
                                         {renderCell(item, col)}
                                     </TableCell>

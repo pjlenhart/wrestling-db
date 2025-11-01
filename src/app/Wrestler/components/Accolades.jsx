@@ -8,23 +8,14 @@ import Subheader from '../../common/Header/Subheader';
 const Accolades = (props) => {
     const { accolades } = props;
     return (
-        <Box
-            sx={{
-                fontFamily: 'Baloo',
-            }}
-        >
+        <Box className="wrestler-accolades-box">
             <Subheader label="Career Accoaldes" paddingBottom={2} />
             <Stack>
                 {accolades
                     ? accolades.map((acc) => (
                           <>
                               <span key={_.uniqueId()}>
-                                  <EmojiEvents
-                                      sx={{
-                                          color: 'goldenrod',
-                                          height: 15,
-                                      }}
-                                  />
+                                  <EmojiEvents className="wrestler-trophy-icon" />
                                   {` ${acc.place} place, ${acc.season} ${acc.tournament}`}
                               </span>
                           </>

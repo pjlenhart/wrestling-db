@@ -6,31 +6,21 @@ import Box from '@mui/material/Box';
 const Announcements = (props) => {
     const { announcements } = props;
     return (
-        <Paper
-            sx={{
-                width: 500,
-                p: 5,
-                alignContent: 'center',
-            }}
-        >
+        <Paper className="announcements-paper">
             {announcements.length > 0 ? (
-                announcements.map((ann) => (
-                    <Box>
+                announcements.map((ann, idx) => (
+                    <Box key={idx}>
                         <Typography
                             component="h2"
                             variant="h5"
-                            sx={{
-                                fontFamily: 'Baloo',
-                            }}
+                            className="announcements-header"
                         >
                             {ann.header}
                         </Typography>
                         <Typography component="ul">
                             <Typography
                                 component="li"
-                                sx={{
-                                    fontFamily: 'Baloo',
-                                }}
+                                className="announcements-list"
                             >
                                 {ann.detail}
                             </Typography>

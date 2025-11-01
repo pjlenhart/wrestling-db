@@ -17,13 +17,7 @@ const SeasonPage = (props) => {
             : regularSeasonData.filter((match) => match.season === season);
 
     return (
-        <Box
-            sx={{
-                width: 'auto',
-                alignItems: 'center',
-                px: 5,
-            }}
-        >
+        <Box className="season-page-container">
             <Stack>
                 <Subheader
                     label={`Regular Season Matches - ${

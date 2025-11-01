@@ -33,13 +33,7 @@ const Staff = () => {
     return (
         <>
             <PageHeader header="Coaching Staff" />
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 15,
-                }}
-            >
+            <Box className="staff-page-container">
                 <Subheader
                     label={`Meet the coaches of Towson Wrestling!`}
                     width={500}

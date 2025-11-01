@@ -14,9 +14,7 @@ const SeasonCountdown = () => {
         if (today.getMonth() >= 11 || today.getMonth() <= 1) {
             return (
                 <Paper
-                    sx={{
-                        p: 5,
-                    }}
+                    className="season-countdown-paper"
                     variant="outline"
                 >
                     <FlipClock
@@ -45,9 +43,7 @@ const SeasonCountdown = () => {
         }
         return (
             <Paper
-                sx={{
-                    p: 5,
-                }}
+                className="season-countdown-paper"
                 variant="outline"
             >
                 <FlipClock

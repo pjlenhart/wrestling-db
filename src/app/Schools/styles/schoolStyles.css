@@ -20,3 +20,25 @@
 .school-table-tr {
   text-align: Left;
 }
+
+/* Schools Page Container */
+.schools-page-container {
+  width: auto;
+  align-items: center;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+/* School Region Table */
+.school-region-box {
+  padding-bottom: 1rem;
+}
+
+.school-grid-container {
+  padding-bottom: 1rem;
+}
+
+.school-divider {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}

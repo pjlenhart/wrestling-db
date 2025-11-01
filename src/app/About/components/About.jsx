@@ -42,13 +42,7 @@ const About = () => {
     return (
         <>
             <PageHeader header="About/FAQ" />
-            <Box
-                sx={{
-                    width: '75%',
-                    alignItems: 'center',
-                    px: 10,
-                }}
-            >
+            <Box className="about-page-container">
                 <Grid container spacing={1}>
                     <Grid item xs={8}>
                         <Stack>

@@ -31,14 +31,7 @@ const WrestlerPage = (props) => {
         <>
             <PageHeader header={wrestlerName} />
 
-            <Box
-                sx={{
-                    width: 'auto',
-                    alignItems: 'center',
-                    px: 5,
-                    pb: 5,
-                }}
-            >
+            <Box className="wrestler-page-container">
                 <Accolades accolades={accolades} />
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={8}>
