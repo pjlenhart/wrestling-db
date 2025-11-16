@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://150.136.168.38:8443',
+    baseURL: 'https://glitch-dev.org',
 });
 
 export async function getUrls() {
