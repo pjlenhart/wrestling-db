@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import PageHeader from '../common/Header/PageHeader';
+import Paper from '@mui/material/Paper';
+import PageHero from '../common/Header/PageHero';
 import Search from '../common/Search/Search';
 import SearchResults from './components/SearchResults';
 import SearchResultsSkeleton from './components/SearchResultsSkeleton';
 import { search } from '../services/movesService';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
+import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import './styles/moveSearchStyles.css';
+import '../common/styles/globalStyles.css';
 
 const MoveSearch = ({ videos }) => {
     const [searchValue, setSearchValue] = useState('');
@@ -56,16 +59,28 @@ const MoveSearch = ({ videos }) => {
     };
 
     return (
-        <>
-            <PageHeader header="Move Search" />
-            <Container className="move-search-page-container">
-                <Box className="move-search-content">
-                    <Typography className="move-search-description">
-                        Discover wrestling techniques, tutorials, and
-                        demonstrations. Search by move name or keyword to find
-                        what you're looking for.
-                    </Typography>
-                    <br />
+        <Box className="modern-page">
+            <PageHero
+                title="Move Search"
+                subtitle="Discover wrestling techniques, tutorials, and demonstrations"
+            />
+
+            <Container maxWidth="lg" className="page-content">
+                {/* Search Section */}
+                <Paper className="move-search-card" elevation={0}>
+                    <Box className="move-search-header">
+                        <VideoLibraryIcon className="move-search-icon" />
+                        <Box>
+                            <Typography className="move-search-title">
+                                Find Wrestling Moves
+                            </Typography>
+                            <Typography className="move-search-subtitle">
+                                Search by move name, position, or keyword to
+                                find tutorials
+                            </Typography>
+                        </Box>
+                    </Box>
+
                     <Search
                         placeholder="Search for a wrestling move..."
                         onSearch={handleSearch}
@@ -73,8 +88,19 @@ const MoveSearch = ({ videos }) => {
                         searchButtonText={<SearchIcon />}
                         clearButtonText={<ClearIcon />}
                         showClearButton={true}
-                        className="centered prominent"
+                        className="move-search-input-container"
                     />
+                </Paper>
+
+                {/* Results Section */}
+                <Box className="move-search-results-section">
+                    {searchValue && (
+                        <Typography className="move-search-results-label">
+                            {isLoading
+                                ? 'Searching...'
+                                : `Results for "${searchValue}"`}
+                        </Typography>
+                    )}
 
                     {isLoading ? (
                         <SearchResultsSkeleton count={8} />
@@ -86,7 +112,7 @@ const MoveSearch = ({ videos }) => {
                     )}
                 </Box>
             </Container>
-        </>
+        </Box>
     );
 };
 

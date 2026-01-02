@@ -1,210 +1,518 @@
-@font-face {
-    font-family: roboto-regular;
-    src: url('/src/app/common/fonts/RobotoCondensed-Regular.ttf');
+/* ===========================================
+   FONTS - Inherited from globalStyles.css via Google Fonts CDN
+   =========================================== */
+
+/* ===========================================
+   HOME PAGE BASE
+   =========================================== */
+.home-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
 }
 
-@font-face {
-    font-family: gagalin;
-    src: url('/src/app/common/fonts/Gagalin-Regular.otf');
+/* ===========================================
+   HERO SECTION
+   =========================================== */
+.hero-section {
+    background: linear-gradient(135deg, #800000 0%, #5c0000 50%, #3d0000 100%);
+    padding: 1.5rem 1rem 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Home Page - Instagram Image */
-.instagram-image {
-    height: 450px;
-    width: 450px;
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+    pointer-events: none;
 }
 
-/* Home Page - Main Content */
-.main-content-wrapper {
-    display: flex !important;
+.hero-content {
+    display: flex;
     flex-direction: column;
-    align-items: center !important;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-family: 'Racing Sans One', cursive !important;
+    color: #fff !important;
+    font-size: 3rem !important;
+    letter-spacing: 2px;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem !important;
+}
+
+.hero-subtitle {
+    font-family: barlow, sans-serif !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 400 !important;
+    margin-bottom: 1rem !important;
+}
+
+.hero-description {
+    font-family: roboto-regular, sans-serif !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    line-height: 1.7 !important;
+}
+
+.hero-image-container {
+    display: flex;
     justify-content: center;
-    padding-bottom: 1rem;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    align-items: center;
+    background: #fff;
+    border-radius: 50%;
+    padding: 1rem;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
-.main-content-stack {
-    width: 100%;
+.hero-beast-image {
+    width: 160px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.hero-beast-image:hover {
+    transform: scale(1.05);
+}
+
+/* ===========================================
+   MAIN CONTENT
+   =========================================== */
+.home-main-content {
+    padding: 3rem 1rem;
+}
+
+.stats-row {
+    margin-bottom: 3rem !important;
+}
+
+/* ===========================================
+   TOP PINNERS SECTION
+   =========================================== */
+.top-pinners-container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.top-pinners-title {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center;
     gap: 0.5rem;
+    margin-bottom: 0.25rem !important;
+}
+
+.top-pinners-title-icon {
+    color: #FFD700 !important;
+    font-size: 1.75rem !important;
+}
+
+.top-pinners-subtitle {
+    color: #666 !important;
+    font-family: roboto-regular, sans-serif !important;
+    margin-bottom: 1.25rem !important;
+    padding-left: 0.25rem;
+}
+
+.top-pinners-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.top-pinner-card {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1rem;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    gap: 1rem;
+}
+
+.top-pinner-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.top-pinner-rank {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.top-pinner-rank-text {
+    color: #fff !important;
+    font-family: barlow, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+}
+
+.top-pinner-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.top-pinner-name {
+    font-family: roboto-bold, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-pinner-record {
+    color: #666 !important;
+    font-family: roboto-regular, sans-serif !important;
+    font-size: 0.85rem !important;
+}
+
+.top-pinner-pins {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0.5rem 0.75rem;
+    background: rgba(128, 0, 0, 0.08);
+    border-radius: 8px;
+    min-width: 50px;
 }
 
-.main-content-paper {
-    align-self: center;
-    padding-top: 0.5rem;
+.top-pinner-pins-count {
+    font-family: barlow, sans-serif !important;
+    color: #800000 !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+}
+
+.top-pinner-pins-label {
+    font-family: roboto-regular, sans-serif !important;
+    color: #800000 !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.5px;
+}
+
+.top-pinners-empty {
+    padding: 2rem;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 12px !important;
+    border: 1px dashed #ddd;
+}
+
+/* ===========================================
+   INSTAGRAM SECTION
+   =========================================== */
+.instagram-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.instagram-title {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem !important;
+}
+
+.instagram-title-icon {
+    color: #E4405F !important;
+    font-size: 1.75rem !important;
+}
+
+.instagram-card {
+    flex: 1;
+    background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instagram-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(131, 58, 180, 0.25);
+}
+
+.instagram-link {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none !important;
+    gap: 1rem;
 }
 
-.main-content-title {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
+.instagram-logo-icon {
+    font-size: 5rem !important;
+    color: #fff !important;
+    transition: transform 0.3s ease;
+}
+
+.instagram-link:hover .instagram-logo-icon {
+    transform: scale(1.1);
+}
+
+.instagram-info {
     text-align: center;
-    color: #800000;
 }
 
-.main-content-description {
-    text-align: center;
-    color: #6c757d;
+.instagram-handle {
+    font-family: barlow, sans-serif !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.25rem !important;
 }
 
-.beast-image {
-    width: 400px;
-    height: 350px;
-    display: block;
-    margin: 0 auto;
+.instagram-cta {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-family: roboto-regular, sans-serif !important;
 }
 
-/* Home Page - Featured Content */
-.featured-container {
+/* ===========================================
+   QUICK ACCESS SECTION
+   =========================================== */
+.quick-access-section {
     padding-top: 1rem;
-    padding-bottom: 2rem;
 }
 
-.featured-highlights-desc {
-    margin-bottom: 1rem;
+.quick-access-title {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.25rem !important;
 }
 
-.featured-chip-container {
+.quick-access-subtitle {
+    color: #666 !important;
+    font-family: roboto-regular, sans-serif !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.quick-links-grid {
+    margin-top: 0.5rem;
+}
+
+.quick-link-anchor {
+    text-decoration: none !important;
+    display: block;
+}
+
+.quick-link-card {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 12px !important;
+    background: #fff !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    gap: 1rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Hide chips on larger screens - they should only show on mobile */
-@media (min-width: 576px) {
-    .featured-chip-container {
-        display: none !important;
+.quick-link-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+}
+
+.quick-link-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.quick-link-icon svg {
+    font-size: 1.5rem;
+}
+
+.quick-link-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.quick-link-title {
+    font-family: roboto-bold, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    margin-bottom: 0.125rem !important;
+}
+
+.quick-link-description {
+    color: #666 !important;
+    font-family: roboto-regular, sans-serif !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quick-link-arrow {
+    color: #bbb;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.quick-link-card:hover .quick-link-arrow {
+    color: #800000;
+    transform: translateX(4px);
+}
+
+/* ===========================================
+   RESPONSIVE STYLES
+   =========================================== */
+@media (min-width: 768px) {
+    .hero-section {
+        padding: 2rem 2rem 2.5rem;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+    }
+
+    .hero-text {
+        max-width: 500px;
+    }
+
+    .hero-title {
+        font-size: 2.75rem !important;
+    }
+
+    .hero-image-container {
+        padding: 1.25rem;
+    }
+
+    .hero-beast-image {
+        width: 180px;
+    }
+
+    .home-main-content {
+        padding: 4rem 2rem;
+    }
+
+    .top-pinners-container {
+        padding: 2rem;
+    }
+
+    .instagram-card {
+        min-height: 200px;
+    }
+
+    .instagram-logo-icon {
+        font-size: 6rem !important;
     }
 }
 
-.featured-chip {
-    cursor: pointer;
-    border-color: #dee2e6;
+@media (min-width: 960px) {
+    .hero-title {
+        font-size: 3rem !important;
+    }
+
+    .hero-beast-image {
+        width: 200px;
+    }
 }
 
-.featured-chip.selected {
-    background-color: #800000 !important;
-    color: #fff !important;
-    border-color: #800000 !important;
+@media (max-width: 599px) {
+    .hero-section {
+        padding: 1.25rem 1rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.75rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .hero-image-container {
+        padding: 0.75rem;
+    }
+
+    .hero-beast-image {
+        width: 120px;
+    }
+
+    .home-main-content {
+        padding: 2rem 1rem;
+    }
+
+    .top-pinners-container {
+        padding: 1.25rem;
+    }
+
+    .top-pinner-card {
+        padding: 0.75rem;
+    }
+
+    .instagram-card {
+        min-height: 150px;
+        padding: 1.25rem;
+    }
+
+    .instagram-logo-icon {
+        font-size: 4rem !important;
+    }
+
+    .quick-link-card {
+        padding: 1rem;
+    }
+
+    .quick-link-icon {
+        width: 42px;
+        height: 42px;
+    }
 }
 
-.featured-stack {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.featured-card {
-    padding: 1rem;
-    height: fit-content;
-    width: 100%;
-    background: none;
-    cursor: pointer;
-    border: 1px solid #dee2e6;
-    text-align: left;
-}
-
-.featured-card.selected {
-    background-color: rgba(128, 0, 0, 0.04);
-    border-color: rgba(128, 0, 0, 0.5);
-}
-
-.featured-card-content {
-    width: 100%;
-    display: flex;
-    text-align: left;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-}
-
-.featured-icon {
-    color: #bbb;
-}
-
-.featured-icon.selected {
-    color: #800000;
-}
-
-.featured-link {
-    display: inline-flex;
-    align-items: center;
-    color: #800000;
-    font-weight: bold;
-    text-decoration: none;
-    transition: transform 0.2s;
-}
-
-.featured-link:hover svg {
-    transform: translateX(2px);
-}
-
-.featured-link svg {
-    margin-top: 1px;
-    margin-left: 2px;
-    transition: 0.2s;
-}
-
-.featured-content-display {
-    height: 100%;
-    width: 100%;
-    display: none;
-    pointer-events: none;
-    background-color: white;
-    justify-content: center;
-}
-
-.featured-description-margin {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-}
-
-/* Home Page - Announcements */
-.announcements-paper {
-    width: 500px;
-    padding: 2.5rem;
-    align-content: center;
-}
-
-.announcements-header {
-    font-family: Baloo, sans-serif;
-}
-
-.announcements-list {
-    font-family: Baloo, sans-serif;
-}
-
-/* Home Page - Season Countdown */
-.season-countdown-paper {
-    padding: 2.5rem;
-}
-
-.season-countdown-box {
-    margin-bottom: 2rem;
-}
-
-.season-countdown-title {
-    color: #800000;
-    margin-bottom: 1rem;
-}
-
+/* ===========================================
+   LEGACY STYLES (kept for compatibility)
+   =========================================== */
 .h-home {
     font-family: gagalin;
     color: black;
     display: inline;
     font-size: 80px;
     padding: 25px 0px 50px 0px;
-}
-
-.home-img {
-    width: 100%;
 }
 
 .h4-home {
@@ -232,18 +540,6 @@
     background-color: #fff;
 }
 
-.tile-img {
-    margin-bottom: 10px;
-    height: auto;
-    box-shadow: 0 4px 8px 0 #000000, 0 6px 20px 0 #000000;
-    border: 1px solid #800000;
-    background-color: #fff;
-}
-
-.div-top {
-    padding-top: 25px;
-}
-
 .home-table {
     font-family: roboto-regular;
 }
@@ -257,289 +553,4 @@
 
 .home-tr:nth-child(even) {
     background-color: lightgray;
-}
-
-/* Home Page - Responsive Styles */
-@media (min-width: 576px) {
-    .main-content-stack {
-        width: 70%;
-    }
-
-    .main-content-wrapper {
-        padding-bottom: 2rem;
-    }
-
-    .featured-container {
-        padding-top: 2rem;
-        padding-bottom: 4rem;
-    }
-
-    .featured-highlights-desc {
-        margin-bottom: 2rem;
-    }
-
-    .featured-stack {
-        display: flex;
-    }
-
-    .featured-content-display {
-        display: flex;
-    }
-}
-
-@media (min-width: 768px) {
-    .main-content-title {
-        flex-direction: row;
-    }
-
-    .featured-card-content {
-        flex-direction: row;
-        align-items: center;
-    }
-}
-
-@media (max-width: 575px) {
-    .featured-stack {
-        display: none;
-    }
-}
-
-@media (max-width: 767px) {
-    .beast-image {
-        width: 300px;
-        height: 262px;
-        margin-left: 0;
-    }
-
-    .instagram-image {
-        height: 300px;
-        width: 300px;
-    }
-
-    .announcements-paper {
-        width: 100%;
-        padding: 1.5rem;
-    }
-}
-
-/* Instagram Image */
-.instagram-image {
-    height: 450px;
-    width: 450px;
-}
-
-/* Beast of the Week Image */
-.beast-image {
-    width: 400px;
-    height: 350px;
-    margin-left: 35px;
-}
-
-/* Main Content Container */
-.main-content-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 1rem;
-}
-
-.main-content-stack {
-    width: 100%;
-}
-
-.main-content-paper {
-    align-self: center;
-    padding-top: 0.5rem;
-}
-
-.main-content-title {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    text-align: center;
-    color: #800000;
-}
-
-.main-content-description {
-    text-align: center;
-    color: #6c757d;
-}
-
-/* Featured Content */
-.featured-container {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-}
-
-.featured-highlights-desc {
-    margin-bottom: 2rem;
-}
-
-.featured-chip-container {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.featured-chip {
-    cursor: pointer;
-    border-color: #dee2e6;
-}
-
-.featured-chip.selected {
-    background-color: #800000;
-    color: #fff;
-    border-color: #800000;
-}
-
-.featured-stack {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.featured-card {
-    padding: 1rem;
-    height: fit-content;
-    width: 100%;
-    background: none;
-    cursor: pointer;
-    border: 1px solid #dee2e6;
-}
-
-.featured-card.selected {
-    background-color: rgba(128, 0, 0, 0.04);
-    border-color: rgba(128, 0, 0, 0.5);
-}
-
-.featured-card-content {
-    width: 100%;
-    display: flex;
-    text-align: left;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.featured-icon {
-    color: #bbb;
-}
-
-.featured-icon.selected {
-    color: #800000;
-}
-
-.featured-link {
-    display: inline-flex;
-    align-items: center;
-    color: #800000;
-    font-weight: bold;
-    text-decoration: none;
-    transition: transform 0.2s;
-}
-
-.featured-link:hover svg {
-    transform: translateX(2px);
-}
-
-.featured-link svg {
-    margin-top: 1px;
-    margin-left: 2px;
-    transition: 0.2s;
-}
-
-.featured-content-display {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    pointer-events: none;
-    background-color: white;
-    justify-content: center;
-}
-
-/* Announcements */
-.announcements-paper {
-    width: 500px;
-    padding: 2.5rem;
-    align-content: center;
-}
-
-.announcements-header {
-    font-family: Baloo;
-}
-
-.announcements-list {
-    font-family: Baloo;
-}
-
-/* Season Countdown */
-.season-countdown-paper {
-    padding: 2.5rem;
-}
-
-.season-countdown-box {
-    margin-bottom: 2rem;
-}
-
-.season-countdown-title {
-    color: #800000;
-    margin-bottom: 1rem;
-}
-
-/* Responsive Styles */
-@media (min-width: 576px) {
-    .main-content-stack {
-        width: 70%;
-    }
-
-    .main-content-container {
-        padding-bottom: 2rem;
-    }
-
-    .featured-container {
-        padding-top: 2rem;
-        padding-bottom: 4rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .main-content-title {
-        flex-direction: row;
-    }
-
-    .featured-card-content {
-        flex-direction: row;
-    }
-
-    .featured-chip-container {
-        display: none;
-    }
-
-    .featured-content-display {
-        display: flex;
-    }
-}
-
-@media (max-width: 767px) {
-    .featured-stack {
-        display: none;
-    }
-
-    .featured-content-display {
-        display: none;
-    }
-
-    .beast-image {
-        width: 300px;
-        height: 262px;
-        margin-left: 0;
-    }
-
-    .instagram-image {
-        height: 300px;
-        width: 300px;
-    }
-
-    .announcements-paper {
-        width: 100%;
-        padding: 1.5rem;
-    }
 }

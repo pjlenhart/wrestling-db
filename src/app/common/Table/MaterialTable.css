@@ -1,27 +1,83 @@
-/* Material Table Component Styles */
+/* Modern Material Table Styles */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.material-table-paper-modern {
+    overflow: hidden;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.material-table-modern {
+    border-collapse: collapse;
+}
+
+.material-table-head-cell-modern {
+    background: linear-gradient(135deg, #800000 0%, #5c0000 100%);
+    color: white;
+    font-family: barlow, sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.875rem 0.75rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.material-table-row-modern {
+    transition: background-color 0.15s ease;
+}
+
+.material-table-row-modern:hover {
+    background-color: rgba(128, 0, 0, 0.04) !important;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 599px) {
+    .material-table-paper-modern {
+        border-radius: 8px !important;
+    }
+    
+    .material-table-head-cell-modern {
+        font-size: 0.7rem !important;
+        padding: 0.5rem 0.375rem !important;
+    }
+    
+    .material-table-row-modern td {
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.375rem !important;
+    }
+}
+
+/* Legacy styles for backward compatibility */
 .material-table-paper {
-  overflow: hidden;
+    overflow: hidden;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 
 .material-table {
-  min-width: 550px;
+    min-width: 550px;
 }
 
 .material-table-head-cell {
-  background-color: #800000;
-  color: white;
-  font-size: 14px;
-  font-family: Baloo, sans-serif;
-  text-align: center;
+    background-color: #800000;
+    color: white;
+    font-size: 14px;
+    font-family: barlow, sans-serif;
+    text-align: center;
 }
 
 .material-table-body-cell {
-  font-size: 14px;
-  font-family: Baloo, sans-serif;
-  text-align: center;
+    font-size: 14px;
+    font-family: roboto-regular, sans-serif;
+    text-align: center;
 }
 
 .material-table-row-odd {
-  background-color: #D3D3D3;
+    background-color: #f9f9f9;
 }
-

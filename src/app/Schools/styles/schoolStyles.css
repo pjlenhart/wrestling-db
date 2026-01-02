@@ -1,44 +1,101 @@
-@font-face {
-  font-family: roboto-regular;
-  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+/* ===========================================
+   SCHOOLS PAGE STYLES
+   =========================================== */
+
+/* Division section */
+.schools-division-section {
+    margin-bottom: 2rem;
 }
 
-.school-table {
-  font-family: roboto_regular;
-  min-width: 300px;
-  max-width: 300px;
+.schools-division-section:last-child {
+    margin-bottom: 0;
 }
 
-.school-table-td {
-  text-align: left;
-  min-width: 200px;
-  max-width: 200px;
-}
-.school-table-th {
-  text-align: left;
-}
-.school-table-tr {
-  text-align: Left;
+.schools-division-title {
+    font-family: barlow, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 1rem !important;
+    padding-left: 0.25rem;
 }
 
-/* Schools Page Container */
-.schools-page-container {
-  width: auto;
-  align-items: center;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+/* Region card */
+.school-region-card {
+    background: #fff !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    height: 100%;
 }
 
-/* School Region Table */
-.school-region-box {
-  padding-bottom: 1rem;
+.school-region-header {
+    padding: 0.75rem 1rem;
+    background: #800000;
 }
 
-.school-grid-container {
-  padding-bottom: 1rem;
+.school-region-title {
+    font-family: barlow, sans-serif !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    text-align: center;
 }
 
-.school-divider {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+/* School list */
+.school-region-list {
+    padding: 0 !important;
+}
+
+.school-region-item {
+    padding: 0.625rem 1rem !important;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.school-region-item:last-child {
+    border-bottom: none;
+}
+
+.school-region-item.even {
+    background-color: #fafafa;
+}
+
+.school-region-text .school-name {
+    font-family: roboto-regular, sans-serif !important;
+    color: #1a1a1a !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.3 !important;
+}
+
+.school-region-text .school-county {
+    font-family: roboto-regular, sans-serif !important;
+    color: #888 !important;
+    font-size: 0.6875rem !important;
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+    .schools-division-title {
+        font-size: 1.125rem !important;
+    }
+    
+    .school-region-header {
+        padding: 0.625rem 0.75rem;
+    }
+    
+    .school-region-title {
+        font-size: 0.8125rem !important;
+    }
+    
+    .school-region-item {
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    .school-region-text .school-name {
+        font-size: 0.75rem !important;
+    }
+    
+    .school-region-text .school-county {
+        font-size: 0.625rem !important;
+    }
 }

@@ -1,0 +1,562 @@
+/* ===========================================
+   GLOBAL DESIGN SYSTEM - Wrestling DB
+   =========================================== */
+
+/* ===========================================
+   CSS CUSTOM PROPERTIES (Variables)
+   =========================================== */
+:root {
+    /* Primary Colors */
+    --color-primary: #800000;
+    --color-primary-dark: #5c0000;
+    --color-primary-darker: #3d0000;
+    --color-primary-light: rgba(128, 0, 0, 0.08);
+    --color-primary-lighter: rgba(128, 0, 0, 0.04);
+    
+    /* Neutral Colors */
+    --color-white: #ffffff;
+    --color-gray-50: #fafafa;
+    --color-gray-100: #f5f5f5;
+    --color-gray-200: #eeeeee;
+    --color-gray-300: #e0e0e0;
+    --color-gray-400: #bdbdbd;
+    --color-gray-500: #9e9e9e;
+    --color-gray-600: #757575;
+    --color-gray-700: #616161;
+    --color-gray-800: #424242;
+    --color-gray-900: #212121;
+    --color-black: #1a1a1a;
+    
+    /* Accent Colors */
+    --color-gold: #FFD700;
+    --color-silver: #C0C0C0;
+    --color-bronze: #CD7F32;
+    --color-success: #2E7D32;
+    --color-info: #1565C0;
+    --color-warning: #F9A825;
+    
+    /* Typography */
+    --font-display: 'Racing Sans One', cursive;
+    --font-heading: 'barlow', sans-serif;
+    --font-body: 'roboto-regular', sans-serif;
+    --font-body-bold: 'roboto-bold', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 50%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.16);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.35s ease;
+}
+
+/* ===========================================
+   FONTS - Using Google Fonts CDN for better performance
+   Local fonts are available as fallback in /src/app/common/fonts/
+   =========================================== */
+
+/* Roboto Condensed - loaded via Google Fonts CDN */
+@font-face {
+    font-family: roboto-regular;
+    src: local('Roboto Condensed'), local('RobotoCondensed-Regular');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: roboto-bold;
+    src: local('Roboto Condensed Bold'), local('RobotoCondensed-Bold');
+    font-weight: 700;
+}
+
+/* Barlow - loaded via Google Fonts CDN */
+@font-face {
+    font-family: barlow;
+    src: local('Barlow SemiBold'), local('Barlow-SemiBold');
+    font-weight: 600;
+}
+
+/* ===========================================
+   PAGE LAYOUT COMPONENTS
+   =========================================== */
+
+/* Modern Page Container */
+.modern-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+}
+
+/* Page Hero Header */
+.page-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 50%, var(--color-primary-darker) 100%);
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.page-hero-title {
+    font-family: var(--font-display) !important;
+    color: var(--color-white) !important;
+    font-size: 2rem !important;
+    letter-spacing: 1px;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+.page-hero-subtitle {
+    font-family: var(--font-body) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 1rem !important;
+    max-width: 600px;
+}
+
+/* Page Content Container */
+.page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+/* ===========================================
+   SECTION COMPONENTS
+   =========================================== */
+
+/* Content Card */
+.content-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl) !important;
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+    font-family: var(--font-heading) !important;
+    color: var(--color-black) !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+}
+
+.section-title-icon {
+    color: var(--color-primary) !important;
+    font-size: 1.5rem !important;
+}
+
+.section-subtitle {
+    font-family: var(--font-body) !important;
+    color: var(--color-gray-600) !important;
+    margin-bottom: var(--spacing-md) !important;
+}
+
+/* ===========================================
+   MODERN TABLE STYLES
+   =========================================== */
+
+.modern-table-container {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table-header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.modern-table-header th {
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.modern-table-body tr {
+    border-bottom: 1px solid var(--color-gray-200);
+    transition: background-color var(--transition-fast);
+}
+
+.modern-table-body tr:last-child {
+    border-bottom: none;
+}
+
+.modern-table-body tr:hover {
+    background-color: var(--color-primary-lighter);
+}
+
+.modern-table-body td {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+    color: var(--color-gray-800);
+}
+
+.modern-table-body tr:nth-child(even) {
+    background-color: var(--color-gray-50);
+}
+
+.modern-table-body tr:nth-child(even):hover {
+    background-color: var(--color-primary-lighter);
+}
+
+/* ===========================================
+   STAT CARDS
+   =========================================== */
+
+.stat-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card-value {
+    font-family: var(--font-heading) !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: var(--color-primary) !important;
+    line-height: 1 !important;
+}
+
+.stat-card-label {
+    font-family: var(--font-body) !important;
+    font-size: 0.75rem !important;
+    color: var(--color-gray-600) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: var(--spacing-xs) !important;
+}
+
+/* ===========================================
+   INFO CARDS / FAQ STYLE
+   =========================================== */
+
+.info-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--spacing-md);
+    border-left: 4px solid var(--color-primary);
+}
+
+.info-card-title {
+    font-family: var(--font-heading) !important;
+    color: var(--color-black) !important;
+    font-weight: 600 !important;
+    font-size: 1.125rem !important;
+    margin-bottom: var(--spacing-sm) !important;
+}
+
+.info-card-description {
+    font-family: var(--font-body) !important;
+    color: var(--color-gray-700) !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+}
+
+/* ===========================================
+   STAFF / PROFILE CARDS
+   =========================================== */
+
+.profile-card {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: var(--spacing-lg);
+    transition: all var(--transition-normal);
+}
+
+.profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.profile-card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.profile-card-content {
+    padding: var(--spacing-lg);
+}
+
+.profile-card-name {
+    font-family: var(--font-heading) !important;
+    color: var(--color-black) !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+.profile-card-role {
+    font-family: var(--font-body) !important;
+    color: var(--color-primary) !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    margin-bottom: var(--spacing-sm) !important;
+}
+
+.profile-card-bio {
+    font-family: var(--font-body) !important;
+    color: var(--color-gray-700) !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+}
+
+/* ===========================================
+   SEASON CARDS
+   =========================================== */
+
+.season-card-modern {
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.season-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.season-card-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.season-card-content {
+    padding: var(--spacing-lg);
+}
+
+.season-card-title {
+    font-family: var(--font-heading) !important;
+    color: var(--color-black) !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: var(--spacing-xs) !important;
+}
+
+.season-card-subtitle {
+    font-family: var(--font-body) !important;
+    color: var(--color-gray-600) !important;
+    font-size: 0.875rem !important;
+    margin-bottom: var(--spacing-sm) !important;
+}
+
+.season-card-link {
+    font-family: var(--font-body-bold) !important;
+    color: var(--color-primary) !important;
+    font-size: 0.875rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+/* ===========================================
+   CHIP / TAG STYLES
+   =========================================== */
+
+.modern-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* ===========================================
+   RESPONSIVE UTILITIES
+   =========================================== */
+
+/* Mobile-first table wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide on mobile */
+@media (max-width: 599px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Hide on desktop */
+@media (min-width: 600px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* ===========================================
+   RESPONSIVE STYLES
+   =========================================== */
+
+@media (min-width: 600px) {
+    .page-hero {
+        padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-2xl);
+    }
+    
+    .page-hero-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .page-content {
+        padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+    
+    .content-card {
+        padding: var(--spacing-xl);
+    }
+}
+
+@media (min-width: 900px) {
+    .page-hero-title {
+        font-size: 3rem !important;
+    }
+}
+
+@media (max-width: 599px) {
+    .page-hero {
+        padding: var(--spacing-md) var(--spacing-sm) var(--spacing-lg);
+    }
+    
+    .page-hero-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .page-hero-subtitle {
+        font-size: 0.875rem !important;
+    }
+    
+    .page-content {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .content-card {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-lg) !important;
+    }
+    
+    .section-title {
+        font-size: 1.125rem !important;
+    }
+    
+    .info-card {
+        padding: var(--spacing-md);
+    }
+    
+    .info-card-title {
+        font-size: 1rem !important;
+    }
+    
+    .info-card-description {
+        font-size: 0.875rem !important;
+    }
+    
+    .modern-table-header th,
+    .modern-table-body td {
+        padding: var(--spacing-sm) var(--spacing-xs);
+        font-size: 0.75rem;
+    }
+    
+    .profile-card-image {
+        height: 200px;
+    }
+    
+    .profile-card-content {
+        padding: var(--spacing-md);
+    }
+    
+    .profile-card-name {
+        font-size: 1.125rem !important;
+    }
+    
+    .profile-card-bio {
+        font-size: 0.875rem !important;
+    }
+}
+

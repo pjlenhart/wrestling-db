@@ -9,49 +9,48 @@ const WrestlerPageTable = (props) => {
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
-            width: 200,
+            width: 180,
             sortable: true,
             filterable: true,
         },
         {
             field: 'season',
             headerName: 'Season',
-            width: 150,
+            width: 120,
             sortable: true,
             filterable: true,
         },
         {
             field: 'opponent_name',
             headerName: 'Opponent',
-            width: 200,
+            width: 180,
             filterable: true,
         },
         {
             field: 'school_name',
             headerName: 'School',
-            width: 200,
+            width: 180,
             sortable: true,
             filterable: true,
         },
         {
             field: 'weight_class',
-            headerName: 'Weight Class',
-            width: 150,
+            headerName: 'Weight',
+            width: 100,
             filterable: true,
         },
         {
             field: 'match_date',
             headerName: 'Date',
             type: 'date',
-            width: 150,
+            width: 120,
             filterable: true,
-            type: 'date',
             valueGetter: (params) => new Date(params.row.match_date),
         },
         {
             field: 'tournament',
             headerName: 'Tournament',
-            width: 300,
+            width: 250,
             sortable: true,
             filterable: true,
             valueGetter: (params) => params.row.match_stats.tournament,
@@ -59,38 +58,37 @@ const WrestlerPageTable = (props) => {
         {
             field: 'match_result',
             headerName: 'Result',
-            width: 100,
+            width: 80,
             filterable: true,
         },
         {
             field: 'match_time',
-            headerName: 'Match Time',
-            width: 150,
-            type: 'time',
+            headerName: 'Time',
+            width: 100,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.match_time,
         },
         {
             field: 'points_for',
-            headerName: 'Points For',
-            width: 150,
+            headerName: 'Pts For',
+            width: 100,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.points_for,
         },
         {
             field: 'points_against',
-            headerName: 'Points Against',
-            width: 150,
+            headerName: 'Pts Against',
+            width: 120,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.points_against,
         },
         {
             field: 'method_of_result',
-            headerName: 'Method Of Result',
-            width: 200,
+            headerName: 'Method',
+            width: 150,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.method_of_result,
@@ -98,7 +96,7 @@ const WrestlerPageTable = (props) => {
         {
             field: 'period',
             headerName: 'Period',
-            width: 150,
+            width: 80,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.period,
@@ -109,40 +107,40 @@ const WrestlerPageTable = (props) => {
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
-            width: 200,
+            width: 150,
             sortable: true,
             filterable: true,
         },
         {
             field: 'season',
             headerName: 'Season',
-            width: 150,
+            width: 110,
             sortable: true,
             filterable: true,
         },
         {
             field: 'opponent_name',
-            width: 200,
+            width: 150,
             headerName: 'Opponent',
             filterable: true,
         },
         {
             field: 'school_name',
             headerName: 'School',
-            width: 200,
+            width: 150,
             sortable: true,
             filterable: true,
         },
         {
             field: 'weight_class',
-            headerName: 'Weight Class',
-            width: 200,
+            headerName: 'Weight',
+            width: 90,
             filterable: true,
         },
         {
             field: 'match_date',
             headerName: 'Date',
-            width: 200,
+            width: 110,
             filterable: true,
             type: 'date',
             valueGetter: (params) => new Date(params.row.match_date),
@@ -150,203 +148,101 @@ const WrestlerPageTable = (props) => {
         {
             field: 'match_result',
             headerName: 'Result',
-            width: 150,
+            width: 80,
             filterable: true,
         },
         {
             field: 'takedowns_for',
-            headerName: 'Takedowns For',
-            width: 150,
+            headerName: 'TD For',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.takedowns_for,
         },
         {
             field: 'takedowns_against',
-            headerName: 'Takedowns Against',
-            width: 200,
+            headerName: 'TD Ag',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.takedowns_against,
         },
         {
             field: 'reversals_for',
-            headerName: 'Reversals For',
-            width: 150,
+            headerName: 'Rev For',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.reversals_for,
         },
         {
             field: 'reversals_against',
-            headerName: 'Reversals Against',
-            width: 150,
+            headerName: 'Rev Ag',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.reversals_against,
         },
         {
             field: 'escapes_for',
-            headerName: 'Escapes For',
-            width: 150,
+            headerName: 'Esc For',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.escapes_for,
         },
         {
             field: 'escapes_against',
-            headerName: 'Escapes Against',
-            width: 150,
+            headerName: 'Esc Ag',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.escapes_against,
         },
         {
             field: 'nearfall_for',
-            headerName: 'Near Falls For',
-            width: 150,
+            headerName: 'NF For',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.nearfall_for,
         },
         {
             field: 'nearfall_against',
-            headerName: 'Near Falls Against',
-            width: 150,
+            headerName: 'NF Ag',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.nearfall_against,
         },
         {
-            field: 'takedown_points_for',
-            headerName: 'Takedown Points For',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedown_points_for,
-        },
-        {
-            field: 'takedowns_points_against',
-            headerName: 'Takedown Points Against',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.takedown_points_against,
-        },
-        {
-            field: 'reversal_points_for',
-            headerName: 'Reversal Points For',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversal_points_for,
-        },
-        {
-            field: 'reversal_points_against',
-            headerName: 'Reversal Points Against',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.reversal_points_against,
-        },
-        {
-            field: 'escape_points_for',
-            headerName: 'Escape Points For',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escape_points_for,
-        },
-        {
-            field: 'escape_points_against',
-            headerName: 'Escape Points Against',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.escape_points_against,
-        },
-        {
-            field: 'nearfall_points_for',
-            headerName: 'Near Fall Points For',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_points_for,
-        },
-        {
-            field: 'nearfall_points_against',
-            headerName: 'Near Fall Points Against',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.nearfall_points_against,
-        },
-        {
-            field: 'penalties_for',
-            headerName: 'Penalties For',
-            width: 150,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalties_for,
-        },
-        {
-            field: 'penalties_against',
-            headerName: 'Penalties Against',
-            width: 150,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalties_against,
-        },
-        {
-            field: 'penalty_points_for',
-            headerName: 'Penalty Points For',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalty_points_for,
-        },
-        {
-            field: 'penalty_points_against',
-            headerName: 'Penalty Points Against',
-            width: 200,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.penalty_points_against,
-        },
-        {
             field: 'total_points_for',
-            headerName: 'Total Points For',
-            width: 200,
+            headerName: 'Total For',
+            width: 100,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.total_points_for,
         },
         {
             field: 'total_points_against',
-            headerName: 'Total Points Against',
-            width: 200,
+            headerName: 'Total Ag',
+            width: 100,
             headerAlign: 'center',
             align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.total_points_against,
+            valueGetter: (params) => params.row.match_stats.total_points_against,
         },
         {
             field: 'point_margin',
-            headerName: 'Point Margin',
-            width: 150,
+            headerName: 'Margin',
+            width: 90,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.point_margin,
         },
         {
             field: 'method_of_result',
-            headerName: 'Method Of Result',
-            width: 200,
+            headerName: 'Method',
+            width: 120,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.method_of_result,
@@ -354,95 +250,109 @@ const WrestlerPageTable = (props) => {
         {
             field: 'period',
             headerName: 'Period',
-            width: 150,
+            width: 80,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.period,
         },
         {
             field: 'team_points_earned',
-            headerName: 'Team Points Earned',
-            width: 200,
+            headerName: 'Team Pts',
+            width: 100,
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) => params.row.match_stats.team_points_earned,
         },
     ];
 
+    const gridStyles = {
+        borderRadius: '12px',
+        border: '1px solid rgba(0, 0, 0, 0.08)',
+        fontFamily: 'roboto-regular, sans-serif',
+        fontSize: 14,
+        '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#800000',
+            color: 'white',
+            fontFamily: 'barlow, sans-serif',
+            fontWeight: 600,
+            fontSize: 13,
+        },
+        '& .MuiDataGrid-columnHeaderTitle': {
+            fontWeight: 600,
+        },
+        '& .MuiDataGrid-row:hover': {
+            backgroundColor: 'rgba(128, 0, 0, 0.04)',
+        },
+        '& .MuiDataGrid-row:nth-of-type(even)': {
+            backgroundColor: '#fafafa',
+        },
+        '& .MuiDataGrid-cell': {
+            borderBottom: '1px solid #f0f0f0',
+        },
+        '& .MuiDataGrid-toolbarContainer': {
+            padding: '0.75rem',
+            gap: '0.5rem',
+        },
+        '& .MuiDataGrid-toolbarContainer .MuiButton-root': {
+            color: '#800000',
+            fontFamily: 'roboto-regular, sans-serif',
+        },
+        '& .MuiDataGrid-footerContainer': {
+            borderTop: '1px solid #f0f0f0',
+        },
+        '& .MuiTablePagination-root': {
+            fontFamily: 'roboto-regular, sans-serif',
+        },
+        '& .MuiCheckbox-root': {
+            color: '#800000',
+        },
+        '& .MuiCheckbox-root.Mui-checked': {
+            color: '#800000',
+        },
+    };
+
     const renderTable = () => {
-        return type === 'regularSeason' ? (
+        const columns = type === 'regularSeason' ? regularSeasonColumns : individualColumns;
+        
+        return (
             <DataGrid
-                sx={{
-                    pl: 5,
-                    boxShadow: 2,
-                    fontFamily: 'Baloo',
-                    fontSize: 18,
-                    border: 2,
-                    borderColor: 'maroon',
-                    '& .MuiDataGrid-row:hover': {
-                        color: 'maroon',
-                    },
-                    '& .MuiDataGrid-columnHeaderTitle': {
-                        fontWeight: 'bold',
-                    },
-                }}
-                columns={regularSeasonColumns}
+                sx={gridStyles}
+                columns={columns}
                 rows={data}
                 pageSize={20}
+                rowsPerPageOptions={[10, 20, 50]}
                 components={{ Toolbar: GridToolbar }}
                 componentsProps={{
                     panel: {
                         sx: {
                             '& .MuiTypography-root': {
-                                color: 'black',
+                                color: '#1a1a1a',
                                 fontSize: 14,
+                                fontFamily: 'roboto-regular, sans-serif',
                             },
                             '& .MuiDataGrid-filterForm': {
                                 bgcolor: 'white',
-                                color: 'maroon',
                             },
                             '& .MuiButton-text': {
-                                color: 'maroon',
+                                color: '#800000',
                             },
                         },
                     },
                 }}
                 checkboxSelection
                 disableSelectionOnClick
-            />
-        ) : (
-            <DataGrid
-                sx={{
-                    pl: 5,
-                    boxShadow: 2,
-                    fontFamily: 'Baloo',
-                    fontSize: 18,
-                    border: 2,
-                    borderColor: 'maroon',
-                    '& .MuiDataGrid-row:hover': {
-                        color: 'maroon',
-                    },
-                    '& .MuiDataGrid-columnHeaderTitle': {
-                        fontWeight: 'bold',
-                    },
-                }}
-                columns={individualColumns}
-                rows={data}
-                pageSize={20}
-                components={{ Toolbar: GridToolbar }}
-                checkboxSelection
-                disableSelectionOnClick
+                density="comfortable"
             />
         );
     };
 
-    return type === 'regularSeason' ? (
-        <Box sx={{ height: 1500, width: '100%' }}>
-            <Box sx={{ display: 'flex', height: '100%' }}>{renderTable()}</Box>
-        </Box>
-    ) : (
-        <Box sx={{ height: 1380, width: '100%' }}>
-            <Box sx={{ display: 'flex', height: '100%' }}>{renderTable()}</Box>
+    const height = type === 'regularSeason' ? 800 : 600;
+
+    return (
+        <Box className="table-responsive" sx={{ width: '100%' }}>
+            <Box sx={{ height, width: '100%' }}>
+                {renderTable()}
+            </Box>
         </Box>
     );
 };

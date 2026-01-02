@@ -1,46 +1,77 @@
-/* Search Results Styles */
+/* ===========================================
+   SEARCH RESULTS STYLES - MODERN
+   =========================================== */
+
 .search-results-container {
     width: 100%;
-    max-width: 800px;
-    margin: 2rem auto 0;
-    padding: 0;
 }
 
-.search-results-grid {
-    margin-top: 1.5rem;
+.search-results-count {
+    font-family: roboto-regular, sans-serif !important;
+    color: #666 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 1.25rem !important;
 }
 
-.search-results-empty {
-    width: 100%;
-    text-align: center;
+/* Empty State Card */
+.search-results-empty-card {
+    background: #fff !important;
+    border-radius: 16px !important;
     padding: 4rem 2rem;
-    margin-top: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.search-results-empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-results-empty-icon {
+    font-size: 4rem !important;
+    color: #bbb !important;
+    margin-bottom: 1rem;
+}
+
+.search-results-empty-icon.available {
+    color: #800000 !important;
+    opacity: 0.5;
+}
+
+.search-results-empty-title {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .search-results-empty-text {
-    color: #6c757d !important;
-    font-size: 1.125rem !important;
-    max-width: 600px;
-    margin: 0 auto !important;
+    font-family: roboto-regular, sans-serif !important;
+    color: #666 !important;
+    font-size: 0.9375rem !important;
     line-height: 1.6 !important;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .search-results-container {
-        padding: 0;
+/* Responsive */
+@media (max-width: 599px) {
+    .search-results-empty-card {
+        padding: 3rem 1.5rem;
     }
-
-    .search-results-title {
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
+    
+    .search-results-empty-icon {
+        font-size: 3rem !important;
     }
-
-    .search-results-empty {
-        padding: 3rem 1rem;
+    
+    .search-results-empty-title {
+        font-size: 1.125rem !important;
     }
-
+    
     .search-results-empty-text {
-        font-size: 1rem !important;
+        font-size: 0.875rem !important;
     }
 }

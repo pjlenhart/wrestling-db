@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import _ from 'lodash';
 import './MaterialTable.css';
 
@@ -20,6 +21,7 @@ const MaterialTable = (props) => {
         alignCell,
         alignHeaderCells,
         sticky,
+        compact,
     } = props;
 
     const renderCell = (item, column) => {
@@ -27,75 +29,101 @@ const MaterialTable = (props) => {
         return _.get(item, column.path);
     };
 
-    const tableStyle = {
-        minWidth: minWidth || 550,
-    };
-
     return (
-        <Paper className="material-table-paper">
-            <TableContainer>
-                <Table
-                    style={tableStyle}
-                    aria-label="simple table"
-                    stickyHeader
-                    className="material-table"
-                >
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={_.uniqueId()}
-                                    align={alignHeaderCells || 'center'}
-                                    className="material-table-head-cell"
-                                    style={{
-                                        backgroundColor: headerHex || '#800000',
-                                        color: headerFontColor || 'white',
-                                    }}
-                                    sx={{
-                                        [`&.${tableCellClasses.head}`]: {
-                                            backgroundColor:
-                                                headerHex || '#800000',
-                                            color: headerFontColor || 'white',
-                                            fontSize: 14,
-                                            fontFamily: 'Baloo',
-                                        },
-                                    }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map((item, index) => (
-                            <TableRow
-                                key={_.uniqueId()}
-                                className={index % 2 !== 0 ? 'material-table-row-odd' : ''}
-                                style={{
-                                    backgroundColor: index % 2 !== 0 && !unstriped ? '#D3D3D3' : 'transparent',
-                                }}
-                            >
-                                {columns.map((col) => (
+        <Box className="table-responsive">
+            <Paper className="material-table-paper-modern">
+                <TableContainer>
+                    <Table
+                        sx={{ 
+                            minWidth: minWidth || 400,
+                            tableLayout: 'fixed',
+                        }}
+                        aria-label="data table"
+                        stickyHeader={sticky}
+                        className="material-table-modern"
+                    >
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column, index) => (
                                     <TableCell
-                                        key={_.uniqueId()}
-                                        className="material-table-body-cell"
-                                        align={alignCell || 'center'}
+                                        key={`header-${index}`}
+                                        align={column.align || alignHeaderCells || 'center'}
+                                        className="material-table-head-cell-modern"
                                         sx={{
-                                            [`&.${tableCellClasses.body}`]: {
-                                                fontSize: 14,
-                                                fontFamily: 'Baloo',
-                                            },
+                                            backgroundColor: headerHex || '#800000',
+                                            color: headerFontColor || 'white',
+                                            fontFamily: 'barlow, sans-serif',
+                                            fontWeight: 600,
+                                            fontSize: compact ? '0.75rem' : '0.875rem',
+                                            padding: compact ? '0.5rem' : '0.875rem 0.75rem',
+                                            whiteSpace: 'nowrap',
+                                            backgroundImage: !headerHex ? 'linear-gradient(135deg, #800000 0%, #5c0000 100%)' : 'none',
+                                            width: column.width || 'auto',
+                                            minWidth: column.minWidth || 'auto',
                                         }}
                                     >
-                                        {renderCell(item, col)}
+                                        {column.label}
                                     </TableCell>
                                 ))}
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
+                        </TableHead>
+                        <TableBody>
+                            {data && data.length > 0 ? (
+                                data.map((item, rowIndex) => (
+                                    <TableRow
+                                        key={`row-${rowIndex}`}
+                                        className="material-table-row-modern"
+                                        sx={{
+                                            backgroundColor: rowIndex % 2 !== 0 && !unstriped 
+                                                ? '#f9f9f9' 
+                                                : 'transparent',
+                                            '&:hover': {
+                                                backgroundColor: 'rgba(128, 0, 0, 0.04)',
+                                            },
+                                            '&:last-child td': {
+                                                borderBottom: 0,
+                                            },
+                                        }}
+                                    >
+                                        {columns.map((col, colIndex) => (
+                                            <TableCell
+                                                key={`cell-${rowIndex}-${colIndex}`}
+                                                align={col.align || alignCell || 'center'}
+                                                sx={{
+                                                    fontFamily: 'roboto-regular, sans-serif',
+                                                    fontSize: compact ? '0.75rem' : '0.875rem',
+                                                    padding: compact ? '0.5rem' : '0.75rem',
+                                                    color: '#424242',
+                                                    borderBottom: '1px solid #eee',
+                                                    width: col.width || 'auto',
+                                                    minWidth: col.minWidth || 'auto',
+                                                }}
+                                            >
+                                                {renderCell(item, col)}
+                                            </TableCell>
+                                        ))}
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell 
+                                        colSpan={columns.length} 
+                                        align="center"
+                                        sx={{
+                                            fontFamily: 'roboto-regular, sans-serif',
+                                            color: '#757575',
+                                            padding: '2rem',
+                                        }}
+                                    >
+                                        No data available
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </Box>
     );
 };
 

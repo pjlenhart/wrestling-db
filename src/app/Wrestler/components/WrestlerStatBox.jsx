@@ -278,11 +278,20 @@ const WrestlerStatBox = (props) => {
         'lossDetail',
         'period',
     ];
+    const chartOptions = {
+        plugins: {
+            legend: {
+                display: false,
+            },
+        },
+        maintainAspectRatio: true,
+    };
+
     const charts = !graphData
         ? null
         : chartNames.map((chart) => (
               <Box className="wrestler-stat-chart">
-                  <Doughnut data={graphData[`${chart}`]} />
+                  <Doughnut data={graphData[`${chart}`]} options={chartOptions} />
               </Box>
           ));
 
@@ -358,7 +367,7 @@ const WrestlerStatBox = (props) => {
               {
                   stat: 'Win Method Breakdown',
                   numerical: (
-                      <ul style={{ textAlign: 'left' }}>
+                      <ul style={{ textAlign: 'center', listStyle: 'none', padding: 0, margin: 0 }}>
                           <li>{`${data.wins_by_pin} by Pin`}</li>
                           <li>{`${data.wins_by_minor_decision} by Minor Dec.`}</li>
                           <li>{`${data.wins_by_major_decision} by Maj. Dec.`}</li>
@@ -370,7 +379,7 @@ const WrestlerStatBox = (props) => {
               {
                   stat: 'Loss Method Breakdown',
                   numerical: (
-                      <ul style={{ textAlign: 'left' }}>
+                      <ul style={{ textAlign: 'center', listStyle: 'none', padding: 0, margin: 0 }}>
                           <li
                               key={_.uniqueId()}
                           >{`${data.losses_by_pin} by Pin`}</li>
@@ -390,7 +399,7 @@ const WrestlerStatBox = (props) => {
               {
                   stat: 'Period Match Ended Breakdown',
                   numerical: (
-                      <ul style={{ textAlign: 'left' }}>
+                      <ul style={{ textAlign: 'center', listStyle: 'none', padding: 0, margin: 0 }}>
                           <li
                               key={_.uniqueId()}
                           >{`${data.matches_end_first_period} in 1st`}</li>

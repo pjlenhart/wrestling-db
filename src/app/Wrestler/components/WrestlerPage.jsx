@@ -1,15 +1,20 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Chip from '@mui/material/Chip';
 import WrestlerPageTable from './WrestlerPageTable';
 import WrestlerStatBox from './WrestlerStatBox';
-import Accolades from './Accolades';
-import '../styles/wrestlerStyles.css';
 import RadarChart from './RadarCharts';
-import PageHeader from '../../common/Header/PageHeader';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Grid from '@mui/material/Grid';
-import Subheader from '../../common/Header/Subheader';
-import Typography from '@mui/material/Typography';
+import PageHero from '../../common/Header/PageHero';
+import '../styles/wrestlerStyles.css';
+import '../../common/styles/globalStyles.css';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import TimelineIcon from '@mui/icons-material/Timeline';
 
 const WrestlerPage = (props) => {
     const {
@@ -19,95 +24,122 @@ const WrestlerPage = (props) => {
         careerStats,
         accolades,
     } = props;
+    
     const wrestlerName = wrestlerData ? wrestlerData.wrestler_name : null;
     const careerArr = careerStats.filter((stats) => stats.season === 'Career');
     const seasons = [...new Set(careerStats.map((stat) => stat.season))];
-    const seasonList = seasons
-        .filter((season) => season !== 'Career')
-        .reverse();
+    const seasonList = seasons.filter((season) => season !== 'Career').reverse();
     const career = careerArr[0] ? careerArr[0] : null;
 
-    return regularSeasonData ? (
-        <>
-            <PageHeader header={wrestlerName} />
+    if (!regularSeasonData) return null;
 
-            <Box className="wrestler-page-container">
-                <Accolades accolades={accolades} />
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={8}>
-                        <Stack>
-                            <Subheader
-                                label="Regular Season - Career"
-                                paddingTop={2}
-                                paddingBottom={2}
-                            />
-                            <WrestlerPageTable
-                                data={regularSeasonData}
-                                type="regularSeason"
-                            />
-                            <br />
-                            <br />
-                            <Subheader
-                                label="Individual/Postseason - Career"
-                                paddingTop={2}
-                                paddingBottom={2}
-                            />
-                            <WrestlerPageTable
-                                data={individualData}
-                                type="individual"
-                            />
-                        </Stack>
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <Subheader
-                            label="Wrestler Statistics"
-                            paddingTop={2}
-                            paddingBottom={2}
-                        />
-                        <Typography
-                            variant="body1"
-                            color="text.secondary"
-                            fontFamily="Baloo"
-                        >
-                            *Note: some statistics are only counted in the
-                            regular season, wins/losses, match times, and
-                            periods are counted in regular and post season.
+    return (
+        <Box className="modern-page">
+            <PageHero 
+                title={wrestlerName} 
+                subtitle={wrestlerData?.classOf ? `Class of ${wrestlerData.classOf}` : 'Towson Wrestler'}
+            />
+            
+            <Container maxWidth="lg" className="page-content">
+                {/* 1. Career Accolades */}
+                {accolades && accolades.length > 0 && (
+                    <Paper className="content-card" elevation={0}>
+                        <Box className="section-header">
+                            <EmojiEventsIcon className="section-title-icon" style={{ color: '#FFD700' }} />
+                            <Typography className="section-title">
+                                Career Accolades
+                            </Typography>
+                        </Box>
+                        <Box className="wrestler-accolades-list">
+                            {accolades.map((acc, index) => (
+                                <Chip
+                                    key={index}
+                                    icon={<EmojiEventsIcon style={{ color: '#FFD700' }} />}
+                                    label={`${acc.place} place - ${acc.season} ${acc.tournament}`}
+                                    className="wrestler-accolade-chip"
+                                />
+                            ))}
+                        </Box>
+                    </Paper>
+                )}
+
+                {/* 2. Career Statistics - Full Width */}
+                <Paper className="content-card" elevation={0}>
+                    <Box className="section-header">
+                        <BarChartIcon className="section-title-icon" />
+                        <Typography className="section-title">
+                            Career Statistics
                         </Typography>
-                        <WrestlerStatBox data={career} />
-                    </Grid>
-                </Grid>
+                    </Box>
+                    <Typography className="section-subtitle">
+                        *Note: Some statistics are only counted in regular season. Wins/losses, match times, and periods are counted in both regular and post season.
+                    </Typography>
+                    <WrestlerStatBox data={career} />
+                </Paper>
 
-                <Box>
-                    <Subheader
-                        label="Scoring Actions Breakdown Compared to Opponents, by Season"
-                        paddingTop={5}
-                        paddingBottom={3}
+                {/* 3. Regular Season - Full Width */}
+                <Paper className="content-card" elevation={0}>
+                    <Box className="section-header">
+                        <TableChartIcon className="section-title-icon" />
+                        <Typography className="section-title">
+                            Regular Season - Career
+                        </Typography>
+                    </Box>
+                    <WrestlerPageTable
+                        data={regularSeasonData}
+                        type="regularSeason"
                     />
-                    <Grid container>
-                        {seasonList.map((season) => {
-                            return (
-                                <Grid item xs={12} md={6}>
-                                    <Typography
-                                        component="h5"
-                                        variant="h5"
-                                        color="text.secondary"
-                                        fontFamily="Baloo"
-                                    >
-                                        Season {season}
-                                    </Typography>
-                                    <RadarChart
-                                        chartData={careerStats.filter(
-                                            (sea) => sea.season === season
-                                        )}
-                                    />
+                </Paper>
+
+                {/* 4. Individual/Post Season - Full Width */}
+                <Paper className="content-card" elevation={0}>
+                    <Box className="section-header">
+                        <TableChartIcon className="section-title-icon" />
+                        <Typography className="section-title">
+                            Individual/Postseason - Career
+                        </Typography>
+                    </Box>
+                    <WrestlerPageTable
+                        data={individualData}
+                        type="individual"
+                    />
+                </Paper>
+
+                {/* 5. Scoring Actions Breakdown - Full Width with Larger Charts */}
+                {seasonList.length > 0 && (
+                    <Paper className="content-card" elevation={0}>
+                        <Box className="section-header">
+                            <TimelineIcon className="section-title-icon" />
+                            <Typography className="section-title">
+                                Scoring Actions Breakdown by Season
+                            </Typography>
+                        </Box>
+                        <Typography className="section-subtitle">
+                            Compare scoring actions against opponents across different seasons
+                        </Typography>
+                        <Grid container spacing={4}>
+                            {seasonList.map((season, index) => (
+                                <Grid item xs={12} md={6} key={index}>
+                                    <Box className="wrestler-radar-section">
+                                        <Typography className="wrestler-season-label">
+                                            Season {season}
+                                        </Typography>
+                                        <Box className="wrestler-radar-container-large">
+                                            <RadarChart
+                                                chartData={careerStats.filter(
+                                                    (sea) => sea.season === season
+                                                )}
+                                            />
+                                        </Box>
+                                    </Box>
                                 </Grid>
-                            );
-                        })}
-                    </Grid>
-                </Box>
-            </Box>
-        </>
-    ) : null;
+                            ))}
+                        </Grid>
+                    </Paper>
+                )}
+            </Container>
+        </Box>
+    );
 };
 
 export default WrestlerPage;
