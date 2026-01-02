@@ -1,21 +1,8 @@
-@font-face {
-    font-family: Barlow;
-    src: url('/src/app/common/fonts/Barlow-Black.ttf');
-}
-
-@font-face {
-    font-family: Baloo;
-    src: url('/src/app/common/fonts/static/BalooBhaijaan2-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: Baloo-Bold;
-    src: url('/src/app/common/fonts/static/BalooBhaijaan2-ExtraBold.ttf');
-}
+/* Fonts loaded via Google Fonts CDN in index.html */
 
 body {
     margin: 0;
-    font-family: Barlow, Baloo, Baloo-Bold, sans-serif;
+    font-family: 'Barlow', 'Roboto Condensed', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

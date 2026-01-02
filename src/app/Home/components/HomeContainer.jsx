@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { getTeamMatches } from '../../services/teamMatchService';
-import { getAnnouncements } from '../../services/widgetService';
+import { getCareerStats } from '../../services/statisticsService';
 import Home from './Home';
 
 const HomeContainer = () => {
-    const [teamMatches, setTeamMatches] = useState([]);
-    const [announcements, setAnnouncements] = useState([]);
+    const [topPinners, setTopPinners] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const getTeamMatchesAll = async () => {
-        const response = await getTeamMatches('desc');
-        const data = response?.data;
-        setTeamMatches(data);
-    };
+    const getTopPinners = async () => {
+        try {
+            setIsLoading(true);
+            const response = await getCareerStats();
+            const data = response?.data || [];
 
-    const getCurrentAnnoucements = async () => {
-        const response = await getAnnouncements();
-        const data = response?.data;
-        const today = new Date().toISOString().slice(0, 10);
-        const currentAnnoucements = data.filter(
-            (ann) =>
-                (today >= ann.start_date && ann.expiration_date > today) ===
-                true
-        );
-        setAnnouncements(currentAnnoucements);
+            // Filter for 2025-2026 season and sort by pins (wins_by_pin)
+            const currentSeasonData = data.filter(
+                (record) => record.season === '2025-2026'
+            );
+
+            // Sort by pins in descending order and take top 5
+            const sortedByPins = currentSeasonData
+                .sort(
+                    (a, b) => parseInt(b.wins_by_pin) - parseInt(a.wins_by_pin)
+                )
+                .slice(0, 5);
+
+            setTopPinners(sortedByPins);
+        } catch (error) {
+            console.error('Error fetching top pinners:', error);
+            setTopPinners([]);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
-        getTeamMatchesAll();
-        getCurrentAnnoucements();
+        getTopPinners();
     }, []);
 
-    return (
-        <Home
-            teamMatchData={teamMatches.reverse().slice(0, 7)}
-            announcements={announcements}
-        />
-    );
+    return <Home topPinners={topPinners} isLoading={isLoading} />;
 };
 
 export default HomeContainer;

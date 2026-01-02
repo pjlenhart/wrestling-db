@@ -1,112 +1,100 @@
-@font-face {
-    font-family: roboto-regular;
-    src: url('/src/app/common/fonts/RobotoCondensed-Regular.ttf');
-}
+/* ===========================================
+   WRESTLER PAGE STYLES
+   =========================================== */
 
-@font-face {
-    font-family: roboto-bold;
-    src: url('/src/app/common/fonts/RobotoCondensed-Bold.ttf');
-}
-
-@font-face {
-    font-family: gagalin;
-    src: url('/src/app/common/fonts/Gagalin-Regular.otf');
-}
-
-.wrestler-table {
-    width: 60%;
+/* Accolades */
+.wrestler-accolades-list {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
-.h-home {
-    font-family: gagalin;
-    color: black;
-    display: inline;
-    font-size: 80px;
-    padding: 25px 0px 50px 0px;
+.wrestler-accolade-chip {
+    background-color: rgba(255, 215, 0, 0.15) !important;
+    color: #1a1a1a !important;
+    font-family: roboto-regular, sans-serif !important;
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0.25rem !important;
+    height: auto !important;
 }
 
-.stat-table {
-    font-family: roboto-regular;
-    min-width: 350px;
+.wrestler-accolade-chip .MuiChip-icon {
+    color: #FFD700 !important;
+}
+
+/* Radar chart section */
+.wrestler-radar-section {
+    text-align: center;
+    padding: 1rem;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.wrestler-season-label {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 1.125rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Large radar container for full-width layout */
+.wrestler-radar-container-large {
+    width: 100%;
     max-width: 500px;
+    margin: 0 auto;
+    padding: 0.5rem;
 }
 
-.stat-table-tr-th {
-    background-color: maroon;
-    color: white;
+/* Modern radar chart styling */
+.wrestler-radar-chart-modern {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
 }
 
-.stat-table-th {
-    border: 2px solid black;
-    text-align: center;
-}
-
-.stat-table-td {
-    min-width: 200px;
-    border: 2px solid black;
-    text-align: center;
-}
-
-.notes {
-    font-family: roboto-regular;
-    font-size: 14px;
-}
-
-.h2-wrestler {
-    font-family: roboto-bold;
-    font-size: 35px;
-}
-
-.radar-box {
-    border: 3px;
-    border-color: maroon;
-    width: 500px;
-    height: 500px;
-}
-
-/* Wrestler Page Container */
-.wrestler-page-container {
-    width: auto;
-    align-items: center;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-    padding-bottom: 2.5rem;
-}
-
-/* Wrestler Box Styles */
-.wrestler-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.wrestlers-box {
-    width: auto;
-    align-items: center;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-    padding-bottom: 5rem;
-}
-
+/* Stat chart sizing (for donut charts in stat box) */
 .wrestler-stat-chart {
-    width: 150px;
-    height: 150px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
 }
 
-.wrestler-radar-chart {
-    width: 750px;
-    height: 750px;
-    font-family: Baloo, sans-serif;
+/* Responsive */
+@media (min-width: 900px) {
+    .wrestler-radar-container-large {
+        max-width: 450px;
+    }
 }
 
-.wrestler-accolades-box {
-    font-family: Baloo, sans-serif;
+@media (max-width: 899px) {
+    .wrestler-radar-container-large {
+        max-width: 400px;
+    }
 }
 
-.wrestler-trophy-icon {
-    color: goldenrod;
-    height: 15px;
+@media (max-width: 599px) {
+    .wrestler-accolade-chip {
+        font-size: 0.75rem !important;
+    }
+    
+    .wrestler-radar-section {
+        padding: 0.75rem;
+    }
+    
+    .wrestler-radar-container-large {
+        max-width: 320px;
+        padding: 0;
+    }
+    
+    .wrestler-stat-chart {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .wrestler-season-label {
+        font-size: 1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
 }

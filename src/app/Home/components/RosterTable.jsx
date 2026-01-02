@@ -4,10 +4,11 @@ import MaterialTable from '../../common/Table/MaterialTable';
 
 const RosterTable = (props) => {
     const { data } = props;
+    
     const wrestlerColumns = [
         {
             path: 'wrestler_id',
-            label: 'Wrestler ID',
+            label: 'ID',
         },
         {
             path: 'wrestler_name',
@@ -15,21 +16,41 @@ const RosterTable = (props) => {
             content: (wrestler) => (
                 <Link
                     to={`/wrestlers/${wrestler.wrestler_id}`}
-                    style={{ color: 'maroon' }}
+                    style={{ 
+                        color: '#800000', 
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                    }}
                 >
                     {wrestler.wrestler_name}
                 </Link>
             ),
         },
-        { path: 'classOf', label: 'Class' },
+        { 
+            path: 'classOf', 
+            label: 'Class' 
+        },
         {
             path: 'active_roster',
-            label: 'Active Roster',
-            content: (wrestler) =>
-                wrestler.active_roster === 1 ? 'On Active Roster' : 'Alumni',
+            label: 'Status',
+            content: (wrestler) => (
+                <span style={{ 
+                    color: wrestler.active_roster === 1 ? '#2E7D32' : '#757575',
+                    fontWeight: wrestler.active_roster === 1 ? 600 : 400,
+                }}>
+                    {wrestler.active_roster === 1 ? 'Active' : 'Alumni'}
+                </span>
+            ),
         },
     ];
-    return <MaterialTable columns={wrestlerColumns} data={data} />;
+    
+    return (
+        <MaterialTable 
+            columns={wrestlerColumns} 
+            data={data} 
+            minWidth={400}
+        />
+    );
 };
 
 export default RosterTable;

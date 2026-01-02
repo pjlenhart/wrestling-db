@@ -1,64 +1,64 @@
-@font-face {
-    font-family: gagalin;
-    src: url(Gagalin-Regular.otf);
+/* ===========================================
+   MATCHES PAGE STYLES
+   =========================================== */
+
+/* Season card spacing */
+.matches-season-card {
+    margin-bottom: 1.5rem;
 }
 
-@font-face {
-    font-family: roboto_regular;
-    src: url(RobotoCondensed-Regular.ttf);
+.matches-season-card:last-child {
+    margin-bottom: 0;
 }
 
-@font-face {
-    font-family: roboto_bold;
-    src: url(RobotoCondensed-Bold.ttf);
-}
-
-@font-face {
-    font-family: roboto_italics;
-    src: url(RobotoCondensed-Italic.ttf);
-}
-
-.match-table {
-    font-family: roboto_regular;
-}
-
-.match-table-td,
-.match-table-th,
-.match-table-tr {
-    text-align: center;
-}
-
-.match-table-tr:nth-child(even) {
-    background-color: lightgray;
-}
-
-.h1-match {
-    font-family: gagalin;
-    color: black;
-    display: inline;
-    font-size: 80px;
-    padding: 25px 0px 50px 0px;
-}
-
-h2 {
-    font-family: roboto_italics;
-    padding: 35px 0px 25px 0px;
-}
-
-/* Matches Page Container */
-.matches-page-container {
-    width: auto;
+/* Season header with record */
+.matches-season-header {
+    display: flex;
     align-items: center;
-    padding-left: 6rem;
-    padding-right: 7rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
-.matches-season-box {
-    padding-bottom: 2.5rem;
+.matches-record-chips {
+    display: flex;
+    gap: 0.5rem;
 }
 
-.matches-table-box {
-    width: 100%;
-    align-items: center;
-    padding: 1rem;
+.matches-chip-win {
+    background-color: rgba(46, 125, 50, 0.1) !important;
+    color: #2E7D32 !important;
+    font-family: barlow, sans-serif !important;
+    font-weight: 600 !important;
+}
+
+.matches-chip-loss {
+    background-color: rgba(198, 40, 40, 0.1) !important;
+    color: #C62828 !important;
+    font-family: barlow, sans-serif !important;
+    font-weight: 600 !important;
+}
+
+/* Result cell styling */
+.match-result-win {
+    color: #2E7D32;
+    font-weight: 600;
+}
+
+.match-result-loss {
+    color: #C62828;
+    font-weight: 600;
+}
+
+/* Mobile responsive */
+@media (max-width: 599px) {
+    .matches-season-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .matches-record-chips {
+        margin-top: 0.25rem;
+    }
 }

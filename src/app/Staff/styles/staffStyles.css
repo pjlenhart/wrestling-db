@@ -1,61 +1,104 @@
-@font-face {
-  font-family: roboto-regular;
-  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
+/* ===========================================
+   STAFF PAGE STYLES
+   =========================================== */
+
+/* Staff card */
+.staff-card {
+    background: #fff !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s ease;
 }
 
-@font-face {
-  font-family: roboto-bold;
-  src: url("/src/app/common/fonts/RobotoCondensed-Bold.ttf");
+.staff-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
-@font-face {
-  font-family: roboto-italic;
-  src: url("/src/app/common/fonts/RobotoCondensed-Italic.ttf");
+/* Image */
+.staff-image-container {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
 }
 
-@font-face {
-  font-family: gagalin;
-  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
+.staff-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.3s ease;
 }
 
-.h1-staff {
-  font-family: gagalin;
-  color: black;
-  display: inline;
-  font-size: 80px;
-  padding: 25px 0px 50px 0px;
+.staff-card:hover .staff-image {
+    transform: scale(1.05);
 }
 
-.img-staff {
-  max-height: 1100px;
-  max-width: 600px;
-  justify-content: center;
+/* Content */
+.staff-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.h2-staff {
-  font-family: roboto-italic;
-  color: black;
-  display: inline;
-  float: inline-end;
+.staff-name {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 1.375rem !important;
+    margin-bottom: 0.25rem !important;
 }
 
-p {
-  font-family: roboto_regular;
-  font-size: 20px;
+.staff-role {
+    font-family: roboto-bold, sans-serif !important;
+    color: #800000 !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.staff-card-format {
-  padding-top: 50px;
+.staff-bio {
+    font-family: roboto-regular, sans-serif !important;
+    color: #555 !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+    flex: 1;
 }
 
-.staff-info {
-  width: 80%;
+/* Responsive */
+@media (max-width: 899px) {
+    .staff-image-container {
+        height: 300px;
+    }
 }
 
-/* Staff Page Container */
-.staff-page-container {
-  width: auto;
-  align-items: center;
-  padding-left: 7.5rem;
-  padding-right: 7.5rem;
+@media (max-width: 599px) {
+    .staff-image-container {
+        height: 250px;
+    }
+    
+    .staff-content {
+        padding: 1.25rem;
+    }
+    
+    .staff-name {
+        font-size: 1.25rem !important;
+    }
+    
+    .staff-role {
+        font-size: 0.8125rem !important;
+    }
+    
+    .staff-bio {
+        font-size: 0.875rem !important;
+    }
 }

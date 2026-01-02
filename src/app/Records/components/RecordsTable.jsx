@@ -5,10 +5,12 @@ import {
     ArrowCircleDown,
     RemoveCircleOutline,
 } from '@mui/icons-material';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import '../styles/recordStyles.css';
 
 const RecordsTable = (props) => {
     const { records } = props;
+
     const recordColumns = [
         {
             path: 'wrestler_name',
@@ -36,7 +38,7 @@ const RecordsTable = (props) => {
         },
         {
             path: 'wins',
-            label: 'Wins',
+            label: 'W',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
                     <Typography className="record-career-text">
@@ -48,7 +50,7 @@ const RecordsTable = (props) => {
         },
         {
             path: 'losses',
-            label: 'Losses',
+            label: 'L',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
                     <Typography className="record-career-text">
@@ -72,7 +74,7 @@ const RecordsTable = (props) => {
         },
         {
             path: 'team_points_earned',
-            label: 'Team Points Earned',
+            label: 'Team Pts',
             content: (wrestler) =>
                 wrestler.season === 'Career' ? (
                     <Typography className="record-career-text">
@@ -86,47 +88,49 @@ const RecordsTable = (props) => {
             path: 'wins',
             label: 'Form',
             content: (wrestler) => {
-                console.log('wrestler', wrestler);
-                if (parseInt(wrestler.wins) > parseInt(wrestler.losses))
+                const wins = parseInt(wrestler.wins);
+                const losses = parseInt(wrestler.losses);
+
+                if (wins > losses) {
                     return (
                         <ArrowCircleUp
                             sx={{
-                                color: 'green',
-                                fontSize: 35,
+                                color: '#2E7D32',
+                                fontSize: 28,
                             }}
                         />
                     );
-                else if (parseInt(wrestler.wins) < parseInt(wrestler.losses))
+                } else if (wins < losses) {
                     return (
                         <ArrowCircleDown
                             sx={{
-                                color: 'red',
-                                fontSize: 35,
+                                color: '#C62828',
+                                fontSize: 28,
                             }}
                         />
                     );
-                else
+                } else {
                     return (
                         <RemoveCircleOutline
                             sx={{
-                                color: 'goldenrod',
-                                fontSize: 35,
+                                color: '#F9A825',
+                                fontSize: 28,
                             }}
                         />
                     );
+                }
             },
         },
     ];
+
     return (
-        <>
-            <MaterialTable
-                columns={recordColumns}
-                data={records}
-                unstriped={true}
-                sticky={true}
-            />
-            {console.log('records', records)}
-        </>
+        <MaterialTable
+            columns={recordColumns}
+            data={records}
+            unstriped={false}
+            sticky={true}
+            minWidth={600}
+        />
     );
 };
 

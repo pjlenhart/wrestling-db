@@ -1,101 +1,114 @@
-@font-face {
-  font-family: gagalin;
-  src: url(Gagalin-Regular.otf);
+/* ===========================================
+   ABOUT PAGE STYLES
+   =========================================== */
+
+/* Section styling */
+.about-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-@font-face {
-  font-family: roboto_regular;
-  src: url(RobotoCondensed-Regular.ttf);
+.about-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
-@font-face {
-  font-family: roboto_bold;
-  src: url(RobotoCondensed-Bold.ttf);
+.about-section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(128, 0, 0, 0.08);
+    color: #800000;
+    flex-shrink: 0;
 }
 
-@font-face {
-  font-family: roboto_italics;
-  src: url(RobotoCondensed-Italic.ttf);
+.about-section-icon svg {
+    font-size: 1.25rem;
 }
 
-.h1-about {
-  font-family: gagalin;
-  color: black;
-  display: inline;
-  text-align: center;
-  font-size: 80px;
+/* Profile Card */
+.about-profile-card {
+    background: #fff !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 100px;
 }
 
-.h2-about {
-  font-family: roboto_regular;
-  color: black;
-  display: inline;
-  float: inline-end;
-  font-size: 40px;
+.about-profile-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
 }
 
-p {
-  font-family: roboto_regular;
-  font-size: 20px;
+.about-profile-content {
+    padding: 1.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #800000 0%, #5c0000 100%);
 }
 
-figcaption {
-  font-family: roboto_italics;
-  font-size: 14px;
-  padding: 10px 25px 25px 50px;
+.about-profile-name {
+    font-family: barlow, sans-serif !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 0.25rem !important;
 }
 
-.img-about {
-  max-height: 900px;
-  width: auto;
-  padding: 50px 25px 10px 50px;
-  justify-content: center;
+.about-profile-role {
+    font-family: roboto-regular, sans-serif !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.9375rem !important;
+    margin-bottom: 0.25rem !important;
 }
 
-.about-container {
-  padding: 25px 25px 25px 50px;
+.about-profile-school {
+    font-family: roboto-regular, sans-serif !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.875rem !important;
 }
 
-.right-half {
-  float: left;
-  width: 50%;
-  padding-bottom: 50px;
+/* Responsive */
+@media (max-width: 899px) {
+    .about-profile-card {
+        position: static;
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-profile-image {
+        height: 250px;
+    }
 }
 
-.left-half {
-  float: left;
-  width: 50%;
-  padding-bottom: 50px;
-}
-
-/* About Page Container */
-.about-page-container {
-  width: 75%;
-  align-items: center;
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
-.about-faq-section {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.about-faq-title {
-  font-family: Baloo, sans-serif;
-  padding-bottom: 0.5rem;
-}
-
-.about-faq-divider {
-  background-color: #800000;
-}
-
-.about-faq-description {
-  font-family: Baloo, sans-serif;
-  font-weight: 700;
-}
-
-.about-faq-image-text {
-  width: 175%;
-  font-family: Baloo, sans-serif;
+@media (max-width: 599px) {
+    .about-section-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .about-section-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .about-profile-image {
+        height: 200px;
+    }
+    
+    .about-profile-content {
+        padding: 1rem;
+    }
+    
+    .about-profile-name {
+        font-size: 1.25rem !important;
+    }
 }

@@ -10,13 +10,13 @@ const SearchResultsSkeleton = ({ count = 8 }) => {
         <Box className="search-results-container">
             <Skeleton
                 variant="text"
-                width={300}
-                height={50}
+                width={120}
+                height={24}
                 animation="wave"
-                sx={{ margin: '0 auto 1.5rem' }}
+                sx={{ marginBottom: '1.25rem' }}
             />
 
-            <Grid container spacing={3} className="search-results-grid">
+            <Grid container spacing={3}>
                 {Array.from({ length: count }).map((_, index) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                         <MoveCardSkeleton />
@@ -28,4 +28,3 @@ const SearchResultsSkeleton = ({ count = 8 }) => {
 };
 
 export default SearchResultsSkeleton;
-

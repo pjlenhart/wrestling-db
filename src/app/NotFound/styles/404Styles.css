@@ -1,20 +1,12 @@
-@font-face {
-  font-family: gagalin;
-  src: url(Gagalin-Regular.otf);
-}
-
-@font-face {
-  font-family: roboto_regular;
-  src: url(RobotoCondensed-Regular.ttf);
-}
+/* Fonts loaded via Google Fonts CDN */
 
 .error-404 {
-  font-family: gagalin;
+  font-family: 'Racing Sans One', cursive;
   font-size: 180px;
   text-align: center;
 }
 
 .p-404 {
-  font-family: roboto_regular;
+  font-family: 'Roboto Condensed', sans-serif;
   text-align: center;
 }

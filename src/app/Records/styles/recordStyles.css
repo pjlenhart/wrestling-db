@@ -1,47 +1,31 @@
-@font-face {
-  font-family: roboto-regular;
-  src: url("/src/app/common/fonts/RobotoCondensed-Regular.ttf");
-}
+/* ===========================================
+   RECORDS PAGE STYLES
+   =========================================== */
 
-@font-face {
-  font-family: gagalin;
-  src: url("/src/app/common/fonts/Gagalin-Regular.otf");
-}
-
-.record-table {
-  font-family: roboto-regular;
-}
-
-.record-td,
-.record-th,
-.record-tr {
-  text-align: center;
-  font-family: roboto-regular;
-}
-
-.form-img {
-  height: 50px;
-  width: 50px;
-}
-
-/* Records Page Container */
-.records-page-container {
-  width: auto;
-  align-items: center;
-  padding-left: 7.5rem;
-  padding-right: 7.5rem;
-}
-
-/* Records Table - Career Row Bold */
+/* Career row bold styling */
 .record-career-text {
-  color: black;
-  font-size: 16px;
-  font-family: Baloo-Bold, sans-serif;
+    color: #1a1a1a !important;
+    font-family: roboto-bold, sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.875rem;
 }
 
-/* Records Form Indicator */
-.record-form-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Form indicator icons */
+.record-form-up {
+    color: #2E7D32;
+}
+
+.record-form-down {
+    color: #C62828;
+}
+
+.record-form-neutral {
+    color: #F9A825;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 599px) {
+    .record-career-text {
+        font-size: 0.75rem;
+    }
 }
