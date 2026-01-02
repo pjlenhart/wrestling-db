@@ -47,7 +47,6 @@ const SeasonTable = (props) => {
             type: 'date',
             width: 150,
             filterable: true,
-            type: 'date',
             valueGetter: (params) => new Date(params.row.match_date),
         },
         {

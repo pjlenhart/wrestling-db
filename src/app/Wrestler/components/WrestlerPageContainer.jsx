@@ -11,64 +11,100 @@ import { getAccoladesByWrestler } from '../../services/widgetService';
 const WrestlerPageContainer = (props) => {
     const [regularSeasonMatches, setRegularSeasonMatches] = useState([]);
     const [individualMatches, setIndividualMatches] = useState([]);
-    const [wrestlerInfo, setWrestlerInfo] = useState([]);
+    const [wrestlerInfo, setWrestlerInfo] = useState(null);
     const [careerStats, setCareerStats] = useState([]);
     const [accolades, setAccolades] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const getRegularSeason = async () => {
-        const response = await getRegularSeasonMatchByWrestler(
-            props.match.params.id
-        );
-        const data = response?.data;
-        setRegularSeasonMatches(data);
-    };
+    const fetchAllData = async () => {
+        try {
+            setIsLoading(true);
+            setError(null);
+            
+            // Fetch all data in parallel
+            const [
+                regularSeasonResponse,
+                individualResponse,
+                wrestlerResponse,
+                statsResponse,
+                accoladesResponse
+            ] = await Promise.allSettled([
+                getRegularSeasonMatchByWrestler(props.match.params.id),
+                getIndividualMatchByWrestler(props.match.params.id),
+                getWrestlerById(props.match.params.id),
+                getCareerStatsByWrestler(props.match.params.id),
+                getAccoladesByWrestler(props.match.params.id)
+            ]);
 
-    const getIndividual = async () => {
-        const response = await getIndividualMatchByWrestler(
-            props.match.params.id
-        );
-        const data = response?.data;
-        setIndividualMatches(data);
-    };
+            // Handle each response with fallbacks
+            if (regularSeasonResponse.status === 'fulfilled') {
+                setRegularSeasonMatches(regularSeasonResponse.value?.data || []);
+            } else {
+                console.error('Error fetching regular season matches:', regularSeasonResponse.reason);
+                setRegularSeasonMatches([]);
+            }
 
-    const getWrestlerInfo = async () => {
-        const response = await getWrestlerById(props.match.params.id);
-        const data = response?.data[0];
-        setWrestlerInfo(data);
-    };
+            if (individualResponse.status === 'fulfilled') {
+                setIndividualMatches(individualResponse.value?.data || []);
+            } else {
+                console.error('Error fetching individual matches:', individualResponse.reason);
+                setIndividualMatches([]);
+            }
 
-    const getStatistics = async () => {
-        const response = await getCareerStatsByWrestler(props.match.params.id);
-        const data = response?.data;
-        setCareerStats(data);
-    };
+            if (wrestlerResponse.status === 'fulfilled') {
+                setWrestlerInfo(wrestlerResponse.value?.data?.[0] || null);
+            } else {
+                console.error('Error fetching wrestler info:', wrestlerResponse.reason);
+                setWrestlerInfo(null);
+            }
 
-    const getAwards = async () => {
-        const response = await getAccoladesByWrestler(props.match.params.id);
-        const data = response?.data;
-        setAccolades(data);
+            if (statsResponse.status === 'fulfilled') {
+                setCareerStats(statsResponse.value?.data || []);
+            } else {
+                console.error('Error fetching career stats:', statsResponse.reason);
+                setCareerStats([]);
+            }
+
+            if (accoladesResponse.status === 'fulfilled') {
+                setAccolades(accoladesResponse.value?.data || []);
+            } else {
+                console.error('Error fetching accolades:', accoladesResponse.reason);
+                setAccolades([]);
+            }
+
+        } catch (error) {
+            console.error('Error fetching wrestler data:', error);
+            setError('Failed to load wrestler data. Please try again later.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
-        getRegularSeason();
-        getIndividual();
-        getWrestlerInfo();
-        getStatistics();
-        getAwards();
-    }, []);
+        fetchAllData();
+    }, [props.match.params.id]);
+
+    if (isLoading) {
+        return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading wrestler data...</div>;
+    }
+
+    if (error) {
+        return <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>{error}</div>;
+    }
+
+    if (!wrestlerInfo) {
+        return <div style={{ padding: '2rem', textAlign: 'center' }}>Wrestler not found.</div>;
+    }
 
     return (
-        <>
-            {regularSeasonMatches ? (
-                <WrestlerPage
-                    regularSeasonData={regularSeasonMatches}
-                    individualData={individualMatches}
-                    wrestlerData={wrestlerInfo}
-                    careerStats={careerStats}
-                    accolades={accolades}
-                />
-            ) : null}
-        </>
+        <WrestlerPage
+            regularSeasonData={regularSeasonMatches}
+            individualData={individualMatches}
+            wrestlerData={wrestlerInfo}
+            careerStats={careerStats}
+            accolades={accolades}
+        />
     );
 };
 

@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
+import ErrorBoundary from './app/common/ErrorBoundary';
 
 const theme = createTheme({
     palette: {
@@ -31,11 +32,13 @@ const theme = createTheme({
 });
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ThemeProvider>,
+    <ErrorBoundary>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ThemeProvider>
+    </ErrorBoundary>,
     document.getElementById('root')
 );
 

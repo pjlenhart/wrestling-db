@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+
+# Config files
+*.config.js
+
+# Environment files
+.env*
+
+# Test coverage
+coverage/
+
