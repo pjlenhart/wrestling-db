@@ -1,0 +1,74 @@
+/* ===========================================
+   PLAYLIST RESULTS STYLES - MODERN
+   =========================================== */
+
+.playlist-results-container {
+    width: 100%;
+}
+
+.playlist-results-count {
+    font-family: roboto-regular, sans-serif !important;
+    color: #666 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 1.25rem !important;
+}
+
+/* Empty State Card */
+.playlist-results-empty-card {
+    background: #fff !important;
+    border-radius: 16px !important;
+    padding: 4rem 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.playlist-results-empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.playlist-results-empty-icon {
+    font-size: 4rem !important;
+    color: #800000 !important;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+}
+
+.playlist-results-empty-title {
+    font-family: barlow, sans-serif !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.playlist-results-empty-text {
+    font-family: roboto-regular, sans-serif !important;
+    color: #666 !important;
+    font-size: 0.9375rem !important;
+    line-height: 1.6 !important;
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+    .playlist-results-empty-card {
+        padding: 3rem 1.5rem;
+    }
+    
+    .playlist-results-empty-icon {
+        font-size: 3rem !important;
+    }
+    
+    .playlist-results-empty-title {
+        font-size: 1.125rem !important;
+    }
+    
+    .playlist-results-empty-text {
+        font-size: 0.875rem !important;
+    }
+}
+

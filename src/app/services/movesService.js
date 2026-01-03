@@ -15,3 +15,7 @@ export async function getVideos(page, size) {
 export async function search(searchValue) {
     return api.get(`/api/videos/search?text=${searchValue}`);
 }
+
+export async function getPlaylists() {
+    return api.get(`/api/match-playlists/all`);
+}

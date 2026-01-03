@@ -14,6 +14,7 @@ import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import NavBar from './app/NavBar/components/NavBar';
 import MoveSearchContainer from './app/MoveSearch/MoveSearchContainer';
+import MatchPlaylistsContainer from './app/MatchPlaylists/MatchPlaylistsContainer';
 
 function App() {
     return (
@@ -38,6 +39,11 @@ function App() {
                     path="/moveSearch"
                     exact
                     component={MoveSearchContainer}
+                />
+                <Route
+                    path="/matchPlaylists"
+                    exact
+                    component={MatchPlaylistsContainer}
                 />
                 <Route path="/staff" exact component={Staff} />
                 <Route path="/wrestlers" exact component={WrestlerContainer} />
