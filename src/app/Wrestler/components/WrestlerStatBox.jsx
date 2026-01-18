@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import _ from 'lodash';
 import {
     Chart as ChartJS,
@@ -18,6 +18,81 @@ const WrestlerStatBox = (props) => {
     const { data } = props;
 
     ChartJS.register(ArcElement, Tooltip);
+
+    // Create or get the external tooltip element
+    const getOrCreateTooltip = (chart) => {
+        let tooltipEl = document.getElementById('chartjs-tooltip');
+
+        if (!tooltipEl) {
+            tooltipEl = document.createElement('div');
+            tooltipEl.id = 'chartjs-tooltip';
+            tooltipEl.style.background = 'rgba(0, 0, 0, 0.8)';
+            tooltipEl.style.borderRadius = '6px';
+            tooltipEl.style.color = 'white';
+            tooltipEl.style.opacity = 1;
+            tooltipEl.style.pointerEvents = 'none';
+            tooltipEl.style.position = 'fixed';
+            tooltipEl.style.transform = 'translate(-50%, 0)';
+            tooltipEl.style.transition = 'all .1s ease';
+            tooltipEl.style.zIndex = '99999';
+            tooltipEl.style.padding = '8px 12px';
+            tooltipEl.style.fontSize = '12px';
+            tooltipEl.style.fontFamily = 'roboto-regular, sans-serif';
+            tooltipEl.style.whiteSpace = 'nowrap';
+
+            document.body.appendChild(tooltipEl);
+        }
+
+        return tooltipEl;
+    };
+
+    // External tooltip handler
+    const externalTooltipHandler = (context) => {
+        const { chart, tooltip } = context;
+        const tooltipEl = getOrCreateTooltip(chart);
+
+        // Hide if no tooltip
+        if (tooltip.opacity === 0) {
+            tooltipEl.style.opacity = 0;
+            return;
+        }
+
+        // Set Text
+        if (tooltip.body) {
+            const titleLines = tooltip.title || [];
+            const bodyLines = tooltip.body.map((b) => b.lines);
+
+            let innerHtml = '';
+
+            titleLines.forEach((title) => {
+                innerHtml += `<div style="font-weight: bold; margin-bottom: 4px;">${title}</div>`;
+            });
+
+            bodyLines.forEach((body, i) => {
+                const colors = tooltip.labelColors[i];
+                const style = `background:${colors.backgroundColor}; border-color:${colors.borderColor}; border-width: 2px; width: 10px; height: 10px; display: inline-block; margin-right: 6px; border-radius: 2px;`;
+                innerHtml += `<div><span style="${style}"></span>${body}</div>`;
+            });
+
+            tooltipEl.innerHTML = innerHtml;
+        }
+
+        // Position tooltip using fixed positioning relative to viewport
+        const { left, top } = chart.canvas.getBoundingClientRect();
+        tooltipEl.style.opacity = 1;
+        tooltipEl.style.left = left + tooltip.caretX + 'px';
+        tooltipEl.style.top = top + tooltip.caretY + 'px';
+    };
+
+    // Cleanup tooltip on unmount
+    useEffect(() => {
+        return () => {
+            const tooltipEl = document.getElementById('chartjs-tooltip');
+            if (tooltipEl) {
+                tooltipEl.remove();
+            }
+        };
+    }, []);
 
     const xValues = {
         winLoss: ['Wins', 'Losses'],
@@ -283,14 +358,25 @@ const WrestlerStatBox = (props) => {
             legend: {
                 display: false,
             },
+            tooltip: {
+                enabled: false, // Disable the default canvas tooltip
+                external: externalTooltipHandler, // Use our custom HTML tooltip
+            },
         },
         maintainAspectRatio: true,
     };
 
     const charts = !graphData
         ? null
-        : chartNames.map((chart) => (
-              <Box className="wrestler-stat-chart">
+        : chartNames.map((chart, index) => (
+              <Box 
+                  key={`chart-${index}`}
+                  className="wrestler-stat-chart"
+                  sx={{
+                      position: 'relative',
+                      overflow: 'visible !important',
+                  }}
+              >
                   <Doughnut data={graphData[`${chart}`]} options={chartOptions} />
               </Box>
           ));

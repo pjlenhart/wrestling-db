@@ -59,6 +59,12 @@
     width: 70px;
     height: 70px;
     margin: 0 auto;
+    overflow: visible !important;
+    position: relative;
+}
+
+.wrestler-stat-chart canvas {
+    overflow: visible !important;
 }
 
 /* Responsive */

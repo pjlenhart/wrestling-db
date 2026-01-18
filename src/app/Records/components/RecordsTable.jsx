@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MaterialTable from '../../common/Table/MaterialTable';
 import {
     ArrowCircleUp,
@@ -15,14 +16,20 @@ const RecordsTable = (props) => {
         {
             path: 'wrestler_name',
             label: 'Name',
-            content: (wrestler) =>
-                wrestler.season === 'Career' ? (
-                    <Typography className="record-career-text">
-                        {wrestler.wrestler_name}
-                    </Typography>
-                ) : (
-                    wrestler.wrestler_name
-                ),
+            content: (wrestler) => (
+                <Link
+                    to={`/wrestlers/${wrestler.wrestler_id}`}
+                    className={wrestler.season === 'Career' ? 'record-wrestler-link record-career-link' : 'record-wrestler-link'}
+                >
+                    {wrestler.season === 'Career' ? (
+                        <Typography className="record-career-text">
+                            {wrestler.wrestler_name}
+                        </Typography>
+                    ) : (
+                        wrestler.wrestler_name
+                    )}
+                </Link>
+            ),
         },
         {
             path: 'season',

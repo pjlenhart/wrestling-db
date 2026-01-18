@@ -226,77 +226,62 @@
 }
 
 /* ===========================================
-   INSTAGRAM SECTION
+   INSTAGRAM BANNER
    =========================================== */
-.instagram-section {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.instagram-banner-container {
+    margin-bottom: 3rem;
 }
 
-.instagram-title {
-    font-family: barlow, sans-serif !important;
-    color: #1a1a1a !important;
-    font-weight: 600 !important;
-    display: flex !important;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem !important;
-}
-
-.instagram-title-icon {
-    color: #E4405F !important;
-    font-size: 1.75rem !important;
-}
-
-.instagram-card {
-    flex: 1;
+.instagram-banner {
     background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%) !important;
     border-radius: 16px !important;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 180px;
+    min-height: 80px;
+    max-height: 100px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.instagram-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(131, 58, 180, 0.25);
+.instagram-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(131, 58, 180, 0.3);
 }
 
-.instagram-link {
+.instagram-banner-link {
     display: flex;
-    flex-direction: column;
     align-items: center;
     text-decoration: none !important;
-    gap: 1rem;
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
 }
 
-.instagram-logo-icon {
-    font-size: 5rem !important;
+.instagram-banner-icon {
+    font-size: 3rem !important;
     color: #fff !important;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-.instagram-link:hover .instagram-logo-icon {
+.instagram-banner-link:hover .instagram-banner-icon {
     transform: scale(1.1);
 }
 
-.instagram-info {
-    text-align: center;
+.instagram-banner-info {
+    text-align: left;
 }
 
-.instagram-handle {
+.instagram-banner-handle {
     font-family: barlow, sans-serif !important;
     color: #fff !important;
     font-weight: 600 !important;
     margin-bottom: 0.25rem !important;
 }
 
-.instagram-cta {
-    color: rgba(255, 255, 255, 0.9) !important;
+.instagram-banner-cta {
+    color: rgba(255, 255, 255, 0.95) !important;
     font-family: roboto-regular, sans-serif !important;
 }
 
@@ -433,12 +418,12 @@
         padding: 2rem;
     }
 
-    .instagram-card {
-        min-height: 200px;
+    .instagram-banner {
+        padding: 1.75rem 2.5rem;
     }
 
-    .instagram-logo-icon {
-        font-size: 6rem !important;
+    .instagram-banner-icon {
+        font-size: 3.5rem !important;
     }
 }
 
@@ -485,13 +470,22 @@
         padding: 0.75rem;
     }
 
-    .instagram-card {
-        min-height: 150px;
-        padding: 1.25rem;
+    .instagram-banner {
+        padding: 1rem 1.5rem;
+        min-height: 70px;
     }
 
-    .instagram-logo-icon {
-        font-size: 4rem !important;
+    .instagram-banner-link {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .instagram-banner-icon {
+        font-size: 2.5rem !important;
+    }
+
+    .instagram-banner-info {
+        text-align: center;
     }
 
     .quick-link-card {

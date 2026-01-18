@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import '../styles/homeStyles.css';
 import TopPinners from './TopPinners';
+import TopTechFalls from './TopTechFalls';
+import BestRecords from './BestRecords';
 import beast from '../images/beast_otw-big.png';
 // Icons
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
@@ -18,7 +20,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-const Home = ({ topPinners, isLoading }) => {
+const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
     const quickLinks = [
         {
             title: 'Team Matches',
@@ -76,7 +78,7 @@ const Home = ({ topPinners, isLoading }) => {
                                 component="h1"
                                 className="hero-title"
                             >
-                                Towson Wrestling
+                                Towson Wrestling DB
                             </Typography>
                             <Typography
                                 variant="h5"
@@ -109,51 +111,55 @@ const Home = ({ topPinners, isLoading }) => {
 
             {/* Main Content */}
             <Container maxWidth="lg" className="home-main-content">
-                {/* Top Pinners & Instagram Row */}
-                <Grid container spacing={4} className="stats-row">
-                    <Grid item xs={12} md={7}>
+                {/* Leaderboards Row */}
+                <Grid container spacing={3} className="stats-row">
+                    <Grid item xs={12} md={4}>
+                        <BestRecords
+                            bestRecords={bestRecords}
+                            isLoading={isLoading}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
                         <TopPinners
                             topPinners={topPinners}
                             isLoading={isLoading}
                         />
                     </Grid>
-                    <Grid item xs={12} md={5}>
-                        <Box className="instagram-section">
-                            <Typography
-                                variant="h5"
-                                className="instagram-title"
-                            >
-                                <InstagramIcon className="instagram-title-icon" />
-                                Follow Us
-                            </Typography>
-                            <Paper className="instagram-card" elevation={0}>
-                                <Link
-                                    href="https://www.instagram.com/towson_high_wrestling/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="instagram-link"
-                                >
-                                    <InstagramIcon className="instagram-logo-icon" />
-                                    <Box className="instagram-info">
-                                        <Typography
-                                            variant="h6"
-                                            className="instagram-handle"
-                                        >
-                                            @towson_high_wrestling
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            className="instagram-cta"
-                                        >
-                                            Follow for updates, highlights &
-                                            more
-                                        </Typography>
-                                    </Box>
-                                </Link>
-                            </Paper>
-                        </Box>
+                    <Grid item xs={12} md={4}>
+                        <TopTechFalls
+                            topTechFalls={topTechFalls}
+                            isLoading={isLoading}
+                        />
                     </Grid>
                 </Grid>
+
+                {/* Instagram Banner */}
+                <Box className="instagram-banner-container">
+                    <Paper className="instagram-banner" elevation={0}>
+                        <Link
+                            href="https://www.instagram.com/towson_high_wrestling/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="instagram-banner-link"
+                        >
+                            <InstagramIcon className="instagram-banner-icon" />
+                            <Box className="instagram-banner-info">
+                                <Typography
+                                    variant="h6"
+                                    className="instagram-banner-handle"
+                                >
+                                    @towson_high_wrestling
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    className="instagram-banner-cta"
+                                >
+                                    Follow for updates, highlights & more
+                                </Typography>
+                            </Box>
+                        </Link>
+                    </Paper>
+                </Box>
 
                 {/* Quick Access Section */}
                 <Box className="quick-access-section">
