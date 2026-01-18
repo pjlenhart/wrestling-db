@@ -30,30 +30,20 @@ const HomeContainer = () => {
             // Top Tech Falls - Sort by tech falls in descending order and take top 5
             const sortedByTechFalls = currentSeasonData
                 .sort(
-                    (a, b) => parseInt(b.wins_by_tech_fall) - parseInt(a.wins_by_tech_fall)
+                    (a, b) =>
+                        parseInt(b.wins_by_tech_fall) -
+                        parseInt(a.wins_by_tech_fall)
                 )
                 .slice(0, 5);
             setTopTechFalls(sortedByTechFalls);
 
-            // Best Records All Time - Group by wrestler and sum up total wins across all seasons
-            const wrestlerCareerRecords = {};
-            data.forEach((record) => {
-                const wrestlerId = record.wrestler_id;
-                if (!wrestlerCareerRecords[wrestlerId]) {
-                    wrestlerCareerRecords[wrestlerId] = {
-                        wrestler_id: wrestlerId,
-                        wrestler_name: record.wrestler_name,
-                        total_wins: 0,
-                        total_losses: 0,
-                    };
-                }
-                wrestlerCareerRecords[wrestlerId].total_wins += parseInt(record.wins) || 0;
-                wrestlerCareerRecords[wrestlerId].total_losses += parseInt(record.losses) || 0;
-            });
+            // Best Records All Time - Filter for career stats and sort by wins
+            const careerData = data.filter(
+                (record) => record.season === 'Career'
+            );
 
-            // Convert to array and sort by total wins
-            const sortedByCareerWins = Object.values(wrestlerCareerRecords)
-                .sort((a, b) => b.total_wins - a.total_wins)
+            const sortedByCareerWins = careerData
+                .sort((a, b) => parseInt(b.wins) - parseInt(a.wins))
                 .slice(0, 5);
             setBestRecords(sortedByCareerWins);
         } catch (error) {

@@ -44,13 +44,33 @@ const BestRecords = ({ bestRecords, isLoading }) => {
                 </Typography>
                 <Box className="top-pinners-list">
                     {[...Array(5)].map((_, index) => (
-                        <Paper key={index} className="top-pinner-card" elevation={0}>
-                            <Skeleton variant="circular" width={36} height={36} />
+                        <Paper
+                            key={index}
+                            className="top-pinner-card"
+                            elevation={0}
+                        >
+                            <Skeleton
+                                variant="circular"
+                                width={36}
+                                height={36}
+                            />
                             <Box className="top-pinner-info">
-                                <Skeleton variant="text" width={120} height={24} />
-                                <Skeleton variant="text" width={80} height={18} />
+                                <Skeleton
+                                    variant="text"
+                                    width={120}
+                                    height={24}
+                                />
+                                <Skeleton
+                                    variant="text"
+                                    width={80}
+                                    height={18}
+                                />
                             </Box>
-                            <Skeleton variant="rounded" width={50} height={36} />
+                            <Skeleton
+                                variant="rounded"
+                                width={50}
+                                height={36}
+                            />
                         </Paper>
                     ))}
                 </Box>
@@ -101,24 +121,40 @@ const BestRecords = ({ bestRecords, isLoading }) => {
                             className="top-pinner-rank"
                             sx={{ backgroundColor: getMedalColor(index) }}
                         >
-                            <Typography variant="body1" className="top-pinner-rank-text">
+                            <Typography
+                                variant="body1"
+                                className="top-pinner-rank-text"
+                            >
                                 {index + 1}
                             </Typography>
                         </Box>
                         <Box className="top-pinner-info">
-                            <Typography variant="body1" className="top-pinner-name">
+                            <Typography
+                                variant="body1"
+                                className="top-pinner-name"
+                            >
                                 {wrestler.wrestler_name}
                             </Typography>
-                            <Typography variant="body2" className="top-pinner-record">
-                                Career Record
-                            </Typography>
                         </Box>
-                        <Box className="top-pinner-pins">
-                            <Typography variant="h5" className="top-pinner-pins-count">
-                                {wrestler.total_wins}
+                        <Box
+                            className="top-pinner-pins"
+                            sx={{
+                                width: '90px',
+                                minWidth: '90px',
+                                maxWidth: '90px',
+                            }}
+                        >
+                            <Typography
+                                variant="h5"
+                                className="top-pinner-pins-count"
+                            >
+                                {wrestler.wins}-{wrestler.losses}
                             </Typography>
-                            <Typography variant="caption" className="top-pinner-pins-label">
-                                WINS
+                            <Typography
+                                variant="caption"
+                                className="top-pinner-pins-label"
+                            >
+                                RECORD
                             </Typography>
                         </Box>
                     </Paper>
