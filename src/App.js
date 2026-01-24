@@ -15,6 +15,7 @@ import React from 'react';
 import NavBar from './app/NavBar/components/NavBar';
 import MoveSearchContainer from './app/MoveSearch/MoveSearchContainer';
 import MatchPlaylistsContainer from './app/MatchPlaylists/MatchPlaylistsContainer';
+import PositionalAnalysisContainer from './app/PositionalAnalysis/PositionalAnalysisContainer';
 
 function App() {
     return (
@@ -44,6 +45,11 @@ function App() {
                     path="/matchPlaylists"
                     exact
                     component={MatchPlaylistsContainer}
+                />
+                <Route
+                    path="/positionalAnalysis"
+                    exact
+                    component={PositionalAnalysisContainer}
                 />
                 <Route path="/staff" exact component={Staff} />
                 <Route path="/wrestlers" exact component={WrestlerContainer} />
