@@ -316,7 +316,7 @@ const PositionalAnalysis = ({
                         
                         <Box sx={{ mb: 2 }}>
                             <Typography variant="subtitle2" sx={{ color: '#2196F3', fontWeight: 600, mb: 0.5 }}>
-                                NEUTRAL (Standing)
+                                NEUTRAL
                             </Typography>
                             <Typography variant="body2" sx={{ color: '#666' }}>
                                 Every match starts in neutral. We measure the <strong>Neutral Win Rate</strong> - 
@@ -328,7 +328,7 @@ const PositionalAnalysis = ({
 
                         <Box sx={{ mb: 2 }}>
                             <Typography variant="subtitle2" sx={{ color: '#F44336', fontWeight: 600, mb: 0.5 }}>
-                                BOTTOM (Underneath)
+                                BOTTOM
                             </Typography>
                             <Typography variant="body2" sx={{ color: '#666' }}>
                                 When taken down, can you get back up? We measure the <strong>Escape Rate</strong> - 
@@ -340,7 +340,7 @@ const PositionalAnalysis = ({
 
                         <Box sx={{ mb: 2 }}>
                             <Typography variant="subtitle2" sx={{ color: '#4CAF50', fontWeight: 600, mb: 0.5 }}>
-                                TOP (On top/riding)
+                                TOP
                             </Typography>
                             <Typography variant="body2" sx={{ color: '#666' }}>
                                 After scoring a takedown, can you keep them down? We measure the <strong>Control Rate</strong> - 
