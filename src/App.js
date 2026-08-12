@@ -15,6 +15,10 @@ import React from 'react';
 import NavBar from './app/NavBar/components/NavBar';
 import MoveSearchContainer from './app/MoveSearch/MoveSearchContainer';
 import MatchPlaylistsContainer from './app/MatchPlaylists/MatchPlaylistsContainer';
+import ScoresheetListContainer from './app/LiveScoresheet/ScoresheetListContainer';
+import NewScoresheetContainer from './app/LiveScoresheet/NewScoresheetContainer';
+import ScoresheetWorkspaceContainer from './app/LiveScoresheet/ScoresheetWorkspaceContainer';
+import ScoresheetLogin from './app/LiveScoresheet/components/ScoresheetLogin';
 
 function App() {
     return (
@@ -45,6 +49,13 @@ function App() {
                     exact
                     component={MatchPlaylistsContainer}
                 />
+                {/* Reading a scoresheet is public; only scoring one is gated.
+                    '/scoresheet/new' has to precede '/scoresheet/:id' or it
+                    would be matched as a sheet whose id is 'new'. */}
+                <Route path="/scoresheet" exact component={ScoresheetListContainer} />
+                <Route path="/scoresheet/login" exact component={ScoresheetLogin} />
+                <Route path="/scoresheet/new" exact component={NewScoresheetContainer} />
+                <Route path="/scoresheet/:id" exact component={ScoresheetWorkspaceContainer} />
                 <Route path="/staff" exact component={Staff} />
                 <Route path="/wrestlers" exact component={WrestlerContainer} />
                 <Route

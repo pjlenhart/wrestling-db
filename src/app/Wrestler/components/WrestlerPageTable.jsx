@@ -1,6 +1,7 @@
 import React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import { parseCalendarDate } from '../../common/dates';
 
 const WrestlerPageTable = (props) => {
     const { data, type } = props;
@@ -45,7 +46,7 @@ const WrestlerPageTable = (props) => {
             type: 'date',
             width: 120,
             filterable: true,
-            valueGetter: (params) => new Date(params.row.match_date),
+            valueGetter: (params) => parseCalendarDate(params.row.match_date),
         },
         {
             field: 'tournament',
@@ -143,7 +144,7 @@ const WrestlerPageTable = (props) => {
             width: 110,
             filterable: true,
             type: 'date',
-            valueGetter: (params) => new Date(params.row.match_date),
+            valueGetter: (params) => parseCalendarDate(params.row.match_date),
         },
         {
             field: 'match_result',

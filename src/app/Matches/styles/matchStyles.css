@@ -62,3 +62,19 @@
         margin-top: 0.25rem;
     }
 }
+
+/* Scoresheet link ------------------------------------------------------- */
+
+.match-scoresheet-link {
+    color: var(--color-primary, #800000) !important;
+}
+
+.match-scoresheet-link:hover {
+    background-color: rgba(128, 0, 0, 0.08) !important;
+}
+
+/* A dual entered by hand has no sheet to open; the dash says so quietly
+   rather than leaving the cell looking broken. */
+.match-scoresheet-none {
+    color: #bdbdbd;
+}

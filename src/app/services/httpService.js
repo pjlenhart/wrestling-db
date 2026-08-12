@@ -1,9 +1,13 @@
 import axios from "axios";
 
+// REACT_APP_API_URL lets a dev session point at a different API -- notably one
+// running against a local database, since the default 8001 instance is usually
+// configured against production.
 axios.defaults.baseURL =
-  process.env.NODE_ENV !== "production"
+  process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV !== "production"
     ? "http://localhost:8001/"
-    : "https://thswrestlingdb.com/";
+    : "https://thswrestlingdb.com/");
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
