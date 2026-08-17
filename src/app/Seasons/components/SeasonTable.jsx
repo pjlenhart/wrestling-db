@@ -297,7 +297,7 @@ const SeasonTable = (props) => {
             width: 110,
             headerAlign: 'center',
             align: 'center',
-            valueGetter: (params) => params.row.match_stats.escape_points_for,
+            valueGetter: (params) => params.row.match_stats.escape_points_for || params.row.match_stats.escapes_for,
         },
         {
             field: 'escape_points_against',
@@ -306,7 +306,7 @@ const SeasonTable = (props) => {
             headerAlign: 'center',
             align: 'center',
             valueGetter: (params) =>
-                params.row.match_stats.escape_points_against,
+                params.row.match_stats.escape_points_against || params.row.match_stats.escapes_against,
         },
         {
             field: 'nearfall_points_for',

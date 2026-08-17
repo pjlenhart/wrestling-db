@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import SeasonTable from './SeasonTable';
+import AdvancedStats from './AdvancedStats';
 import PageHero from '../../common/Header/PageHero';
 import '../styles/styles.css';
 import '../../common/styles/globalStyles.css';
@@ -17,50 +18,59 @@ const SeasonPage = (props) => {
     const { season, individualData, regularSeasonData } = props;
     const [activeTab, setActiveTab] = useState('regular');
 
-    const individualDataFiltered = useMemo(() => 
-        season === 'all'
-            ? individualData
-            : individualData.filter((match) => match.season === season),
+    const individualDataFiltered = useMemo(
+        () =>
+            season === 'all'
+                ? individualData
+                : individualData.filter((match) => match.season === season),
         [season, individualData]
     );
-    
-    const regularSeasonDataFiltered = useMemo(() =>
-        season === 'all'
-            ? regularSeasonData
-            : regularSeasonData.filter((match) => match.season === season),
+
+    const regularSeasonDataFiltered = useMemo(
+        () =>
+            season === 'all'
+                ? regularSeasonData
+                : regularSeasonData.filter((match) => match.season === season),
         [season, regularSeasonData]
     );
 
     // Calculate summary statistics
     const summaryStats = useMemo(() => {
-        const allMatches = [...regularSeasonDataFiltered, ...individualDataFiltered];
-        
+        const allMatches = [
+            ...regularSeasonDataFiltered,
+            ...individualDataFiltered,
+        ];
+
         // Handle different possible values for match_result: 'W', 'Win', 'L', 'Loss'
-        const wins = allMatches.filter(m => {
+        const wins = allMatches.filter((m) => {
             const result = m.match_result?.toString().toUpperCase().trim();
             return result === 'W' || result === 'WIN';
         }).length;
-        
-        const losses = allMatches.filter(m => {
+
+        const losses = allMatches.filter((m) => {
             const result = m.match_result?.toString().toUpperCase().trim();
             return result === 'L' || result === 'LOSS';
         }).length;
-        
-        const uniqueWrestlers = new Set(allMatches.map(m => m.wrestler_id)).size;
-        
+
+        const uniqueWrestlers = new Set(allMatches.map((m) => m.wrestler_id))
+            .size;
+
         // Count pins - check both method_of_result variations
-        const pins = allMatches.filter(m => {
+        const pins = allMatches.filter((m) => {
             const method = m.match_stats?.method_of_result?.toLowerCase() || '';
             const result = m.match_result?.toString().toUpperCase().trim();
             const isWin = result === 'W' || result === 'WIN';
-            return isWin && (method.includes('pin') || method.includes('fall'));
+            return isWin && method.includes('pin');
         }).length;
-        
+
         return {
             totalMatches: allMatches.length,
             wins,
             losses,
-            winRate: allMatches.length > 0 ? ((wins / allMatches.length) * 100).toFixed(1) : '0.0',
+            winRate:
+                allMatches.length > 0
+                    ? ((wins / allMatches.length) * 100).toFixed(1)
+                    : '0.0',
             uniqueWrestlers,
             pins,
         };
@@ -70,14 +80,15 @@ const SeasonPage = (props) => {
 
     return (
         <Box className="season-page-wrapper">
-            <PageHero 
-                title={displaySeason} 
-                subtitle={season === 'all' 
-                    ? 'Combined statistics across all recorded seasons'
-                    : `Match data and statistics for the ${season} wrestling season`
+            <PageHero
+                title={displaySeason}
+                subtitle={
+                    season === 'all'
+                        ? 'Combined statistics across all recorded seasons'
+                        : `Match data and statistics for the ${season} wrestling season`
                 }
             />
-            
+
             <Container maxWidth="xl" className="season-page-content">
                 {/* Back Link */}
                 <Link to="/seasons" className="season-back-link">
@@ -131,19 +142,50 @@ const SeasonPage = (props) => {
 
                 {/* Navigation Tabs */}
                 <Box className="season-nav-tabs">
-                    <button 
-                        className={`season-nav-tab ${activeTab === 'regular' ? 'active' : ''}`}
+                    <button
+                        className={`season-nav-tab ${
+                            activeTab === 'regular' ? 'active' : ''
+                        }`}
                         onClick={() => setActiveTab('regular')}
                     >
-                        <SportsKabaddiIcon sx={{ fontSize: 16, mr: 0.5, verticalAlign: 'middle' }} />
+                        <SportsKabaddiIcon
+                            sx={{
+                                fontSize: 16,
+                                mr: 0.5,
+                                verticalAlign: 'middle',
+                            }}
+                        />
                         Regular Season ({regularSeasonDataFiltered.length})
                     </button>
-                    <button 
-                        className={`season-nav-tab ${activeTab === 'postseason' ? 'active' : ''}`}
+                    <button
+                        className={`season-nav-tab ${
+                            activeTab === 'postseason' ? 'active' : ''
+                        }`}
                         onClick={() => setActiveTab('postseason')}
                     >
-                        <EmojiEventsIcon sx={{ fontSize: 16, mr: 0.5, verticalAlign: 'middle' }} />
+                        <EmojiEventsIcon
+                            sx={{
+                                fontSize: 16,
+                                mr: 0.5,
+                                verticalAlign: 'middle',
+                            }}
+                        />
                         Individual/Postseason ({individualDataFiltered.length})
+                    </button>
+                    <button
+                        className={`season-nav-tab ${
+                            activeTab === 'advanced' ? 'active' : ''
+                        }`}
+                        onClick={() => setActiveTab('advanced')}
+                    >
+                        <TrendingUpIcon
+                            sx={{
+                                fontSize: 16,
+                                mr: 0.5,
+                                verticalAlign: 'middle',
+                            }}
+                        />
+                        Advanced Stats
                     </button>
                 </Box>
 
@@ -159,7 +201,8 @@ const SeasonPage = (props) => {
                                     Regular Season Matches
                                 </Typography>
                                 <Typography className="season-section-subtitle">
-                                    Dual meet matches with full scoring breakdown
+                                    Dual meet matches with full scoring
+                                    breakdown
                                 </Typography>
                             </Box>
                         </Box>
@@ -184,17 +227,28 @@ const SeasonPage = (props) => {
                                     Individual & Postseason Matches
                                 </Typography>
                                 <Typography className="season-section-subtitle">
-                                    Tournament and individual competition results
+                                    Tournament and individual competition
+                                    results
                                 </Typography>
                             </Box>
                         </Box>
                         <Box className="season-table-container">
-                            <SeasonTable 
-                                data={individualDataFiltered} 
-                                type="individual" 
+                            <SeasonTable
+                                data={individualDataFiltered}
+                                type="individual"
                             />
                         </Box>
                     </Box>
+                )}
+
+                {/* Advanced Stats Section */}
+                {activeTab === 'advanced' && (
+                    <AdvancedStats
+                        regularSeasonDataFiltered={regularSeasonDataFiltered}
+                        individualDataFiltered={individualDataFiltered}
+                        season={season}
+                        regularSeasonData={regularSeasonData}
+                    />
                 )}
             </Container>
         </Box>
