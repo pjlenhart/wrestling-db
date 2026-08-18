@@ -31,6 +31,7 @@ const NavBar = (props) => {
         { link: 'moveSearch', display: 'Move Search' },
         { link: 'matchPlaylists', display: 'Match Playlists' },
         { link: 'schools', display: 'School Directory' },
+        { link: 'scoresheet', display: 'Scoresheets' },
     ];
 
     return (
