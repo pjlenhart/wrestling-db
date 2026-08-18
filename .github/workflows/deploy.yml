@@ -1,0 +1,52 @@
+name: Deploy frontend
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Never let two deploys overwrite /var/www/html at the same time.
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Runs on a 7GB runner, so the build no longer has to fit on the VPS.
+      - name: Build
+        run: npm run build
+        env:
+          # Optional: only set the REACT_APP_API_URL repo variable if the API
+          # ever moves off https://thswrestlingdb.com/ (the built-in default).
+          REACT_APP_API_URL: ${{ vars.REACT_APP_API_URL }}
+
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      # --delete keeps the doc root clean of files removed from the build, so
+      # anything living in /var/www/html that is not build output will be
+      # removed on the first run -- check the directory before enabling this.
+      # .htaccess is excluded as a guard: there is none there today (the SPA
+      # rewrites are in the vhost), but if one is ever added it must survive.
+      - name: Deploy to VPS
+        run: |
+          rsync -avz --delete \
+            --exclude '.htaccess' \
+            -e "ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes" \
+            build/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.FRONTEND_PATH }}/"
