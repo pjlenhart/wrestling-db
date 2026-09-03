@@ -16,9 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Pinned to the Node major the lockfile was generated and verified
+      # against (24). Node 18's older bundled npm resolves an *optional*
+      # peer dependency (yaml, under postcss-load-config) differently and
+      # expects a lock entry npm 24's toolchain never wrote -- `npm ci`
+      # then fails as "in sync" even though nothing is actually wrong.
+      # Node 18 has also been EOL since April 2025, independent of this.
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
