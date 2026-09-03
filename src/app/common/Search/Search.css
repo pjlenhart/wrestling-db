@@ -20,73 +20,68 @@
 .search-input {
     flex: 1;
     min-width: 200px;
-    padding: 0.875rem 1.25rem;
-    font-size: 1rem;
+    padding: 0.6875rem 0.875rem;
+    font-size: 0.9375rem;
     font-family: inherit;
-    border: 2px solid #dee2e6;
-    border-radius: 12px;
+    color: var(--color-gray-900);
+    border: 1px solid var(--color-hairline-strong);
+    border-radius: var(--radius-sm);
     outline: none;
-    transition: all 0.3s ease;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    background-color: var(--color-white);
 }
 
 .search-input:focus {
-    border-color: #800000;
-    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.12);
 }
 
 .search-input::placeholder {
-    color: #adb5bd;
+    color: var(--color-gray-500);
 }
 
 .search-button {
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
+    padding: 0.6875rem 1.5rem;
+    font-size: 0.9375rem;
     font-weight: 600;
+    font-family: var(--font-heading);
     color: #fff;
-    background-color: #800000;
-    border: 2px solid #800000;
-    border-radius: 12px;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(128, 0, 0, 0.2);
 }
 
 .search-button:hover {
-    background-color: #a00000;
-    border-color: #a00000;
-    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
-    transform: translateY(-1px);
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
 }
 
-.search-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(128, 0, 0, 0.2);
+.search-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.25);
 }
 
 .search-clear-button {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.6875rem 1.25rem;
+    font-size: 0.9375rem;
     font-weight: 500;
-    color: #6c757d;
+    font-family: var(--font-heading);
+    color: var(--color-gray-700);
     background-color: transparent;
-    border: 2px solid #dee2e6;
-    border-radius: 12px;
+    border: 1px solid var(--color-hairline-strong);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
     white-space: nowrap;
 }
 
 .search-clear-button:hover {
-    color: #800000;
-    border-color: #800000;
-    background-color: rgba(128, 0, 0, 0.04);
-}
-
-.search-clear-button:active {
-    transform: scale(0.98);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-lighter);
 }
 
 /* Responsive Styles */
@@ -104,12 +99,12 @@
     }
 
     .search-input {
-        padding: 0.75rem 1rem;
+        padding: 0.625rem 0.875rem;
     }
 
     .search-button,
     .search-clear-button {
-        padding: 0.75rem 1.25rem;
+        padding: 0.625rem 1rem;
     }
 }
 
@@ -126,49 +121,34 @@
 }
 
 .search-container.prominent {
-    padding: 3rem 0.05rem;
-    background: linear-gradient(
-        135deg,
-        rgba(128, 0, 0, 0.02) 0%,
-        rgba(128, 0, 0, 0.06) 100%
-    );
-    border-radius: 20px;
+    padding: 0;
     margin-bottom: 2rem;
 }
 
 .search-container.prominent .search-input {
-    font-size: 1.125rem;
-    padding: 1.125rem 1.5rem;
-    border-width: 2px;
+    font-size: 1rem;
+    padding: 0.8125rem 1rem;
 }
 
 .search-container.prominent .search-button {
-    font-size: 1.125rem;
-    padding: 1.125rem 2.5rem;
+    font-size: 1rem;
+    padding: 0.8125rem 1.75rem;
 }
 
 .search-container.prominent .search-clear-button {
-    font-size: 1rem;
-    padding: 1.125rem 2rem;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 1.5rem;
 }
 
 @media (max-width: 768px) {
-    .search-container.prominent {
-        padding: 2rem 1rem;
-    }
-
     .search-container.prominent .search-input {
-        font-size: 1rem;
-        padding: 0.875rem 1.25rem;
+        font-size: 0.9375rem;
+        padding: 0.6875rem 0.875rem;
     }
 
-    .search-container.prominent .search-button {
-        font-size: 1rem;
-        padding: 0.875rem 1.5rem;
-    }
-
+    .search-container.prominent .search-button,
     .search-container.prominent .search-clear-button {
-        font-size: 0.95rem;
-        padding: 0.875rem 1.5rem;
+        font-size: 0.9375rem;
+        padding: 0.6875rem 1.25rem;
     }
 }

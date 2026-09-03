@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MaterialTable from '../../common/Table/MaterialTable';
 
-const RosterTable = (props) => {
-    const { data } = props;
-    
+// showStatus defaults on so an unfiltered listing still says who is who; a
+// caller that has already split the roster passes false, since inside one of
+// those lists the column is the same value on every row.
+const RosterTable = ({ data, showStatus = true }) => {
     const wrestlerColumns = [
         {
             path: 'wrestler_id',
@@ -30,18 +31,22 @@ const RosterTable = (props) => {
             path: 'classOf', 
             label: 'Class' 
         },
-        {
-            path: 'active_roster',
-            label: 'Status',
-            content: (wrestler) => (
-                <span style={{ 
-                    color: wrestler.active_roster === 1 ? '#2E7D32' : '#757575',
-                    fontWeight: wrestler.active_roster === 1 ? 600 : 400,
-                }}>
-                    {wrestler.active_roster === 1 ? 'Active' : 'Alumni'}
-                </span>
-            ),
-        },
+        ...(showStatus
+            ? [
+                  {
+                      path: 'active_roster',
+                      label: 'Status',
+                      content: (wrestler) => (
+                          <span style={{ 
+                              color: wrestler.active_roster === 1 ? 'var(--color-positive)' : 'var(--color-gray-600)',
+                              fontWeight: wrestler.active_roster === 1 ? 600 : 400,
+                          }}>
+                              {wrestler.active_roster === 1 ? 'Active' : 'Alumni'}
+                          </span>
+                      ),
+                  },
+              ]
+            : []),
     ];
     
     return (

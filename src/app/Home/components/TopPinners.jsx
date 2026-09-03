@@ -6,31 +6,10 @@ import Skeleton from '@mui/material/Skeleton';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const TopPinners = ({ topPinners, isLoading }) => {
-    const getMedalColor = (index) => {
-        switch (index) {
-            case 0:
-                return '#FFD700'; // Gold
-            case 1:
-                return '#C0C0C0'; // Silver
-            case 2:
-                return '#CD7F32'; // Bronze
-            default:
-                return '#800000'; // Maroon for 4th and 5th
-        }
-    };
-
-    const getBackgroundGradient = (index) => {
-        switch (index) {
-            case 0:
-                return 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%)';
-            case 1:
-                return 'linear-gradient(135deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%)';
-            case 2:
-                return 'linear-gradient(135deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%)';
-            default:
-                return 'linear-gradient(135deg, rgba(128, 0, 0, 0.08) 0%, rgba(128, 0, 0, 0.02) 100%)';
-        }
-    };
+    // Rank tiers drive the medal accent in CSS (.rank-1/2/3); ranks 4+ stay neutral
+    // so the podium reads at a glance without three competing row colors.
+    const getRankClass = (index) =>
+        index < 3 ? ` rank-${index + 1}` : '';
 
     if (isLoading) {
         return (
@@ -45,7 +24,7 @@ const TopPinners = ({ topPinners, isLoading }) => {
                 <Box className="top-pinners-list">
                     {[...Array(5)].map((_, index) => (
                         <Paper key={index} className="top-pinner-card" elevation={0}>
-                            <Skeleton variant="circular" width={36} height={36} />
+                            <Skeleton variant="circular" width={28} height={28} />
                             <Box className="top-pinner-info">
                                 <Skeleton variant="text" width={120} height={24} />
                                 <Skeleton variant="text" width={80} height={18} />
@@ -90,17 +69,10 @@ const TopPinners = ({ topPinners, isLoading }) => {
                 {topPinners.map((wrestler, index) => (
                     <Paper
                         key={wrestler.wrestler_id || index}
-                        className="top-pinner-card"
+                        className={`top-pinner-card${getRankClass(index)}`}
                         elevation={0}
-                        sx={{
-                            background: getBackgroundGradient(index),
-                            borderLeft: `4px solid ${getMedalColor(index)}`,
-                        }}
                     >
-                        <Box
-                            className="top-pinner-rank"
-                            sx={{ backgroundColor: getMedalColor(index) }}
-                        >
+                        <Box className="top-pinner-rank">
                             <Typography variant="body1" className="top-pinner-rank-text">
                                 {index + 1}
                             </Typography>

@@ -27,42 +27,36 @@ const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
             description: 'View all team match results and scores',
             icon: <SportsKabaddiIcon />,
             link: '/matches',
-            color: '#2E7D32',
         },
         {
             title: 'Seasons',
             description: 'Browse historical season data',
             icon: <CalendarMonthIcon />,
             link: '/seasons',
-            color: '#1565C0',
         },
         {
             title: 'Records',
             description: 'Career stats and records by wrestler',
             icon: <EmojiEventsIcon />,
             link: '/records',
-            color: '#F9A825',
         },
         {
             title: 'Move Search',
             description: 'Search wrestling techniques and tutorials',
             icon: <SearchIcon />,
             link: '/moveSearch',
-            color: '#7B1FA2',
         },
         {
             title: 'Wrestlers',
             description: 'View individual wrestler profiles',
             icon: <GroupsIcon />,
             link: '/wrestlers',
-            color: '#00838F',
         },
         {
             title: 'Schools',
             description: 'School directory and information',
             icon: <SchoolIcon />,
             link: '/schools',
-            color: '#D84315',
         },
     ];
 
@@ -183,13 +177,7 @@ const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
                                         className="quick-link-card"
                                         elevation={0}
                                     >
-                                        <Box
-                                            className="quick-link-icon"
-                                            sx={{
-                                                backgroundColor: `${item.color}15`,
-                                                color: item.color,
-                                            }}
-                                        >
+                                        <Box className="quick-link-icon">
                                             {item.icon}
                                         </Box>
                                         <Box className="quick-link-content">

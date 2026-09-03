@@ -102,7 +102,7 @@ const RecordsTable = (props) => {
                     return (
                         <ArrowCircleUp
                             sx={{
-                                color: '#2E7D32',
+                                color: 'var(--color-positive)',
                                 fontSize: 28,
                             }}
                         />
@@ -111,7 +111,7 @@ const RecordsTable = (props) => {
                     return (
                         <ArrowCircleDown
                             sx={{
-                                color: '#C62828',
+                                color: 'var(--color-negative)',
                                 fontSize: 28,
                             }}
                         />
@@ -120,7 +120,7 @@ const RecordsTable = (props) => {
                     return (
                         <RemoveCircleOutline
                             sx={{
-                                color: '#F9A825',
+                                color: 'var(--color-gray-500)',
                                 fontSize: 28,
                             }}
                         />

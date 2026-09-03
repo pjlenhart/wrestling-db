@@ -303,9 +303,10 @@
 /* ---------- Setup ---------- */
 
 .ls-setup-card {
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
     padding: var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
 }
 
 .ls-setup-actions {

@@ -35,9 +35,9 @@ const Schools = (props) => {
     const getDivisionColor = (division) => {
         switch (division) {
             case '4A': return '#800000';
-            case '3A': return '#1565C0';
-            case '2A': return '#2E7D32';
-            case '1A': return '#7B1FA2';
+            case '3A': return '#33566e';
+            case '2A': return '#2f6b4f';
+            case '1A': return '#5c4570';
             default: return '#800000';
         }
     };

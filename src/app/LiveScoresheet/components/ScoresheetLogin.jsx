@@ -62,7 +62,7 @@ const ScoresheetLogin = () => {
     return (
         <>
             <PageHero title="Sign in" subtitle="Only needed to score a dual — anyone can read scoresheets." />
-            <Container maxWidth="xs" className="ls-page">
+            <Container maxWidth="xs" className="ls-page app-fields">
                 <Paper component="form" onSubmit={submit} className="ls-setup-card" elevation={0}>
                     <Stack spacing={3}>
                         {error && <Alert severity="error">{error}</Alert>}

@@ -1,12 +1,50 @@
 /* Fonts loaded via Google Fonts CDN */
 
 .error-404 {
-  font-family: 'Racing Sans One', cursive;
-  font-size: 180px;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 9rem);
+  line-height: 1;
   text-align: center;
+  color: var(--color-primary);
+  letter-spacing: 2px;
+  margin-top: var(--spacing-3xl);
+  margin-bottom: var(--spacing-md);
 }
 
 .p-404 {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: var(--font-body);
   text-align: center;
+  color: var(--color-gray-700);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* The first line carries the message; the rest is supporting detail. */
+.error-404 + .p-404 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-black);
+  margin-bottom: var(--spacing-lg);
+}
+
+.p-404 a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(128, 0, 0, 0.3);
+  transition: border-color var(--transition-fast);
+}
+
+.p-404 a:hover {
+  border-bottom-color: var(--color-primary);
+}
+
+.p-404:last-child {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-hairline);
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-3xl);
 }

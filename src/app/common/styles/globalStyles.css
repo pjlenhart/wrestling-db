@@ -27,14 +27,35 @@
     --color-gray-900: #212121;
     --color-black: #1a1a1a;
     
-    /* Accent Colors */
-    --color-gold: #FFD700;
-    --color-silver: #C0C0C0;
-    --color-bronze: #CD7F32;
+    /* Accent Colors
+       Muted, print-inspired metallics. Pure #FFD700/#C0C0C0 read as toy medals
+       on screen; these hold their identity next to maroon without shouting. */
+    --color-gold: #a8842c;
+    --color-silver: #7c8085;
+    --color-bronze: #9a6636;
+    --color-gold-surface: rgba(168, 132, 44, 0.08);
+    --color-silver-surface: rgba(124, 128, 133, 0.08);
+    --color-bronze-surface: rgba(154, 102, 54, 0.08);
     --color-success: #2E7D32;
     --color-info: #1565C0;
     --color-warning: #F9A825;
-    
+
+    /* Data Semantics - for/against, win/loss.
+       Desaturated so a grid of them reads as a stat sheet, not a traffic light. */
+    --color-positive: #2f6b4f;
+    --color-negative: #a13d3d;
+    --color-positive-surface: rgba(47, 107, 79, 0.07);
+    --color-negative-surface: rgba(161, 61, 61, 0.07);
+
+    /* Structure */
+    --color-hairline: rgba(16, 16, 20, 0.09);
+    --color-hairline-strong: rgba(16, 16, 20, 0.14);
+    --color-surface-subtle: #f7f7f8;
+
+    /* Eyebrow / label typography - small uppercase metadata */
+    --label-size: 0.6875rem;
+    --label-tracking: 0.08em;
+
     /* Typography */
     --font-display: 'Racing Sans One', cursive;
     --font-heading: 'barlow', sans-serif;
@@ -428,6 +449,148 @@
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
+}
+
+/* ===========================================
+   FORM FIELDS
+   MUI's stock outlined field is 56px tall with a 4px radius, which next to the
+   rest of the site reads as an oversized bubble. These match the hairline field
+   used by the site search so a form looks the same wherever it appears.
+
+   Put .app-fields on any container holding MUI inputs. A Dialog needs it on
+   the Dialog itself, since it portals out of whatever page rendered it.
+   =========================================== */
+
+.app-fields .MuiOutlinedInput-root {
+    border-radius: var(--radius-sm);
+    background-color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+}
+
+.app-fields .MuiOutlinedInput-input {
+    padding: 0.6875rem 0.875rem;
+}
+
+.app-fields .MuiOutlinedInput-notchedOutline {
+    border-color: var(--color-hairline-strong);
+    transition: border-color var(--transition-fast);
+}
+
+.app-fields .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--color-gray-500);
+}
+
+/* One ring rather than MUI's 2px outline thickening: the border stays a
+   hairline and the focus state is carried by the halo, as on the search field. */
+.app-fields .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-width: 1px;
+    border-color: var(--color-primary);
+}
+
+.app-fields .MuiOutlinedInput-root.Mui-focused {
+    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.12);
+}
+
+.app-fields .MuiOutlinedInput-root.Mui-error.Mui-focused {
+    box-shadow: 0 0 0 3px rgba(161, 61, 61, 0.18);
+}
+
+.app-fields .MuiInputLabel-outlined {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-gray-600);
+    transform: translate(14px, 11px) scale(1);
+}
+
+.app-fields .MuiInputLabel-outlined.MuiInputLabel-shrink {
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    transform: translate(14px, -8px) scale(0.9);
+}
+
+.app-fields .MuiInputLabel-outlined.Mui-focused {
+    color: var(--color-primary);
+}
+
+/* ===========================================
+   SEGMENTED TABS
+   Used by the season page, the wrestler directory and records. One
+   implementation so a tab row looks the same wherever it appears.
+   =========================================== */
+
+.segmented-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.segmented-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 0.5625rem 1.125rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--color-hairline-strong);
+    background: var(--color-white);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.segmented-tab:hover {
+    background: var(--color-primary-lighter);
+    border-color: rgba(128, 0, 0, 0.35);
+    color: var(--color-primary);
+}
+
+.segmented-tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.2);
+}
+
+.segmented-tab.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Count rides inside the tab so the split is legible before you click it. */
+.segmented-tab-count {
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    padding: 0.1875rem 0.375rem;
+    border-radius: 3px;
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+}
+
+.segmented-tab.active .segmented-tab-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+}
+
+.segmented-tab-icon {
+    font-size: 1rem !important;
+}
+
+@media (max-width: 599px) {
+    .segmented-tabs {
+        gap: var(--spacing-xs);
+    }
+
+    .segmented-tab {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8125rem;
+    }
 }
 
 /* ===========================================
