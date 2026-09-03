@@ -44,7 +44,7 @@ const ScoringWorkspace = ({
 
     if (notFound) {
         return (
-            <Container maxWidth="sm" className="ls-page">
+            <Container maxWidth="sm" className="ls-page app-fields">
                 <Alert severity="warning">
                     That scoresheet is not on this device.{' '}
                     <RouterLink to="/scoresheet">Back to the list</RouterLink>
@@ -55,7 +55,7 @@ const ScoringWorkspace = ({
 
     if (!draft) {
         return (
-            <Container maxWidth="sm" className="ls-page">
+            <Container maxWidth="sm" className="ls-page app-fields">
                 {error ? <Alert severity="error">{error}</Alert> : <Typography>Loading…</Typography>}
             </Container>
         );

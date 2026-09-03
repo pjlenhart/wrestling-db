@@ -55,7 +55,7 @@ const DualSetup = ({ schools, isLoading, error, onCreate }) => {
     return (
         <>
             <PageHero title="New scoresheet" subtitle="Set the dual up once, then score it bout by bout." />
-            <Container maxWidth="sm" className="ls-page">
+            <Container maxWidth="sm" className="ls-page app-fields">
                 {error && (
                     <Alert severity="error" sx={{ mb: 3 }}>
                         {error}

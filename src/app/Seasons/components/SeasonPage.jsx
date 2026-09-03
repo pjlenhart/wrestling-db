@@ -141,9 +141,9 @@ const SeasonPage = (props) => {
                 </Box>
 
                 {/* Navigation Tabs */}
-                <Box className="season-nav-tabs">
+                <Box className="segmented-tabs">
                     <button
-                        className={`season-nav-tab ${
+                        className={`segmented-tab ${
                             activeTab === 'regular' ? 'active' : ''
                         }`}
                         onClick={() => setActiveTab('regular')}
@@ -158,7 +158,7 @@ const SeasonPage = (props) => {
                         Regular Season ({regularSeasonDataFiltered.length})
                     </button>
                     <button
-                        className={`season-nav-tab ${
+                        className={`segmented-tab ${
                             activeTab === 'postseason' ? 'active' : ''
                         }`}
                         onClick={() => setActiveTab('postseason')}
@@ -173,7 +173,7 @@ const SeasonPage = (props) => {
                         Individual/Postseason ({individualDataFiltered.length})
                     </button>
                     <button
-                        className={`season-nav-tab ${
+                        className={`segmented-tab ${
                             activeTab === 'advanced' ? 'active' : ''
                         }`}
                         onClick={() => setActiveTab('advanced')}

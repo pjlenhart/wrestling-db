@@ -9,10 +9,6 @@ import Chip from '@mui/material/Chip';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
-import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
-import MovieIcon from '@mui/icons-material/Movie';
-import SlideshowIcon from '@mui/icons-material/Slideshow';
-import TheatersIcon from '@mui/icons-material/Theaters';
 import '../styles/playlistCardStyles.css';
 
 const PlaylistCard = (props) => {
@@ -46,58 +42,20 @@ const PlaylistCard = (props) => {
 
     const thumbnail = getThumbnail(url);
 
-    // Get colorful icon and gradient based on playlist id
-    const getIconAndColor = (playlistId) => {
-        const icons = [
-            { 
-                icon: VideoLibraryIcon, 
-                gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: '#667eea'
-            },
-            { 
-                icon: MovieIcon, 
-                gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                color: '#f093fb'
-            },
-            { 
-                icon: SlideshowIcon, 
-                gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                color: '#4facfe'
-            },
-            { 
-                icon: TheatersIcon, 
-                gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                color: '#43e97b'
-            },
-            { 
-                icon: PlaylistPlayIcon, 
-                gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-                color: '#fa709a'
-            },
-            { 
-                icon: VideoLibraryIcon, 
-                gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-                color: '#30cfd0'
-            },
-            { 
-                icon: MovieIcon, 
-                gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-                color: '#a8edea'
-            },
-            { 
-                icon: TheatersIcon, 
-                gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-                color: '#ff9a9e'
-            },
+    // Thumbnail fallback art. Previously eight unrelated neon gradients keyed off
+    // the id; now three tonal variants of the brand palette, so a wall of cards
+    // still has rhythm without turning into a rainbow.
+    const getPlaceholderStyle = (playlistId) => {
+        const variants = [
+            'linear-gradient(135deg, #800000 0%, #4a0000 100%)',
+            'linear-gradient(135deg, #3a3a3f 0%, #232327 100%)',
+            'linear-gradient(135deg, #5c0000 0%, #2b2023 100%)',
         ];
-        
-        // Use ID to consistently pick an icon/color combo
-        const index = playlistId ? Math.abs(playlistId) % icons.length : 0;
-        return icons[index];
+        const index = playlistId ? Math.abs(playlistId) % variants.length : 0;
+        return variants[index];
     };
 
-    const iconConfig = getIconAndColor(id);
-    const IconComponent = iconConfig.icon;
+    const placeholderGradient = getPlaceholderStyle(id);
 
     const handleOpenLink = () => {
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -167,9 +125,9 @@ const PlaylistCard = (props) => {
                 ) : (
                     <Box 
                         className="playlist-card-placeholder-modern"
-                        sx={{ background: iconConfig.gradient }}
+                        sx={{ background: placeholderGradient }}
                     >
-                        <IconComponent className="playlist-card-placeholder-icon" />
+                        <PlaylistPlayIcon className="playlist-card-placeholder-icon" />
                         <Typography className="playlist-card-placeholder-text">
                             {getDisplayNameFromPattern(name)}
                         </Typography>

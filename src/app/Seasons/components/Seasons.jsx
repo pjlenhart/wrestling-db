@@ -25,15 +25,20 @@ const TrophyIcon = () => (
 );
 
 const Seasons = (props) => {
-    const seasonColors = [
-        { bg: 'linear-gradient(135deg, #800000 0%, #4a0000 100%)', accent: '#FFD700' },  // All - gold accent
-        { bg: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', accent: '#e94560' },  // Current - red accent
-        { bg: 'linear-gradient(135deg, #2d3436 0%, #000000 100%)', accent: '#74b9ff' },  // Blue accent
-        { bg: 'linear-gradient(135deg, #434343 0%, #000000 100%)', accent: '#55efc4' },  // Green accent
-        { bg: 'linear-gradient(135deg, #3d3d3d 0%, #1a1a1a 100%)', accent: '#fdcb6e' },  // Yellow accent
-        { bg: 'linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%)', accent: '#fd79a8' },  // Pink accent
-    ];
-    
+    // One branded treatment instead of six unrelated neon accents: maroon for
+    // the seasons we want people in (all-time and current), graphite for the
+    // archive, so the header art reinforces hierarchy rather than randomising it.
+    const seasonColors = {
+        featured: {
+            bg: 'linear-gradient(135deg, #800000 0%, #4a0000 100%)',
+            accent: 'rgba(255, 255, 255, 0.92)',
+        },
+        archive: {
+            bg: 'linear-gradient(135deg, #3a3a3f 0%, #232327 100%)',
+            accent: 'rgba(255, 255, 255, 0.72)',
+        },
+    };
+
     const seasons = [
         {
             id: 'all',
@@ -41,7 +46,7 @@ const Seasons = (props) => {
             subtitle: 'Combined statistics from all seasons on record',
             link: '/seasons/all',
             featured: true,
-            colors: seasonColors[0],
+            colors: seasonColors.featured,
         },
         {
             id: '2025-2026',
@@ -49,35 +54,35 @@ const Seasons = (props) => {
             subtitle: 'Current season data and statistics',
             link: '/seasons/2025-2026',
             featured: true,
-            colors: seasonColors[1],
+            colors: seasonColors.featured,
         },
         {
             id: '2024-2025',
             title: '2024-2025',
             subtitle: 'Data and statistics from the 2024-2025 season',
             link: '/seasons/2024-2025',
-            colors: seasonColors[2],
+            colors: seasonColors.archive,
         },
         {
             id: '2023-2024',
             title: '2023-2024',
             subtitle: 'Data and statistics from the 2023-2024 season',
             link: '/seasons/2023-2024',
-            colors: seasonColors[3],
+            colors: seasonColors.archive,
         },
         {
             id: '2022-2023',
             title: '2022-2023',
             subtitle: 'Data and statistics from the 2022-2023 season',
             link: '/seasons/2022-2023',
-            colors: seasonColors[4],
+            colors: seasonColors.archive,
         },
         {
             id: '2021-2022',
             title: '2021-2022',
             subtitle: 'Data and statistics from the 2021-2022 season',
             link: '/seasons/2021-2022',
-            colors: seasonColors[5],
+            colors: seasonColors.archive,
         },
     ];
 

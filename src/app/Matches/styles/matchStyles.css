@@ -27,27 +27,31 @@
 }
 
 .matches-chip-win {
-    background-color: rgba(46, 125, 50, 0.1) !important;
-    color: #2E7D32 !important;
-    font-family: barlow, sans-serif !important;
+    background-color: var(--color-positive-surface) !important;
+    color: var(--color-positive) !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: var(--font-heading) !important;
     font-weight: 600 !important;
+    font-variant-numeric: tabular-nums;
 }
 
 .matches-chip-loss {
-    background-color: rgba(198, 40, 40, 0.1) !important;
-    color: #C62828 !important;
-    font-family: barlow, sans-serif !important;
+    background-color: var(--color-negative-surface) !important;
+    color: var(--color-negative) !important;
+    border-radius: var(--radius-sm) !important;
+    font-family: var(--font-heading) !important;
     font-weight: 600 !important;
+    font-variant-numeric: tabular-nums;
 }
 
 /* Result cell styling */
 .match-result-win {
-    color: #2E7D32;
+    color: var(--color-positive);
     font-weight: 600;
 }
 
 .match-result-loss {
-    color: #C62828;
+    color: var(--color-negative);
     font-weight: 600;
 }
 

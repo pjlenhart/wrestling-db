@@ -112,7 +112,7 @@ const BoutPanel = ({
     );
 
     return (
-        <Paper className="ls-bout-panel" elevation={0}>
+        <Paper className="ls-bout-panel app-fields" elevation={0}>
             <Box className="ls-bout-head">
                 <Typography className="ls-bout-weight">{bout.weight}</Typography>
                 <Chip

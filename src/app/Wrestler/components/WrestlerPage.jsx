@@ -45,7 +45,7 @@ const WrestlerPage = (props) => {
                 {accolades && accolades.length > 0 && (
                     <Paper className="content-card" elevation={0}>
                         <Box className="section-header">
-                            <EmojiEventsIcon className="section-title-icon" style={{ color: '#FFD700' }} />
+                            <EmojiEventsIcon className="section-title-icon" />
                             <Typography className="section-title">
                                 Career Accolades
                             </Typography>
@@ -54,7 +54,7 @@ const WrestlerPage = (props) => {
                             {accolades.map((acc, index) => (
                                 <Chip
                                     key={index}
-                                    icon={<EmojiEventsIcon style={{ color: '#FFD700' }} />}
+                                    icon={<EmojiEventsIcon />}
                                     label={`${acc.place} place - ${acc.season} ${acc.tournament}`}
                                     className="wrestler-accolade-chip"
                                 />

@@ -10,12 +10,12 @@
 
 /* Season card */
 .season-card-modern {
-    background: #fff !important;
-    border-radius: 16px !important;
+    background: var(--color-white) !important;
+    border-radius: var(--radius-md) !important;
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm) !important;
+    border: 1px solid var(--color-hairline);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
     cursor: pointer;
     height: 100%;
     display: flex;
@@ -23,9 +23,9 @@
 }
 
 .season-card-modern:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15) !important;
-    border-color: rgba(128, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: rgba(128, 0, 0, 0.28);
 }
 
 .season-card-modern.featured {
@@ -40,7 +40,7 @@
 .season-card-icon-container {
     position: relative;
     width: 100%;
-    height: 140px;
+    height: 124px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -54,16 +54,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 40%),
-        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 30%),
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 20px,
-            rgba(255,255,255,0.02) 20px,
-            rgba(255,255,255,0.02) 40px
-        );
+    background:
+        radial-gradient(circle at 22% 78%, rgba(255, 255, 255, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 78% 22%, rgba(255, 255, 255, 0.05) 0%, transparent 35%);
     pointer-events: none;
 }
 
@@ -71,13 +64,13 @@
 .season-card-icon-wrapper {
     position: relative;
     z-index: 2;
-    width: 70px;
-    height: 70px;
-    transition: transform 0.3s ease;
+    width: 54px;
+    height: 54px;
+    transition: transform var(--transition-normal);
 }
 
 .season-card-modern:hover .season-card-icon-wrapper {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* SVG icon styling */
@@ -85,12 +78,7 @@
     width: 100%;
     height: 100%;
     color: var(--icon-accent, rgba(255, 255, 255, 0.9));
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.season-card-modern:hover .season-card-svg-icon {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    transition: color var(--transition-normal);
 }
 
 /* Badge */
@@ -98,16 +86,15 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.16);
     backdrop-filter: blur(4px);
-    color: #fff;
+    color: rgba(255, 255, 255, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 3;
 }
 
@@ -266,39 +253,6 @@
 }
 
 /* Quick nav tabs */
-.season-nav-tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.season-nav-tab {
-    padding: 0.625rem 1.25rem;
-    border-radius: 8px;
-    font-family: roboto-regular, sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background: #fff;
-    color: #666;
-    text-decoration: none;
-}
-
-.season-nav-tab:hover {
-    background: rgba(128, 0, 0, 0.05);
-    border-color: rgba(128, 0, 0, 0.3);
-    color: #800000;
-}
-
-.season-nav-tab.active {
-    background: #800000;
-    color: #fff;
-    border-color: #800000;
-}
-
 /* Back link */
 .season-back-link {
     display: inline-flex;
@@ -386,15 +340,6 @@
     .season-section-title {
         font-size: 1.125rem !important;
     }
-    
-    .season-nav-tabs {
-        gap: 0.375rem;
-    }
-    
-    .season-nav-tab {
-        padding: 0.5rem 1rem;
-        font-size: 0.8125rem;
-    }
 }
 
 @media (min-width: 600px) {
@@ -421,20 +366,24 @@
     margin-top: 1rem;
 }
 
+/* Category rules: small uppercase eyebrow over a hairline, so the three
+   groups read as sections of one stat sheet rather than separate widgets. */
 .advanced-stats-category-title {
-    font-family: barlow, sans-serif !important;
-    font-size: 1.125rem !important;
+    font-family: var(--font-heading) !important;
+    font-size: 0.75rem !important;
     font-weight: 600 !important;
-    color: #1a1a1a !important;
-    margin-bottom: 1rem !important;
+    color: var(--color-gray-700) !important;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
+    margin-bottom: 0.875rem !important;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(128, 0, 0, 0.1);
+    border-bottom: 1px solid var(--color-hairline-strong);
 }
 
 .advanced-stats-subtitle {
-    font-family: roboto-regular, sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 0.875rem !important;
-    color: #666 !important;
+    color: var(--color-gray-600) !important;
     margin-bottom: 1.5rem !important;
 }
 
@@ -445,104 +394,94 @@
 }
 
 .advanced-stat-card {
-    background: #fafafa !important;
-    border-radius: 12px !important;
-    padding: 0.75rem !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    transition: all 0.2s ease;
+    background: var(--color-white) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem 0.5rem !important;
+    border: 1px solid var(--color-hairline) !important;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     overflow: hidden;
 }
 
 .advanced-stat-card:hover {
-    background: #f5f5f5 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-hairline-strong) !important;
+    box-shadow: var(--shadow-sm);
 }
 
 .advanced-stat-card.total {
-    background: linear-gradient(135deg, rgba(128, 0, 0, 0.05) 0%, rgba(128, 0, 0, 0.02) 100%) !important;
-    border-color: rgba(128, 0, 0, 0.15) !important;
+    background: var(--color-primary-lighter) !important;
+    border-color: rgba(128, 0, 0, 0.12) !important;
 }
 
 .advanced-stat-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 0;
 }
 
+/* The two halves are separated by a hairline instead of competing color
+   blocks; the figures themselves carry the for/against signal. */
 .advanced-stat-item {
     flex: 1;
     text-align: center;
-    padding: 0.375rem 0.5rem;
-    border-radius: 8px;
+    padding: 0.125rem 0.375rem;
     min-width: 0;
 }
 
-.advanced-stat-item.for {
-    background: rgba(76, 175, 80, 0.1);
-}
-
-.advanced-stat-item.against {
-    background: rgba(244, 67, 54, 0.1);
-}
-
 .advanced-stat-value {
-    font-family: barlow, sans-serif !important;
+    font-family: var(--font-heading) !important;
     font-size: 1.25rem !important;
     font-weight: 700 !important;
-    color: #1a1a1a !important;
-    line-height: 1 !important;
+    color: var(--color-black) !important;
+    line-height: 1.1 !important;
+    font-variant-numeric: tabular-nums;
 }
 
 .advanced-stat-value.large {
-    font-size: 2rem !important;
+    font-size: 1.875rem !important;
 }
 
 .advanced-stat-item.for .advanced-stat-value {
-    color: #2e7d32 !important;
+    color: var(--color-positive) !important;
 }
 
 .advanced-stat-item.against .advanced-stat-value {
-    color: #c62828 !important;
-}
-
-.advanced-stat-item.for .advanced-stat-value.large {
-    color: #2e7d32 !important;
-}
-
-.advanced-stat-item.against .advanced-stat-value.large {
-    color: #c62828 !important;
+    color: var(--color-negative) !important;
 }
 
 .advanced-stat-label {
-    font-family: roboto-regular, sans-serif !important;
-    font-size: 0.6875rem !important;
-    color: #666 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-family: var(--font-body) !important;
+    font-size: 0.625rem !important;
+    color: var(--color-gray-600) !important;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
     margin-top: 0.25rem !important;
 }
 
 .advanced-stat-title-box {
     flex: 0 0 auto;
-    padding: 0 0.5rem;
+    padding: 0 0.625rem;
     min-width: 70px;
     text-align: center;
+    border-left: 1px solid var(--color-hairline);
+    border-right: 1px solid var(--color-hairline);
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .advanced-stat-title {
-    font-family: roboto-regular, sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 0.6875rem !important;
     font-weight: 600 !important;
-    color: #444 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    white-space: nowrap;
+    color: var(--color-gray-800) !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.25 !important;
 }
 
 .advanced-stats-total-row {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .advanced-stats-total-row .advanced-stat-card {
@@ -559,13 +498,21 @@
 .advanced-stats-total-row .advanced-stat-item {
     flex: 1 1 0;
     min-width: 0;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 }
 
 .advanced-stats-total-row .advanced-stat-title-box {
     flex: 0 0 auto;
     min-width: 100px;
     padding: 0 1rem;
+    border-color: rgba(128, 0, 0, 0.14);
+}
+
+.advanced-stats-total-row .advanced-stat-title {
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
+    color: var(--color-primary) !important;
 }
 
 /* Methods and Periods Grid */
@@ -582,73 +529,68 @@
 }
 
 .method-card {
-    background: #fff !important;
+    background: var(--color-white) !important;
 }
 
 .method-stat-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.25rem;
+    gap: 0;
 }
 
 .method-stat-item {
     flex: 1;
     text-align: center;
-    padding: 0.5rem 0.375rem;
-    border-radius: 6px;
+    padding: 0.125rem 0.375rem;
     min-width: 0;
 }
 
-.method-stat-item.win {
-    background: rgba(76, 175, 80, 0.15);
-}
-
-.method-stat-item.loss {
-    background: rgba(244, 67, 54, 0.15);
-}
-
 .method-stat-value {
-    font-family: barlow, sans-serif !important;
+    font-family: var(--font-heading) !important;
     font-size: 1.25rem !important;
     font-weight: 700 !important;
-    line-height: 1 !important;
+    line-height: 1.1 !important;
+    font-variant-numeric: tabular-nums;
 }
 
 .method-stat-item.win .method-stat-value {
-    color: #2e7d32 !important;
+    color: var(--color-positive) !important;
 }
 
 .method-stat-item.loss .method-stat-value {
-    color: #c62828 !important;
+    color: var(--color-negative) !important;
 }
 
 .method-stat-title-box {
     flex: 0 0 auto;
-    padding: 0 0.25rem;
+    padding: 0 0.5rem;
     min-width: 60px;
     text-align: center;
+    border-left: 1px solid var(--color-hairline);
+    border-right: 1px solid var(--color-hairline);
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .method-stat-title {
-    font-family: roboto-regular, sans-serif !important;
-    font-size: 0.625rem !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.6875rem !important;
     font-weight: 600 !important;
-    color: #444 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.2px;
-    white-space: nowrap;
+    color: var(--color-gray-800) !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.25 !important;
 }
 
 /* Methods Legend */
 .methods-legend {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-    padding: 0.75rem;
-    background: #fafafa;
-    border-radius: 8px;
+    gap: 1.75rem;
+    margin-top: 0.875rem;
+    padding: 0.625rem;
 }
 
 .legend-item {
@@ -658,26 +600,26 @@
 }
 
 .legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
 }
 
 .legend-color.win {
-    background: rgba(76, 175, 80, 0.3);
-    border: 2px solid #2e7d32;
+    background: var(--color-positive);
 }
 
 .legend-color.loss {
-    background: rgba(244, 67, 54, 0.3);
-    border: 2px solid #c62828;
+    background: var(--color-negative);
 }
 
 .legend-text {
-    font-family: roboto-regular, sans-serif !important;
-    font-size: 0.8125rem !important;
-    color: #444 !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.75rem !important;
+    color: var(--color-gray-700) !important;
     font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
 }
 
 /* Radar Charts Section */
@@ -690,16 +632,18 @@
 .radar-chart-section {
     text-align: center;
     padding: 1.5rem;
-    background: #fafafa;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-hairline);
 }
 
 .radar-chart-label {
-    font-family: barlow, sans-serif !important;
-    color: #1a1a1a !important;
+    font-family: var(--font-heading) !important;
+    color: var(--color-gray-700) !important;
     font-weight: 600 !important;
-    font-size: 1.125rem !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
     margin-bottom: 1rem !important;
 }
 
@@ -811,12 +755,12 @@
     }
     
     .radar-chart-label {
-        font-size: 1rem !important;
+        font-size: 0.6875rem !important;
         margin-bottom: 0.75rem !important;
     }
     
     .advanced-stats-category-title {
-        font-size: 1rem !important;
+        font-size: 0.6875rem !important;
     }
 }
 

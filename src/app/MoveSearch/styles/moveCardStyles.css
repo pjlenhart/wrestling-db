@@ -6,27 +6,27 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-radius: 16px !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    background: #fff !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--color-hairline) !important;
+    background: var(--color-white) !important;
+    box-shadow: var(--shadow-sm) !important;
     overflow: hidden;
-    transition: all 0.25s ease;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
 .move-card-modern:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12) !important;
-    border-color: rgba(128, 0, 0, 0.2) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: rgba(128, 0, 0, 0.28) !important;
 }
 
 /* Media Container */
 .move-card-media-container {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 168px;
     overflow: hidden;
-    background: #f5f5f5;
+    background: var(--color-surface-subtle);
 }
 
 .move-card-thumbnail {
@@ -60,12 +60,13 @@
 }
 
 .move-card-play-icon {
-    font-size: 4rem !important;
+    font-size: 3rem !important;
     color: #fff !important;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 /* Instagram Placeholder */
+/* Instagram's own gradient stays: it is how you tell at a glance where the
+   clip lives. Only the mark and label are scaled back to card proportions. */
 .move-card-instagram {
     width: 100%;
     height: 100%;
@@ -78,25 +79,25 @@
 }
 
 .move-card-instagram-icon {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
     color: #fff;
 }
 
 .move-card-source-label {
-    font-family: barlow, sans-serif !important;
-    color: #fff !important;
-    font-size: 0.875rem !important;
+    font-family: var(--font-body) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 0.6875rem !important;
     font-weight: 600 !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    text-transform: uppercase !important;
+    letter-spacing: var(--label-tracking) !important;
 }
 
 /* Generic Placeholder */
 .move-card-placeholder-modern {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #800000 0%, #5c0000 100%);
+    background: linear-gradient(135deg, #800000 0%, #4a0000 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,8 +106,8 @@
 }
 
 .move-card-placeholder-icon {
-    font-size: 3rem !important;
-    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 2rem !important;
+    color: rgba(255, 255, 255, 0.55) !important;
 }
 
 .move-card-placeholder-text {
@@ -149,24 +150,29 @@
 
 /* Chips */
 .move-card-chip {
-    font-family: roboto-regular, sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 0.75rem !important;
-    height: 26px !important;
+    height: 24px !important;
+    border-radius: var(--radius-sm) !important;
 }
 
+/* Position is the primary facet and gets the brand; family is secondary and
+   sits in neutral rather than introducing an off-brand blue. */
 .move-card-chip.position {
-    background: rgba(128, 0, 0, 0.1) !important;
-    color: #800000 !important;
+    background: var(--color-primary-light) !important;
+    color: var(--color-primary) !important;
 }
 
 .move-card-chip.family {
-    background: rgba(21, 101, 192, 0.1) !important;
-    color: #1565C0 !important;
+    background: var(--color-surface-subtle) !important;
+    color: var(--color-gray-800) !important;
+    border: 1px solid var(--color-hairline) !important;
 }
 
 .move-card-chip.tag {
-    background: #f5f5f5 !important;
-    color: #666 !important;
+    background: transparent !important;
+    color: var(--color-gray-600) !important;
+    border: 1px solid var(--color-hairline) !important;
 }
 
 /* Tags Section */
@@ -202,21 +208,21 @@
 
 /* Button */
 .move-card-button-modern {
-    background: linear-gradient(135deg, #800000 0%, #5c0000 100%) !important;
+    background: var(--color-primary) !important;
     color: #fff !important;
-    border-radius: 10px !important;
-    padding: 0.75rem 1rem !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 0.625rem 1rem !important;
     text-transform: none !important;
-    font-family: barlow, sans-serif !important;
+    font-family: var(--font-heading) !important;
     font-weight: 600 !important;
-    font-size: 0.9375rem !important;
-    box-shadow: 0 2px 8px rgba(128, 0, 0, 0.2) !important;
-    transition: all 0.25s ease !important;
+    font-size: 0.875rem !important;
+    box-shadow: none !important;
+    transition: background-color var(--transition-fast) !important;
 }
 
 .move-card-button-modern:hover {
-    box-shadow: 0 4px 16px rgba(128, 0, 0, 0.35) !important;
-    transform: translateY(-1px);
+    background: var(--color-primary-dark) !important;
+    box-shadow: none !important;
 }
 
 /* Responsive */
@@ -230,8 +236,8 @@
     }
     
     .move-card-instagram-icon {
-        width: 50px;
-        height: 50px;
+        width: 42px;
+        height: 42px;
     }
     
     .move-card-play-icon {

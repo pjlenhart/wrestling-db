@@ -42,7 +42,7 @@ const SubmitDialog = ({ open, draft, dual, onClose, onConfirm }) => {
         });
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth className="ls-dialog app-fields">
             <DialogTitle>Finish this dual</DialogTitle>
             <DialogContent dividers>
                 <Box className="ls-submit-score">
