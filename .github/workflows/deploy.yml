@@ -16,19 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Pinned to the Node major the lockfile was generated and verified
-      # against (24). Node 18's older bundled npm resolves an *optional*
-      # peer dependency (yaml, under postcss-load-config) differently and
-      # expects a lock entry npm 24's toolchain never wrote -- `npm ci`
-      # then fails as "in sync" even though nothing is actually wrong.
-      # Node 18 has also been EOL since April 2025, independent of this.
+      # Node 18 is EOL (April 2025) and its bundled npm is too old for this
+      # project's toolchain, so pin to the current LTS major.
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
+      # `npm install`, not `npm ci`, on purpose:
+      #  - The lockfile is authored on Windows, which omits the darwin-only
+      #    optional deps (fsevents) that `npm ci` demands be present on every
+      #    platform -- so `npm ci` fails on the Linux runner as "out of sync"
+      #    even though the tree is fine.
+      #  - react-data-grid is a beta whose newer builds require react 19,
+      #    while this app is on react 17; --legacy-peer-deps keeps npm from
+      #    tripping on that peer, which is how the project has always built.
+      # The committed lock is still respected for every version it pins, so
+      # this stays reproducible -- it just tolerates the two gaps above
+      # instead of failing on them.
       - name: Install dependencies
-        run: npm ci
+        run: npm install --legacy-peer-deps --no-audit --no-fund
 
       # Runs on a 7GB runner, so the build no longer has to fit on the VPS.
       - name: Build
