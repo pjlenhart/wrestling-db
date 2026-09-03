@@ -1,0 +1,55 @@
+name: Regenerate lockfile
+
+# Manual-only. Rebuilds package-lock.json on ubuntu-latest/Node 24 -- the
+# same OS and Node major the deploy workflow's `npm ci` runs under -- and
+# commits the result straight to the branch it was run on.
+#
+# Why this has to run in CI rather than on a dev machine: npm on Windows
+# can silently drop platform-gated optional dependencies (fsevents,
+# darwin-only) from the lock instead of keeping the placeholder entry
+# `npm ci` expects to find on every platform. A lock written on Windows
+# has repeatedly passed a local `npm ci` and then failed the same command
+# on the Linux runner as "not in sync" -- the discrepancy is the OS that
+# wrote the lock, not anything wrong with the dependency tree itself.
+#
+# Run this after any dependency change made from a Windows checkout, or
+# whenever `npm ci` fails on the Linux runner with a "Missing: X" error
+# that a local `npm ci` on Windows does not reproduce.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Regenerate from package.json only
+        run: |
+          rm -f package-lock.json
+          npm install --package-lock-only --no-audit --no-fund
+
+      # Proves the new lock actually satisfies `npm ci` on this same OS/Node
+      # combination before anything is committed -- not just asserted.
+      - name: Verify npm ci succeeds against the new lock
+        run: npm ci
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet package-lock.json; then
+            echo "Lockfile already matches what Linux/Node 24 produces -- nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "Regenerate package-lock.json on Linux/Node 24 (automated)"
+          git push
