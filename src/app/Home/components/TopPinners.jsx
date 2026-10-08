@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Skeleton from '@mui/material/Skeleton';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
-const TopPinners = ({ topPinners, isLoading }) => {
+const TopPinners = ({ topPinners, season, isLoading }) => {
     // Rank tiers drive the medal accent in CSS (.rank-1/2/3); ranks 4+ stay neutral
     // so the podium reads at a glance without three competing row colors.
     const getRankClass = (index) =>
@@ -19,7 +19,7 @@ const TopPinners = ({ topPinners, isLoading }) => {
                     Top Pin Leaders
                 </Typography>
                 <Typography variant="body2" className="top-pinners-subtitle">
-                    2025-2026 Season
+                    {season} Season
                 </Typography>
                 <Box className="top-pinners-list">
                     {[...Array(5)].map((_, index) => (
@@ -45,7 +45,7 @@ const TopPinners = ({ topPinners, isLoading }) => {
                     Top Pin Leaders
                 </Typography>
                 <Typography variant="body2" className="top-pinners-subtitle">
-                    2025-2026 Season
+                    {season} Season
                 </Typography>
                 <Paper className="top-pinners-empty" elevation={0}>
                     <Typography variant="body1" color="text.secondary">
@@ -63,7 +63,7 @@ const TopPinners = ({ topPinners, isLoading }) => {
                 Top Pin Leaders
             </Typography>
             <Typography variant="body2" className="top-pinners-subtitle">
-                2025-2026 Season
+                {season} Season
             </Typography>
             <Box className="top-pinners-list">
                 {topPinners.map((wrestler, index) => (

@@ -9,6 +9,7 @@ import '../styles/homeStyles.css';
 import TopPinners from './TopPinners';
 import TopTechFalls from './TopTechFalls';
 import BestRecords from './BestRecords';
+import EventCalendar from './EventCalendar';
 import beast from '../images/beast_otw-big.png';
 // Icons
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
@@ -16,11 +17,21 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupsIcon from '@mui/icons-material/Groups';
-import SchoolIcon from '@mui/icons-material/School';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
+const Home = ({
+    topPinners,
+    topTechFalls,
+    bestRecords,
+    isLoading,
+    seasonLabel,
+    events,
+    season,
+    eventsLoading,
+    eventsError,
+}) => {
     const quickLinks = [
         {
             title: 'Team Matches',
@@ -53,10 +64,10 @@ const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
             link: '/wrestlers',
         },
         {
-            title: 'Schools',
-            description: 'School directory and information',
-            icon: <SchoolIcon />,
-            link: '/schools',
+            title: 'Match Playlists',
+            description: 'Browse curated match collections',
+            icon: <PlaylistPlayIcon />,
+            link: '/matchPlaylists',
         },
     ];
 
@@ -116,12 +127,14 @@ const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
                     <Grid item xs={12} md={4}>
                         <TopPinners
                             topPinners={topPinners}
+                            season={seasonLabel}
                             isLoading={isLoading}
                         />
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <TopTechFalls
                             topTechFalls={topTechFalls}
+                            season={seasonLabel}
                             isLoading={isLoading}
                         />
                     </Grid>
@@ -154,6 +167,14 @@ const Home = ({ topPinners, topTechFalls, bestRecords, isLoading }) => {
                         </Link>
                     </Paper>
                 </Box>
+
+                {/* Season Calendar */}
+                <EventCalendar
+                    events={events}
+                    season={season}
+                    isLoading={eventsLoading}
+                    hasError={eventsError}
+                />
 
                 {/* Quick Access Section */}
                 <Box className="quick-access-section">

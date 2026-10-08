@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getCareerStats } from '../../services/statisticsService';
+import { getEvents } from '../../services/widgetService';
+import { seasonStartYear } from '../calendar';
 import Home from './Home';
 
 const HomeContainer = () => {
@@ -7,16 +9,23 @@ const HomeContainer = () => {
     const [topTechFalls, setTopTechFalls] = useState([]);
     const [bestRecords, setBestRecords] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [season] = useState(() => seasonStartYear());
+    // Career stats name seasons '2026-2027'. Shares the calendar's season, so
+    // the leaderboards reset on their own when it rolls over in August.
+    const seasonLabel = `${season}-${season + 1}`;
+    const [events, setEvents] = useState([]);
+    const [eventsLoading, setEventsLoading] = useState(true);
+    const [eventsError, setEventsError] = useState(false);
 
-    const getLeaderboardData = async () => {
+    const getLeaderboardData = async (currentSeason) => {
         try {
             setIsLoading(true);
             const response = await getCareerStats();
             const data = response?.data || [];
 
-            // Filter for 2025-2026 season
+            // Filter for the current season
             const currentSeasonData = data.filter(
-                (record) => record.season === '2025-2026'
+                (record) => record.season === currentSeason
             );
 
             // Top Pinners - Sort by pins in descending order and take top 5
@@ -57,8 +66,23 @@ const HomeContainer = () => {
     };
 
     useEffect(() => {
-        getLeaderboardData();
-    }, []);
+        getLeaderboardData(seasonLabel);
+    }, [seasonLabel]);
+
+    useEffect(() => {
+        const getCalendarEvents = async () => {
+            try {
+                const response = await getEvents(season);
+                setEvents(response?.data || []);
+            } catch (error) {
+                console.error('Error fetching calendar events:', error);
+                setEventsError(true);
+            } finally {
+                setEventsLoading(false);
+            }
+        };
+        getCalendarEvents();
+    }, [season]);
 
     return (
         <Home
@@ -66,6 +90,11 @@ const HomeContainer = () => {
             topTechFalls={topTechFalls}
             bestRecords={bestRecords}
             isLoading={isLoading}
+            seasonLabel={seasonLabel}
+            events={events}
+            season={season}
+            eventsLoading={eventsLoading}
+            eventsError={eventsError}
         />
     );
 };
