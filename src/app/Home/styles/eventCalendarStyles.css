@@ -1,0 +1,503 @@
+/* ===========================================
+   SEASON CALENDAR (home page)
+   One month at a time, November through March.
+   Team colors mark each event; the type is the label.
+   =========================================== */
+/* The details popover renders outside .event-calendar, so team colors are
+   keyed on the team class alone. */
+.team-varsity { --team-color: var(--color-primary); }
+.team-jv { --team-color: #3d5a80; }
+.team-girls { --team-color: var(--color-gold); }
+.team-all-teams { --team-color: var(--color-gray-800); }
+
+/* Home and away are the event's background; the team stays the left rule. */
+.event-chip-home,
+.agenda-event-home,
+.calendar-legend-swatch-home {
+    background: rgba(128, 0, 0, 0.12) !important;
+    border-color: rgba(128, 0, 0, 0.22) !important;
+}
+
+.event-chip-away,
+.agenda-event-away,
+.calendar-legend-swatch-away {
+    background: var(--color-gray-200) !important;
+    border-color: var(--color-hairline-strong) !important;
+}
+
+/* The left rule is always the team color, whatever the background says. */
+.event-chip-home,
+.event-chip-away,
+.agenda-event-home,
+.agenda-event-away {
+    border-left-color: var(--team-color) !important;
+}
+
+/* No Practice days read as "off": striped, muted, no hover lift. */
+.event-chip-off,
+.calendar-legend-swatch-off {
+    background: repeating-linear-gradient(
+        135deg,
+        var(--color-gray-100) 0 4px,
+        var(--color-gray-200) 4px 8px
+    ) !important;
+}
+
+.event-calendar {
+    background: var(--color-white) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-sm) !important;
+    padding: var(--spacing-lg);
+    margin-bottom: 3rem;
+}
+
+/* ---------- Header ---------- */
+.calendar-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-hairline);
+}
+
+.calendar-title {
+    font-family: var(--font-heading) !important;
+    color: var(--color-black) !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem !important;
+}
+
+.calendar-title-icon {
+    color: var(--color-primary) !important;
+}
+
+.calendar-subtitle {
+    color: var(--color-gray-600) !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--label-size) !important;
+    text-transform: uppercase;
+    letter-spacing: var(--label-tracking) !important;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.calendar-month {
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 1.125rem !important;
+    color: var(--color-black) !important;
+    min-width: 9.5rem;
+    text-align: center;
+}
+
+.calendar-nav-button {
+    color: var(--color-primary) !important;
+    border: 1px solid var(--color-hairline-strong) !important;
+    width: 36px;
+    height: 36px;
+}
+
+.calendar-nav-button.Mui-disabled {
+    color: var(--color-gray-400) !important;
+    border-color: var(--color-hairline) !important;
+}
+
+/* ---------- Month pills + legend ---------- */
+.calendar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    padding: var(--spacing-md) 0;
+}
+
+.calendar-months {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.calendar-month-pill {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--color-gray-700);
+    background: transparent;
+    border: 1px solid var(--color-hairline-strong);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.calendar-month-pill:hover {
+    background: var(--color-primary-lighter);
+}
+
+.calendar-month-pill.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.calendar-month-pill:focus-visible,
+.event-chip:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs) var(--spacing-md);
+}
+
+.calendar-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-gray-700);
+}
+
+.calendar-legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--team-color);
+}
+
+/* ---------- Month grid ---------- */
+.calendar-grid {
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.calendar-row {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.calendar-row + .calendar-row {
+    border-top: 1px solid var(--color-hairline);
+}
+
+.calendar-weekday {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    text-transform: uppercase;
+    letter-spacing: var(--label-tracking);
+    color: var(--color-gray-600);
+    padding: 0.5rem;
+    background: var(--color-surface-subtle);
+}
+
+.calendar-cell {
+    min-height: 104px;
+    padding: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.calendar-cell + .calendar-cell,
+.calendar-weekday + .calendar-weekday {
+    border-left: 1px solid var(--color-hairline);
+}
+
+.calendar-cell-empty {
+    background: var(--color-surface-subtle);
+}
+
+.calendar-date {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--color-gray-700);
+    line-height: 1;
+    padding: 0.125rem 0.125rem 0.25rem;
+}
+
+.calendar-cell-today {
+    background: var(--color-primary-lighter);
+}
+
+.calendar-cell-today .calendar-date {
+    color: var(--color-primary);
+}
+
+/* One event inside a day. The team color is the left rule. */
+.event-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.0625rem;
+    width: 100%;
+    text-align: left;
+    background: var(--color-white);
+    border: 1px solid var(--color-hairline-strong);
+    border-left: 3px solid var(--team-color);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.375rem;
+    cursor: pointer;
+    font: inherit;
+    transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.event-chip:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.event-chip-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.event-chip-team {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-gray-900);
+}
+
+.event-chip-venue {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.625rem;
+    color: var(--color-gray-600);
+}
+
+.event-chip-type {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: var(--color-gray-800);
+    overflow-wrap: anywhere;
+}
+
+.event-chip-title {
+    font-family: var(--font-body-bold);
+    font-size: 0.6875rem;
+    line-height: 1.25;
+    color: var(--color-gray-900);
+    overflow-wrap: anywhere;
+}
+
+.event-chip-off {
+    border-style: dashed;
+    border-left-style: solid;
+}
+
+.event-chip-off:hover {
+    box-shadow: none;
+}
+
+.event-chip-off .event-chip-type {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.calendar-legend-swatch-off {
+    border: 1px dashed var(--color-gray-500);
+    box-sizing: border-box;
+}
+
+.event-day-tag {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    color: var(--color-gray-600);
+}
+
+.calendar-empty {
+    font-family: var(--font-body) !important;
+    color: var(--color-gray-600) !important;
+    font-size: 0.875rem !important;
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.calendar-empty-below {
+    padding: var(--spacing-md) 0 0;
+}
+
+.calendar-skeleton {
+    height: 420px !important;
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Details popover ---------- */
+.event-popover-paper {
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-md) !important;
+}
+
+.event-popover {
+    padding: var(--spacing-md);
+    border-top: 3px solid var(--team-color);
+    min-width: 220px;
+    max-width: 300px;
+}
+
+.event-popover-team {
+    font-family: var(--font-body) !important;
+    font-size: var(--label-size) !important;
+    text-transform: uppercase;
+    letter-spacing: var(--label-tracking) !important;
+    color: var(--color-gray-600) !important;
+}
+
+.event-popover-type {
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 1.0625rem !important;
+    color: var(--color-black) !important;
+}
+
+.event-popover-title {
+    font-family: var(--font-body) !important;
+    font-size: 0.875rem !important;
+    color: var(--color-gray-800) !important;
+}
+
+.event-popover-facts {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.75rem;
+    margin: var(--spacing-sm) 0 0;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+}
+
+.event-popover-facts dt {
+    color: var(--color-gray-600);
+}
+
+.event-popover-facts dd {
+    margin: 0;
+    color: var(--color-gray-900);
+}
+
+/* ---------- Agenda (phones) ---------- */
+.calendar-agenda {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.agenda-day {
+    padding: var(--spacing-sm) 0;
+}
+
+.agenda-day + .agenda-day {
+    border-top: 1px solid var(--color-hairline);
+}
+
+.agenda-date {
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: var(--color-gray-700) !important;
+    margin-bottom: 0.375rem !important;
+}
+
+.agenda-date-today {
+    color: var(--color-primary) !important;
+}
+
+.agenda-event {
+    border-left: 3px solid var(--team-color);
+    padding: 0.25rem 0 0.25rem 0.75rem;
+}
+
+.agenda-event-home,
+.agenda-event-away {
+    border-width: 0 0 0 3px;
+    border-style: solid;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding-right: 0.5rem;
+}
+
+.agenda-event-off {
+    background: repeating-linear-gradient(
+        135deg,
+        var(--color-gray-50) 0 4px,
+        var(--color-gray-100) 4px 8px
+    );
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.agenda-event + .agenda-event {
+    margin-top: 0.5rem;
+}
+
+.agenda-event-heading {
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 0.9375rem !important;
+    color: var(--color-black) !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.375rem;
+}
+
+.agenda-event-team {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+}
+
+.agenda-event-title {
+    font-family: var(--font-body) !important;
+    font-size: 0.875rem !important;
+    color: var(--color-gray-800) !important;
+}
+
+.agenda-event-details {
+    font-family: var(--font-body) !important;
+    font-size: 0.8125rem !important;
+    color: var(--color-gray-600) !important;
+}
+
+@media (max-width: 599px) {
+    .event-calendar {
+        padding: var(--spacing-md);
+    }
+
+    .calendar-header {
+        align-items: flex-start;
+    }
+
+    .calendar-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .calendar-months {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .calendar-month-pill {
+        padding: 0.25rem 0.625rem;
+    }
+}

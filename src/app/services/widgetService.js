@@ -9,3 +9,10 @@ export async function getAnnouncements() {
 export async function getAccoladesByWrestler(id) {
     return http.get(`${infoEndpoint}/accolades/${id}`);
 }
+
+/** Calendar events for the season starting in November of `seasonStartYear`. */
+export async function getEvents(seasonStartYear) {
+    return http.get(`${infoEndpoint}/events`, {
+        params: { season: seasonStartYear },
+    });
+}
