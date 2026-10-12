@@ -2,6 +2,7 @@ import React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { parseCalendarDate } from '../../common/dates';
+import { actionCountColumns, hasBreakdown } from '../../common/scoringBreakdown';
 
 const WrestlerPageTable = (props) => {
     const { data, type } = props;
@@ -102,6 +103,9 @@ const WrestlerPageTable = (props) => {
             align: 'center',
             valueGetter: (params) => params.row.match_stats.period,
         },
+        // Most postseason matches only have the score, so the breakdown
+        // columns appear only once at least one match in view has one.
+        ...(data.some(hasBreakdown) ? actionCountColumns : []),
     ];
 
     const regularSeasonColumns = [
@@ -152,70 +156,7 @@ const WrestlerPageTable = (props) => {
             width: 80,
             filterable: true,
         },
-        {
-            field: 'takedowns_for',
-            headerName: 'TD For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedowns_for,
-        },
-        {
-            field: 'takedowns_against',
-            headerName: 'TD Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedowns_against,
-        },
-        {
-            field: 'reversals_for',
-            headerName: 'Rev For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversals_for,
-        },
-        {
-            field: 'reversals_against',
-            headerName: 'Rev Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversals_against,
-        },
-        {
-            field: 'escapes_for',
-            headerName: 'Esc For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escapes_for,
-        },
-        {
-            field: 'escapes_against',
-            headerName: 'Esc Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escapes_against,
-        },
-        {
-            field: 'nearfall_for',
-            headerName: 'NF For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_for,
-        },
-        {
-            field: 'nearfall_against',
-            headerName: 'NF Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_against,
-        },
+        ...actionCountColumns,
         {
             field: 'total_points_for',
             headerName: 'Total For',

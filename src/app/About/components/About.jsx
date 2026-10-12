@@ -21,13 +21,13 @@ const About = () => {
             icon: <InfoIcon />,
             header: 'Statistics and Data For Towson High Wrestling',
             description:
-                'This purpose of this site is to have a central hub that wrestlers and coaches can access to look up statistics and data for Towson High School Wrestling. This data is both individualized and team oriented, allowing student athletes to analyze their performance and how it has contributed to team success. In addition, student athletes will have access to both post-season and regular season data and will be able to see career statistics starting from the 2021-2022 season.',
+                'This purpose of this site is to have a central hub that wrestlers and coaches can access to look up statistics and data for Towson High School Wrestling. This data is both individualized and team oriented, allowing student athletes to analyze their performance and how it has contributed to team success. In addition, student athletes will have access to both post-season and dual meet data and will be able to see career statistics starting from the 2021-2022 season.',
         },
         {
             icon: <DataUsageIcon />,
             header: 'What Data is Available on this Website?',
             description:
-                'Student athletes will have access to both post-season and regular season data and will be able to see career statistics starting from the 2021-2022 season. However, due to the way scoring is conducted throughout the season, post-season statistics are more limited than regular season data which tracks all scoring actions. All wins, losses, match times, methods of result, period the match ended in, and in some cases, points for/against, are common data points that are available for both regular season and post-season matches. Regular season individual tournament match data will be collected and scored similar to how post-season matches are, with fewer data points, but still contributing to career numbers.',
+                'Student athletes will have access to both post-season and dual meet data and will be able to see career statistics starting from the 2021-2022 season. However, due to the way scoring is conducted throughout the season, post-season statistics are often more limited than dual meet data, which tracks all scoring actions, although some post-season matches include the full scoring breakdown as well. All wins, losses, match times, methods of result, period the match ended in, and in some cases, points for/against, are common data points that are available for both dual meet and post-season matches. Regular season individual tournament match data will be collected and scored similar to how post-season matches are, with fewer data points, but still contributing to career numbers.',
         },
         {
             icon: <StorageIcon />,
