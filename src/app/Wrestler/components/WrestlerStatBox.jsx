@@ -381,10 +381,13 @@ const WrestlerStatBox = (props) => {
               </Box>
           ));
 
+    // Percentage widths and no minimum width, so the table fits a phone
+    // instead of scrolling sideways. The chart column only has to hold a
+    // small donut.
     const columns = [
-        { path: 'stat', label: 'Statistic' },
-        { path: 'numerical', label: 'Value' },
-        { path: 'graph', label: 'Graphical Representation' },
+        { path: 'stat', label: 'Statistic', width: '42%' },
+        { path: 'numerical', label: 'Value', width: '33%' },
+        { path: 'graph', label: 'Chart', width: '25%' },
     ];
 
     const rows = !data
@@ -516,7 +519,7 @@ const WrestlerStatBox = (props) => {
 
     return data ? (
         <>
-            <MaterialTable columns={columns} data={rows} />
+            <MaterialTable columns={columns} data={rows} minWidth={0} />
         </>
     ) : null;
 };

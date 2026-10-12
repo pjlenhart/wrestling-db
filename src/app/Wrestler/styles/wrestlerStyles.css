@@ -3,25 +3,287 @@
    =========================================== */
 
 /* Accolades */
-.wrestler-accolades-list {
+.accolades-header {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.accolades-header-title {
+    margin-bottom: 0;
+}
+
+.accolades-tally {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.accolades-tally-item {
+    text-align: center;
+}
+
+.accolades-tally-value {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    font-size: 1.375rem !important;
+    line-height: 1.1 !important;
+    color: var(--color-primary) !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.accolades-tally-label {
+    font-family: var(--font-body) !important;
+    font-size: var(--label-size) !important;
+    letter-spacing: var(--label-tracking) !important;
+    text-transform: uppercase;
+    color: var(--color-gray-600) !important;
+}
+
+.accolades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 0.75rem;
 }
 
-.wrestler-accolade-chip {
-    background-color: var(--color-white) !important;
-    border: 1px solid var(--color-hairline-strong) !important;
-    border-radius: var(--radius-sm) !important;
-    color: var(--color-gray-900) !important;
-    font-family: var(--font-body) !important;
-    font-size: 0.8125rem !important;
-    padding: 0.4375rem 0.25rem !important;
-    height: auto !important;
+.accolade-card {
+    --medal: var(--color-gray-200);
+    --medal-ink: var(--color-gray-600);
+    --medal-glow: transparent;
+    --medal-tint: var(--color-white);
+
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.125rem 1rem 1.25rem;
+    background: linear-gradient(100deg, var(--medal-tint) 0%, var(--color-white) 60%);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.wrestler-accolade-chip .MuiChip-icon {
-    color: var(--color-gold) !important;
+/* The metal runs down the left edge of the card as well as the medal. */
+.accolade-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--medal);
+}
+
+.accolade-card:hover {
+    box-shadow: var(--shadow-md), 0 0 0 1px var(--medal-glow);
+    transform: translateY(-2px);
+}
+
+/* Metallic medal tiers. Each gradient runs light-dark-light so the disc
+   catches the light like struck metal. */
+.accolade-card.place-1 {
+    --medal: linear-gradient(135deg, #fff3b0 0%, #e8c547 28%, #b8860b 52%, #f7dc6f 74%, #c9971c 100%);
+    --medal-ink: #4a3300;
+    --medal-glow: rgba(212, 166, 34, 0.45);
+    --medal-tint: rgba(232, 197, 71, 0.14);
+}
+
+.accolade-card.place-2 {
+    --medal: linear-gradient(135deg, #ffffff 0%, #d5d9de 28%, #8e959e 52%, #eef0f2 74%, #a3aab3 100%);
+    --medal-ink: #2f343a;
+    --medal-glow: rgba(142, 149, 158, 0.45);
+    --medal-tint: rgba(163, 170, 179, 0.14);
+}
+
+.accolade-card.place-3 {
+    --medal: linear-gradient(135deg, #ffd9b3 0%, #d08a4c 28%, #8f4f22 52%, #e8b07c 74%, #a5612e 100%);
+    --medal-ink: #3a1f0b;
+    --medal-glow: rgba(176, 102, 48, 0.45);
+    --medal-tint: rgba(208, 138, 76, 0.13);
+}
+
+/* 4th-6th each get their own metal: blued steel, verdigris (the green patina
+   copper takes on), and the team's maroon. */
+.accolade-card.place-4 {
+    --medal: linear-gradient(135deg, #c9dcf5 0%, #5b86c4 28%, #1f3f73 52%, #8fb0e0 74%, #2e5694 100%);
+    --medal-ink: #ffffff;
+    --medal-glow: rgba(46, 86, 148, 0.4);
+    --medal-tint: rgba(91, 134, 196, 0.1);
+}
+
+.accolade-card.place-5 {
+    --medal: linear-gradient(135deg, #cdeee0 0%, #5fae8f 28%, #2a6b55 52%, #94d1b8 74%, #3c8a6d 100%);
+    --medal-ink: #ffffff;
+    --medal-glow: rgba(60, 138, 109, 0.4);
+    --medal-tint: rgba(95, 174, 143, 0.1);
+}
+
+.accolade-card.place-6 {
+    --medal: linear-gradient(135deg, #d27a77 0%, #a01e1e 28%, #5c0000 52%, #b84a48 74%, #800000 100%);
+    --medal-ink: #ffffff;
+    --medal-glow: rgba(128, 0, 0, 0.35);
+    --medal-tint: rgba(128, 0, 0, 0.06);
+}
+
+/* The medal hangs from a neck ribbon: two strips in the team's colours that
+   come down from the top of the card in a V and tuck in behind the medal.
+   The card clips them at its top edge, so they read as running on up out
+   of frame. */
+.accolade-medal-wrap {
+    position: relative;
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-end;
+    padding-top: 1.25rem;
+}
+
+.accolade-ribbon {
+    position: absolute;
+    left: 50%;
+    /* Reach from well above the card's top edge down into the medal. */
+    top: -3rem;
+    bottom: 34px;
+    width: 0;
+}
+
+.accolade-ribbon::before,
+.accolade-ribbon::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -7px;
+    width: 14px;
+    height: 100%;
+    transform-origin: 50% 100%;
+    background: linear-gradient(
+        90deg,
+        #5c0000 0%,
+        #800000 22%,
+        #f3e6bf 22%,
+        #f3e6bf 32%,
+        #c9a227 32%,
+        #e2c35a 50%,
+        #c9a227 68%,
+        #f3e6bf 68%,
+        #f3e6bf 78%,
+        #800000 78%,
+        #5c0000 100%
+    );
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.accolade-ribbon::before {
+    transform: rotate(-16deg);
+}
+
+/* The strip nearer the viewer is a shade darker, as if it falls in the
+   other's shadow. */
+.accolade-ribbon::after {
+    transform: rotate(16deg);
+    filter: brightness(0.88);
+}
+
+.accolade-medal {
+    position: relative;
+    z-index: 1;
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--medal);
+    /* Inner rim, a top highlight, and a soft drop so the medal sits proud. */
+    box-shadow:
+        inset 0 0 0 3px rgba(255, 255, 255, 0.35),
+        inset 0 2px 3px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.18),
+        0 3px 8px var(--medal-glow);
+}
+
+/* A sheen that sweeps across the medal on hover. */
+.accolade-medal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.65) 48%, transparent 66%);
+    background-size: 250% 100%;
+    background-position: 120% 0;
+    pointer-events: none;
+}
+
+.accolade-card:hover .accolade-medal::after {
+    animation: accolade-shine 0.9s ease;
+}
+
+@keyframes accolade-shine {
+    from { background-position: 120% 0; }
+    to { background-position: -40% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accolade-card,
+    .accolade-card:hover {
+        transform: none;
+    }
+
+    .accolade-card:hover .accolade-medal::after {
+        animation: none;
+    }
+}
+
+.accolade-card.place-other .accolade-medal {
+    box-shadow: inset 0 0 0 2px var(--color-gray-300);
+}
+
+.accolade-medal-text {
+    position: relative;
+    font-family: var(--font-heading) !important;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+    line-height: 1 !important;
+    color: var(--medal-ink) !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.accolade-card.place-4 .accolade-medal-text,
+.accolade-card.place-5 .accolade-medal-text,
+.accolade-card.place-6 .accolade-medal-text {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.accolade-medal-icon {
+    position: relative;
+    color: var(--medal-ink) !important;
+    font-size: 1.5rem !important;
+}
+
+.accolade-info {
+    min-width: 0;
+}
+
+.accolade-tournament {
+    font-family: var(--font-heading) !important;
+    font-weight: 600 !important;
+    font-size: 0.9875rem !important;
+    line-height: 1.3 !important;
+    color: var(--color-black) !important;
+}
+
+.accolade-meta {
+    font-family: var(--font-body) !important;
+    font-size: 0.8125rem !important;
+    color: var(--color-gray-600) !important;
+    margin-top: 0.125rem !important;
+}
+
+.accolade-meta-dot {
+    margin: 0 0.375rem;
+    color: var(--color-gray-400);
 }
 
 /* Radar chart section */
@@ -83,10 +345,14 @@
 }
 
 @media (max-width: 599px) {
-    .wrestler-accolade-chip {
-        font-size: 0.75rem !important;
+    .accolades-grid {
+        grid-template-columns: 1fr;
     }
-    
+
+    .accolades-tally {
+        gap: 1rem;
+    }
+
     .wrestler-radar-section {
         padding: 0.75rem;
     }

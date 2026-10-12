@@ -4,16 +4,15 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Chip from '@mui/material/Chip';
 import WrestlerPageTable from './WrestlerPageTable';
 import WrestlerStatBox from './WrestlerStatBox';
+import CareerAccolades from './CareerAccolades';
 import RadarChart from './RadarCharts';
 import PageHero from '../../common/Header/PageHero';
 import '../styles/wrestlerStyles.css';
 import '../../common/styles/globalStyles.css';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import TimelineIcon from '@mui/icons-material/Timeline';
 
 const WrestlerPage = (props) => {
@@ -43,24 +42,7 @@ const WrestlerPage = (props) => {
             <Container maxWidth="lg" className="page-content">
                 {/* 1. Career Accolades */}
                 {accolades && accolades.length > 0 && (
-                    <Paper className="content-card" elevation={0}>
-                        <Box className="section-header">
-                            <EmojiEventsIcon className="section-title-icon" />
-                            <Typography className="section-title">
-                                Career Accolades
-                            </Typography>
-                        </Box>
-                        <Box className="wrestler-accolades-list">
-                            {accolades.map((acc, index) => (
-                                <Chip
-                                    key={index}
-                                    icon={<EmojiEventsIcon />}
-                                    label={`${acc.place} place - ${acc.season} ${acc.tournament}`}
-                                    className="wrestler-accolade-chip"
-                                />
-                            ))}
-                        </Box>
-                    </Paper>
+                    <CareerAccolades accolades={accolades} />
                 )}
 
                 {/* 2. Career Statistics - Full Width */}
