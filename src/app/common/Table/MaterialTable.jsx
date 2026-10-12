@@ -35,7 +35,9 @@ const MaterialTable = (props) => {
                 <TableContainer>
                     <Table
                         sx={{ 
-                            minWidth: minWidth || 400,
+                            // `??` so a caller can pass 0 to let the table shrink to
+                            // fit a phone; anything else keeps the 400px floor.
+                            minWidth: minWidth ?? 400,
                             tableLayout: 'fixed',
                         }}
                         aria-label="data table"
