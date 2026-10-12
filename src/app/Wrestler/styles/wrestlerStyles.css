@@ -103,16 +103,91 @@
     --medal-tint: rgba(208, 138, 76, 0.13);
 }
 
-/* 4th-6th: still the podium, in the team's own colour. */
-.accolade-card.place-podium {
+/* 4th-6th each get their own metal: blued steel, verdigris (the green patina
+   copper takes on), and the team's maroon. */
+.accolade-card.place-4 {
+    --medal: linear-gradient(135deg, #c9dcf5 0%, #5b86c4 28%, #1f3f73 52%, #8fb0e0 74%, #2e5694 100%);
+    --medal-ink: #ffffff;
+    --medal-glow: rgba(46, 86, 148, 0.4);
+    --medal-tint: rgba(91, 134, 196, 0.1);
+}
+
+.accolade-card.place-5 {
+    --medal: linear-gradient(135deg, #cdeee0 0%, #5fae8f 28%, #2a6b55 52%, #94d1b8 74%, #3c8a6d 100%);
+    --medal-ink: #ffffff;
+    --medal-glow: rgba(60, 138, 109, 0.4);
+    --medal-tint: rgba(95, 174, 143, 0.1);
+}
+
+.accolade-card.place-6 {
     --medal: linear-gradient(135deg, #d27a77 0%, #a01e1e 28%, #5c0000 52%, #b84a48 74%, #800000 100%);
     --medal-ink: #ffffff;
     --medal-glow: rgba(128, 0, 0, 0.35);
     --medal-tint: rgba(128, 0, 0, 0.06);
 }
 
+/* The medal hangs from a neck ribbon: two strips in the team's colours that
+   come down from the top of the card in a V and tuck in behind the medal.
+   The card clips them at its top edge, so they read as running on up out
+   of frame. */
+.accolade-medal-wrap {
+    position: relative;
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-end;
+    padding-top: 1.25rem;
+}
+
+.accolade-ribbon {
+    position: absolute;
+    left: 50%;
+    /* Reach from well above the card's top edge down into the medal. */
+    top: -3rem;
+    bottom: 34px;
+    width: 0;
+}
+
+.accolade-ribbon::before,
+.accolade-ribbon::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -7px;
+    width: 14px;
+    height: 100%;
+    transform-origin: 50% 100%;
+    background: linear-gradient(
+        90deg,
+        #5c0000 0%,
+        #800000 22%,
+        #f3e6bf 22%,
+        #f3e6bf 32%,
+        #c9a227 32%,
+        #e2c35a 50%,
+        #c9a227 68%,
+        #f3e6bf 68%,
+        #f3e6bf 78%,
+        #800000 78%,
+        #5c0000 100%
+    );
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.accolade-ribbon::before {
+    transform: rotate(-16deg);
+}
+
+/* The strip nearer the viewer is a shade darker, as if it falls in the
+   other's shadow. */
+.accolade-ribbon::after {
+    transform: rotate(16deg);
+    filter: brightness(0.88);
+}
+
 .accolade-medal {
     position: relative;
+    z-index: 1;
     width: 54px;
     height: 54px;
     flex-shrink: 0;
@@ -175,7 +250,9 @@
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-.accolade-card.place-podium .accolade-medal-text {
+.accolade-card.place-4 .accolade-medal-text,
+.accolade-card.place-5 .accolade-medal-text,
+.accolade-card.place-6 .accolade-medal-text {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 

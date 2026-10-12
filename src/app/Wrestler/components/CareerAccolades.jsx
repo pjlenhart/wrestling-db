@@ -60,23 +60,25 @@ const CareerAccolades = ({ accolades }) => {
             <Box className="accolades-grid">
                 {sorted.map((acc, index) => {
                     const n = placeNumber(acc.place);
-                    // Medal tiers drive the look in CSS: gold, silver and bronze
-                    // for the top three and a team-colour medal for 4th-6th. A
-                    // place that isn't a numbered finish falls back to neutral.
-                    let tier = 'place-other';
-                    if (n !== null && n <= 3) tier = `place-${n}`;
-                    else if (n !== null && n <= PODIUM_PLACES) tier = 'place-podium';
+                    // Each podium place has its own metal in CSS (.place-1 to
+                    // .place-6). A place that isn't a numbered finish falls back
+                    // to a neutral trophy with no ribbon.
+                    const isMedal = n !== null && n >= 1 && n <= PODIUM_PLACES;
+                    const tier = isMedal ? `place-${n}` : 'place-other';
 
                     return (
                         <Box key={index} className={`accolade-card ${tier}`}>
-                            <Box className="accolade-medal" aria-hidden="true">
-                                {n !== null ? (
-                                    <Typography className="accolade-medal-text">
-                                        {acc.place}
-                                    </Typography>
-                                ) : (
-                                    <EmojiEventsIcon className="accolade-medal-icon" />
-                                )}
+                            <Box className="accolade-medal-wrap" aria-hidden="true">
+                                {isMedal && <Box className="accolade-ribbon" />}
+                                <Box className="accolade-medal">
+                                    {isMedal ? (
+                                        <Typography className="accolade-medal-text">
+                                            {acc.place}
+                                        </Typography>
+                                    ) : (
+                                        <EmojiEventsIcon className="accolade-medal-icon" />
+                                    )}
+                                </Box>
                             </Box>
                             <Box className="accolade-info">
                                 <Typography className="accolade-tournament">
