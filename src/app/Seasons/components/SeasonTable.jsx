@@ -3,6 +3,11 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { parseCalendarDate } from '../../common/dates';
+import {
+    actionCountColumns,
+    hasBreakdown,
+    pointAndPenaltyColumns,
+} from '../../common/scoringBreakdown';
 
 const SeasonTable = (props) => {
     const { data, type } = props;
@@ -142,6 +147,11 @@ const SeasonTable = (props) => {
             align: 'center',
             valueGetter: (params) => params.row.match_stats.period,
         },
+        // Most postseason matches only have the score, so the breakdown
+        // columns appear only once at least one match in view has one.
+        ...(data.some(hasBreakdown)
+            ? [...actionCountColumns, ...pointAndPenaltyColumns]
+            : []),
     ];
 
     const regularSeasonColumns = [
@@ -193,171 +203,8 @@ const SeasonTable = (props) => {
             width: 80,
             filterable: true,
         },
-        {
-            field: 'takedowns_for',
-            headerName: 'TD For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedowns_for,
-        },
-        {
-            field: 'takedowns_against',
-            headerName: 'TD Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedowns_against,
-        },
-        {
-            field: 'reversals_for',
-            headerName: 'Rev For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversals_for,
-        },
-        {
-            field: 'reversals_against',
-            headerName: 'Rev Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversals_against,
-        },
-        {
-            field: 'escapes_for',
-            headerName: 'Esc For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escapes_for,
-        },
-        {
-            field: 'escapes_against',
-            headerName: 'Esc Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escapes_against,
-        },
-        {
-            field: 'nearfall_for',
-            headerName: 'NF For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_for,
-        },
-        {
-            field: 'nearfall_against',
-            headerName: 'NF Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_against,
-        },
-        {
-            field: 'takedown_points_for',
-            headerName: 'TD Pts For',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.takedown_points_for,
-        },
-        {
-            field: 'takedowns_points_against',
-            headerName: 'TD Pts Ag',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.takedown_points_against,
-        },
-        {
-            field: 'reversal_points_for',
-            headerName: 'Rev Pts For',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.reversal_points_for,
-        },
-        {
-            field: 'reversal_points_against',
-            headerName: 'Rev Pts Ag',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.reversal_points_against,
-        },
-        {
-            field: 'escape_points_for',
-            headerName: 'Esc Pts For',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.escape_points_for || params.row.match_stats.escapes_for,
-        },
-        {
-            field: 'escape_points_against',
-            headerName: 'Esc Pts Ag',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.escape_points_against || params.row.match_stats.escapes_against,
-        },
-        {
-            field: 'nearfall_points_for',
-            headerName: 'NF Pts For',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.nearfall_points_for,
-        },
-        {
-            field: 'nearfall_points_against',
-            headerName: 'NF Pts Ag',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.nearfall_points_against,
-        },
-        {
-            field: 'penalties_for',
-            headerName: 'Pen For',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalties_for,
-        },
-        {
-            field: 'penalties_against',
-            headerName: 'Pen Ag',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalties_against,
-        },
-        {
-            field: 'penalty_points_for',
-            headerName: 'Pen Pts For',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.penalty_points_for,
-        },
-        {
-            field: 'penalty_points_against',
-            headerName: 'Pen Pts Ag',
-            width: 110,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) =>
-                params.row.match_stats.penalty_points_against,
-        },
+        ...actionCountColumns,
+        ...pointAndPenaltyColumns,
         {
             field: 'total_points_for',
             headerName: 'Total For',

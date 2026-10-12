@@ -5,80 +5,30 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TeamRadarChart from './TeamRadarChart';
+import { hasBreakdown, sumBreakdowns } from '../../common/scoringBreakdown';
 
 const AdvancedStats = ({
     regularSeasonDataFiltered,
     individualDataFiltered,
     season,
-    regularSeasonData,
 }) => {
-    // Aggregate advanced stats from regular season matches (dual meet stats only)
-    const advancedStats = useMemo(() => {
-        const stats = {
-            takedowns_for: 0,
-            takedowns_against: 0,
-            reversals_for: 0,
-            reversals_against: 0,
-            escapes_for: 0,
-            escapes_against: 0,
-            nearfall_for: 0,
-            nearfall_against: 0,
-            penalties_for: 0,
-            penalties_against: 0,
-            takedown_points_for: 0,
-            takedown_points_against: 0,
-            reversal_points_for: 0,
-            reversal_points_against: 0,
-            escape_points_for: 0,
-            escape_points_against: 0,
-            nearfall_points_for: 0,
-            nearfall_points_against: 0,
-            penalty_points_for: 0,
-            penalty_points_against: 0,
-            total_points_for: 0,
-            total_points_against: 0,
-        };
+    // Every dual meet match, plus the postseason matches that were entered with
+    // a full breakdown. Postseason matches without one are left out entirely,
+    // rather than counted as matches where nothing happened.
+    const breakdownMatches = useMemo(
+        () =>
+            [...regularSeasonDataFiltered, ...individualDataFiltered].filter(
+                hasBreakdown
+            ),
+        [regularSeasonDataFiltered, individualDataFiltered]
+    );
 
-        regularSeasonDataFiltered.forEach((match) => {
-            const ms = match.match_stats || {};
-            const escapesFor = Number(ms.escapes_for) || 0;
-            const escapesAgainst = Number(ms.escapes_against) || 0;
+    const advancedStats = useMemo(
+        () => sumBreakdowns(breakdownMatches),
+        [breakdownMatches]
+    );
 
-            stats.takedowns_for += Number(ms.takedowns_for) || 0;
-            stats.takedowns_against += Number(ms.takedowns_against) || 0;
-            stats.reversals_for += Number(ms.reversals_for) || 0;
-            stats.reversals_against += Number(ms.reversals_against) || 0;
-            stats.escapes_for += escapesFor;
-            stats.escapes_against += escapesAgainst;
-            stats.nearfall_for += Number(ms.nearfall_for) || 0;
-            stats.nearfall_against += Number(ms.nearfall_against) || 0;
-            stats.penalties_for += Number(ms.penalties_for) || 0;
-            stats.penalties_against += Number(ms.penalties_against) || 0;
-            stats.takedown_points_for += Number(ms.takedown_points_for) || 0;
-            stats.takedown_points_against +=
-                Number(ms.takedown_points_against) || 0;
-            stats.reversal_points_for += Number(ms.reversal_points_for) || 0;
-            stats.reversal_points_against +=
-                Number(ms.reversal_points_against) || 0;
-            // Escape points: use stored value if available, otherwise calculate (1 point per escape)
-            stats.escape_points_for +=
-                Number(ms.escape_points_for) || escapesFor;
-            stats.escape_points_against +=
-                Number(ms.escape_points_against) || escapesAgainst;
-            stats.nearfall_points_for += Number(ms.nearfall_points_for) || 0;
-            stats.nearfall_points_against +=
-                Number(ms.nearfall_points_against) || 0;
-            stats.penalty_points_for += Number(ms.penalty_points_for) || 0;
-            stats.penalty_points_against +=
-                Number(ms.penalty_points_against) || 0;
-            stats.total_points_for += Number(ms.total_points_for) || 0;
-            stats.total_points_against += Number(ms.total_points_against) || 0;
-        });
-
-        return stats;
-    }, [regularSeasonDataFiltered]);
-
-    // Aggregate win/loss methods and periods (includes both regular season and individual/postseason)
+    // Aggregate win/loss methods and periods (includes both dual meet and individual/postseason)
     const methodsAndPeriods = useMemo(() => {
         const methods = {
             wins: {
@@ -103,7 +53,7 @@ const AdvancedStats = ({
             losses: { first: 0, second: 0, third: 0, ot: 0, na: 0 },
         };
 
-        // Combine both regular season and individual/postseason data
+        // Combine both dual meet and individual/postseason data
         const allMatches = [
             ...regularSeasonDataFiltered,
             ...individualDataFiltered,
@@ -163,14 +113,15 @@ const AdvancedStats = ({
         return { methods, periods };
     }, [regularSeasonDataFiltered, individualDataFiltered]);
 
-    // Extract unique seasons for "All Seasons" radar charts
+    // Extract unique seasons for "All Seasons" radar charts. On that view the
+    // filtered data is all of it.
     const uniqueSeasons = useMemo(() => {
         if (season !== 'all') return [];
         const seasonsSet = new Set(
-            regularSeasonData.map((m) => m.season).filter(Boolean)
+            breakdownMatches.map((m) => m.season).filter(Boolean)
         );
         return Array.from(seasonsSet).sort().reverse();
-    }, [season, regularSeasonData]);
+    }, [season, breakdownMatches]);
 
     // Calculate stats per season for "All Seasons" view
     const statsBySeason = useMemo(() => {
@@ -178,41 +129,13 @@ const AdvancedStats = ({
 
         const result = {};
         uniqueSeasons.forEach((s) => {
-            const seasonMatches = regularSeasonData.filter(
-                (m) => m.season === s
+            result[s] = sumBreakdowns(
+                breakdownMatches.filter((m) => m.season === s)
             );
-            const stats = {
-                takedowns_for: 0,
-                takedowns_against: 0,
-                reversals_for: 0,
-                reversals_against: 0,
-                escapes_for: 0,
-                escapes_against: 0,
-                nearfall_for: 0,
-                nearfall_against: 0,
-                penalties_for: 0,
-                penalties_against: 0,
-            };
-
-            seasonMatches.forEach((match) => {
-                const ms = match.match_stats || {};
-                stats.takedowns_for += Number(ms.takedowns_for) || 0;
-                stats.takedowns_against += Number(ms.takedowns_against) || 0;
-                stats.reversals_for += Number(ms.reversals_for) || 0;
-                stats.reversals_against += Number(ms.reversals_against) || 0;
-                stats.escapes_for += Number(ms.escapes_for) || 0;
-                stats.escapes_against += Number(ms.escapes_against) || 0;
-                stats.nearfall_for += Number(ms.nearfall_for) || 0;
-                stats.nearfall_against += Number(ms.nearfall_against) || 0;
-                stats.penalties_for += Number(ms.penalties_for) || 0;
-                stats.penalties_against += Number(ms.penalties_against) || 0;
-            });
-
-            result[s] = stats;
         });
 
         return result;
-    }, [season, regularSeasonData, uniqueSeasons]);
+    }, [season, breakdownMatches, uniqueSeasons]);
 
     return (
         <Box className="season-section">
@@ -225,8 +148,8 @@ const AdvancedStats = ({
                         Advanced Statistics
                     </Typography>
                     <Typography className="season-section-subtitle">
-                        Aggregated dual meet scoring actions from regular season
-                        matches
+                        Aggregated scoring actions from dual meets and from
+                        postseason matches with a full scoring breakdown
                     </Typography>
                 </Box>
             </Box>

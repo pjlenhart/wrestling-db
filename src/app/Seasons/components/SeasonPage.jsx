@@ -155,7 +155,7 @@ const SeasonPage = (props) => {
                                 verticalAlign: 'middle',
                             }}
                         />
-                        Regular Season ({regularSeasonDataFiltered.length})
+                        Dual Meets ({regularSeasonDataFiltered.length})
                     </button>
                     <button
                         className={`segmented-tab ${
@@ -189,7 +189,7 @@ const SeasonPage = (props) => {
                     </button>
                 </Box>
 
-                {/* Regular Season Section */}
+                {/* Dual Meets Section */}
                 {activeTab === 'regular' && (
                     <Box className="season-section">
                         <Box className="season-section-header">
@@ -198,7 +198,7 @@ const SeasonPage = (props) => {
                             </Box>
                             <Box>
                                 <Typography className="season-section-title">
-                                    Regular Season Matches
+                                    Dual Meet Matches
                                 </Typography>
                                 <Typography className="season-section-subtitle">
                                     Dual meet matches with full scoring
@@ -247,7 +247,6 @@ const SeasonPage = (props) => {
                         regularSeasonDataFiltered={regularSeasonDataFiltered}
                         individualDataFiltered={individualDataFiltered}
                         season={season}
-                        regularSeasonData={regularSeasonData}
                     />
                 )}
             </Container>

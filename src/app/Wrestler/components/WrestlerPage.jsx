@@ -72,17 +72,17 @@ const WrestlerPage = (props) => {
                         </Typography>
                     </Box>
                     <Typography className="section-subtitle">
-                        *Note: Some statistics are only counted in regular season. Wins/losses, match times, and periods are counted in both regular and post season.
+                        *Note: Some statistics are only counted in dual meets. Wins/losses, match times, and periods are counted in both dual meets and post season.
                     </Typography>
                     <WrestlerStatBox data={career} />
                 </Paper>
 
-                {/* 3. Regular Season - Full Width */}
+                {/* 3. Dual Meets - Full Width */}
                 <Paper className="content-card" elevation={0}>
                     <Box className="section-header">
                         <TableChartIcon className="section-title-icon" />
                         <Typography className="section-title">
-                            Regular Season - Career
+                            Dual Meets - Career
                         </Typography>
                     </Box>
                     <WrestlerPageTable
