@@ -1,18 +1,5 @@
 /* Fonts loaded via Google Fonts CDN */
 
-/* Site Logo */
-.siteLogo {
-    height: 50px;
-    width: 68px;
-}
-
-@media (min-width: 1200px) {
-    .siteLogo {
-        height: 60px;
-        width: 80px;
-    }
-}
-
 /* NavBar AppBar Styles */
 .navbar-appbar {
     box-shadow: none !important;
@@ -37,36 +24,19 @@
     padding: 0.5rem 1rem;
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* Keeps the hidden measuring row from widening the page */
+    overflow: hidden;
 }
 
-/* Logo Container */
-.navbar-logo-container {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: -12px;
-    padding-left: 0;
-    padding-right: 0;
-    height: 55px;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-/* Desktop Menu */
+/* Desktop Menu - shown only while every link fits on one line (see NavBar) */
 .navbar-desktop-menu {
-    display: none;
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: nowrap;
     gap: 0;
     flex-grow: 1;
     justify-content: space-evenly;
     align-items: center;
-}
-
-@media (min-width: 900px) {
-    .navbar-desktop-menu {
-        display: flex;
-    }
+    height: 55px;
 }
 
 @media (min-width: 1200px) {
@@ -75,15 +45,23 @@
     }
 }
 
-/* Mobile Menu Button Container */
-.navbar-mobile-button {
-    display: block;
+/* Hidden copy of the desktop menu, used only to measure the width it needs */
+.navbar-measure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    justify-content: flex-start;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-@media (min-width: 900px) {
-    .navbar-mobile-button {
-        display: none;
-    }
+/* Mobile Menu Button Container */
+.navbar-mobile-button {
+    display: flex;
+    align-items: center;
+    height: 55px;
+    margin-left: auto;
 }
 
 /* Menu Item Styles */
