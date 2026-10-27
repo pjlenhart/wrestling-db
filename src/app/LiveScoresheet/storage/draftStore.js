@@ -7,12 +7,19 @@
  */
 
 import { WEIGHT_CLASSES, boutOrder, createBout } from '../scoring/liveBout';
+import { createTournamentBout } from '../scoring/tournamentBout';
 
 const STORAGE_KEY = 'wrestlingdb.liveScoresheets.v1';
 const SCHEMA_VERSION = 1;
 
 export const STATUS_IN_PROGRESS = 'In Progress';
 export const STATUS_SUBMITTED = 'Submitted';
+
+/** Drafts saved before tournament sheets existed carry no kind: they are duals. */
+export const KIND_DUAL = 'dual';
+export const KIND_TOURNAMENT = 'tournament';
+
+export const isTournamentDraft = (draft) => Boolean(draft) && draft.kind === KIND_TOURNAMENT;
 
 export class DraftStoreError extends Error {}
 
@@ -92,6 +99,7 @@ export function createDraft({ matchDate, opponentSchool, opponentSchoolId = null
 
     return {
         id: draftId(),
+        kind: KIND_DUAL,
         version: SCHEMA_VERSION,
         createdAt: now,
         updatedAt: now,
@@ -109,6 +117,40 @@ export function createDraft({ matchDate, opponentSchool, opponentSchoolId = null
 }
 
 /**
+ * Start a tournament sheet: one bout.
+ *
+ * Only the tournament, date and weight have to be known up front. Everything
+ * else -- even who the opponent is -- can be filled in at the mat, which is
+ * often the first time anybody knows it.
+ */
+export function createTournamentDraft({
+    tournament,
+    matchDate,
+    weight,
+    wrestlerId = null,
+    wrestler = '',
+    opponent = '',
+    opponentSchool = '',
+    opponentSchoolId = null,
+}) {
+    const now = new Date().toISOString();
+
+    return {
+        id: draftId(),
+        kind: KIND_TOURNAMENT,
+        version: SCHEMA_VERSION,
+        createdAt: now,
+        updatedAt: now,
+        tournament,
+        matchDate,
+        opponentSchool,
+        opponentSchoolId,
+        status: STATUS_IN_PROGRESS,
+        bout: { ...createTournamentBout(Number(weight)), wrestlerId, wrestler, opponent },
+    };
+}
+
+/**
  * A JSON copy of one sheet.
  *
  * An escape hatch worth having while this is the only copy: a scorer can hand
@@ -119,7 +161,10 @@ export function exportDraft(draft) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `scoresheet-${draft.opponentSchool || 'dual'}-${draft.matchDate}.json`.replace(/\s+/g, '-');
+    const name = isTournamentDraft(draft)
+        ? `${draft.tournament || 'tournament'}-${draft.bout?.weight || ''}`
+        : draft.opponentSchool || 'dual';
+    link.download = `scoresheet-${name}-${draft.matchDate}.json`.replace(/\s+/g, '-');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

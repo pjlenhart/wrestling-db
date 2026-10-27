@@ -44,6 +44,26 @@ export async function submitScoresheet(draft) {
     );
 }
 
+/**
+ * Submit a finished tournament bout.
+ *
+ * The same rule as a dual: only the marks, or the quick result as typed, are
+ * sent. What gets recorded is derived again on the server.
+ */
+export async function submitTournamentBout(draft) {
+    return http.post(
+        `${apiEndpoint}/tournament`,
+        {
+            tournament: draft.tournament,
+            matchDate: draft.matchDate,
+            opponentSchool: draft.opponentSchool,
+            opponentSchoolId: draft.opponentSchoolId,
+            bout: draft.bout,
+        },
+        { headers: authHeader() },
+    );
+}
+
 /** Retry the match-table write for a sheet that was stored but not recorded. */
 export async function commitScoresheet(id) {
     return http.post(`${apiEndpoint}/${id}/commit`, {}, { headers: authHeader() });
@@ -52,6 +72,43 @@ export async function commitScoresheet(id) {
 export async function deleteScoresheet(id) {
     return http.delete(`${apiEndpoint}/${id}`, { headers: authHeader() });
 }
+
+/** A stored dual, shaped like the draft the workspace already knows how to render. */
+export const dualSheetFromServer = (row) => ({
+    id: String(row.scoresheet_id),
+    matchDate: String(row.match_date || '').slice(0, 10),
+    opponentSchool: row.opponent_school,
+    opponentSchoolId: row.school_id,
+    venue: row.venue,
+    startingWeight: row.starting_weight,
+    status: row.status,
+    bouts: row.bouts || [],
+    officialOurScore: row.official_our_score,
+    officialOpponentScore: row.official_opponent_score,
+    report: row.report,
+    teamMatchId: row.team_match_id,
+});
+
+/**
+ * A stored tournament sheet, shaped like its draft.
+ *
+ * The tournament's name is kept inside the one stored bout, so it is lifted
+ * back out to sit beside the date where the draft keeps it.
+ */
+export const tournamentSheetFromServer = (row) => {
+    const { tournament, ...bout } = (row.bouts && row.bouts[0]) || {};
+    return {
+        id: String(row.scoresheet_id),
+        kind: row.kind,
+        tournament: tournament || '',
+        matchDate: String(row.match_date || '').slice(0, 10),
+        opponentSchool: row.opponent_school,
+        opponentSchoolId: row.school_id,
+        status: row.status,
+        report: row.report,
+        bout,
+    };
+};
 
 /**
  * Local drafts carry a generated string id; server sheets have a numeric one.
@@ -63,9 +120,12 @@ const scoresheetApi = {
     getScoresheets,
     getScoresheet,
     submitScoresheet,
+    submitTournamentBout,
     commitScoresheet,
     deleteScoresheet,
     isServerId,
+    dualSheetFromServer,
+    tournamentSheetFromServer,
 };
 
 export default scoresheetApi;

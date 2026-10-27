@@ -2,6 +2,7 @@ import http from './httpService';
 
 const apiEndpointRegularSeason = '/wrestling-api/matches/regular-season';
 const apiEndpointIndividual = '/wrestling-api/matches/individual';
+const apiEndpointTournaments = '/wrestling-api/matches/tournaments';
 
 export async function getRegularSeasonMatches() {
     return http.get(`${apiEndpointRegularSeason}`);
@@ -17,4 +18,9 @@ export async function getIndividualMatches() {
 
 export function getIndividualMatchByWrestler(wrestlerId) {
     return http.get(`${apiEndpointIndividual}/${wrestlerId}`);
+}
+
+/** Every tournament name already on record, most recent first. */
+export async function getTournamentNames() {
+    return http.get(`${apiEndpointTournaments}`);
 }

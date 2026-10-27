@@ -54,6 +54,13 @@ const forfeitNote = (forfeit) => {
     return 'Neither team wrestled this weight. A double forfeit is worth nothing to either side.';
 };
 
+/**
+ * One bout: names, the scoring pad, and how it ended.
+ *
+ * Duals and tournament sheets share this. The props after `readOnly` are what
+ * a tournament changes -- which forfeits it can have, no team points, and
+ * `children` in place of the pad when a quick result is being typed instead.
+ */
 const BoutPanel = ({
     bout,
     roster,
@@ -68,6 +75,14 @@ const BoutPanel = ({
     onSetStatus,
     onSetWinner,
     readOnly,
+    forfeitOptions = FORFEIT_OPTIONS,
+    describeForfeit = forfeitNote,
+    showTeamPoints = true,
+    showFinal = true,
+    finalPrompt = 'That ends the bout. Mark it final so it counts toward the team score.',
+    helpSteps,
+    helpStartsOpen,
+    children,
 }) => {
     const [period, setPeriod] = useState('1');
     const [logOpen, setLogOpen] = useState(false);
@@ -117,20 +132,32 @@ const BoutPanel = ({
                 <Typography className="ls-bout-weight">{bout.weight}</Typography>
                 <Chip
                     size="small"
-                    label={conceded ? FORFEIT_OPTIONS.find((o) => o.value === bout.forfeit).label : bout.status}
+                    label={conceded ? forfeitOptions.find((o) => o.value === bout.forfeit)?.label : bout.status}
                     color={decided ? 'success' : 'default'}
                     variant={decided ? 'filled' : 'outlined'}
                 />
                 <Box sx={{ flexGrow: 1 }} />
                 {result && result.result && (
                     <Typography className="ls-bout-result" component="span">
-                        {result.result === 'Win' ? 'W' : 'L'} &middot; {result.method} &middot;{' '}
-                        {result.result === 'Win' ? result.teamPointsFor : result.teamPointsAgainst} team pts
+                        {result.result === 'Win' ? 'W' : 'L'} &middot; {result.method}
+                        {showTeamPoints && (
+                            <>
+                                {' '}&middot;{' '}
+                                {result.result === 'Win' ? result.teamPointsFor : result.teamPointsAgainst} team pts
+                            </>
+                        )}
                     </Typography>
                 )}
             </Box>
 
-            {!readOnly && <ScoringHelp rules={rules} />}
+            {!readOnly && (
+                <ScoringHelp
+                    rules={rules}
+                    steps={helpSteps}
+                    showTeamPoints={showTeamPoints}
+                    startOpen={helpStartsOpen}
+                />
+            )}
 
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} className="ls-bout-names">
                 {/* A strict picklist, not free text: picking from the roster is
@@ -157,7 +184,7 @@ const BoutPanel = ({
                         disabled={readOnly}
                         fullWidth
                         size="small"
-                        helperText="Roster unavailable — type the name"
+                        helperText={readOnly ? undefined : 'Roster unavailable — type the name'}
                     />
                 )}
                 <TextField
@@ -172,8 +199,10 @@ const BoutPanel = ({
 
             {conceded ? (
                 <Alert severity="info" className="ls-bout-note">
-                    {forfeitNote(bout.forfeit)}
+                    {describeForfeit(bout.forfeit)}
                 </Alert>
+            ) : children ? (
+                children
             ) : readOnly ? (
                 /* Reading a finished dual, not scoring one. The pad, the period
                    selector and the forfeit controls are all things you would
@@ -255,7 +284,7 @@ const BoutPanel = ({
                                 </Button>
                             }
                         >
-                            That ends the bout. Mark it final so it counts toward the team score.
+                            {finalPrompt}
                         </Alert>
                     )}
 
@@ -354,7 +383,7 @@ const BoutPanel = ({
                         onChange={(_e, value) => onSetForfeit(bout.weight, value)}
                         className="ls-forfeit-group"
                     >
-                        {FORFEIT_OPTIONS.map((option) => (
+                        {forfeitOptions.map((option) => (
                             <ToggleButton key={option.value} value={option.value} disabled={readOnly}>
                                 {option.label}
                             </ToggleButton>
@@ -364,7 +393,7 @@ const BoutPanel = ({
 
                 <Box sx={{ flexGrow: 1 }} />
 
-                {!conceded && (
+                {!conceded && showFinal && (
                     <Box className="ls-final">
                         {!readiness.ready && bout.status !== BOUT_FINAL && (
                             <Typography variant="caption" className="ls-final-reason">
