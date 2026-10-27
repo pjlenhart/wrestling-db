@@ -3,6 +3,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { parseCalendarDate } from '../../common/dates';
+import { useScoresheetColumn } from '../../LiveScoresheet/components/ScoresheetDialog';
 import {
     actionCountColumns,
     hasBreakdown,
@@ -11,6 +12,8 @@ import {
 
 const SeasonTable = (props) => {
     const { data, type } = props;
+    // Leads every bout table, right after the selection checkboxes.
+    const { column: scoresheetColumn, dialog: scoresheetDialog } = useScoresheetColumn();
 
     const gridStyles = {
         borderRadius: '12px',
@@ -59,6 +62,7 @@ const SeasonTable = (props) => {
     };
 
     const individualColumns = [
+        scoresheetColumn,
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
@@ -155,6 +159,7 @@ const SeasonTable = (props) => {
     ];
 
     const regularSeasonColumns = [
+        scoresheetColumn,
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
@@ -298,6 +303,7 @@ const SeasonTable = (props) => {
             <Box sx={{ height, width: '100%' }}>
                 {renderTable()}
             </Box>
+            {scoresheetDialog}
         </Box>
     );
 };

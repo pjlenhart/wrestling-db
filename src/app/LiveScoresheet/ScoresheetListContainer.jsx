@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { listDrafts, deleteDraft, DraftStoreError, STATUS_IN_PROGRESS } from './storage/draftStore';
+import {
+    listDrafts,
+    deleteDraft,
+    isTournamentDraft,
+    DraftStoreError,
+    KIND_DUAL,
+    KIND_TOURNAMENT,
+    STATUS_IN_PROGRESS,
+} from './storage/draftStore';
 import { getScoresheets } from './services/scoresheetApi';
 import { deriveLiveDual } from './scoring/liveBout';
+import { deriveTournamentBout } from './scoring/tournamentBout';
 import ScoresheetList from './components/ScoresheetList';
 
 /**
@@ -12,7 +21,44 @@ import ScoresheetList from './components/ScoresheetList';
  * both are fetched and normalised into one shape the list can render.
  */
 
+/** A tournament draft's one bout, scored as far as it has got. */
+const localTournamentRow = (draft) => {
+    let derived = null;
+    try {
+        derived = deriveTournamentBout({ ...draft, bout: draft.bout || {} });
+    } catch (err) {
+        // Same rule as a dual: a draft that will not derive still gets a row.
+    }
+    const bout = draft.bout || {};
+
+    return {
+        key: `local-${draft.id}`,
+        id: draft.id,
+        kind: KIND_TOURNAMENT,
+        source: 'local',
+        matchDate: draft.matchDate,
+        tournament: draft.tournament,
+        opponentSchool: draft.opponentSchool,
+        weight: bout.weight,
+        wrestler: bout.wrestler,
+        opponent: bout.opponent,
+        status: STATUS_IN_PROGRESS,
+        result: derived?.result ?? null,
+        method: derived?.method ?? null,
+        period: derived?.period ?? null,
+        recorded: derived ? derived.record : true,
+        pointsFor: derived?.pointsFor ?? null,
+        pointsAgainst: derived?.pointsAgainst ?? null,
+        // No team score: a tournament sheet is a single bout.
+        ourScore: null,
+        opponentScore: null,
+        draft,
+    };
+};
+
 const localRow = (draft) => {
+    if (isTournamentDraft(draft)) return localTournamentRow(draft);
+
     let ourScore = null;
     let opponentScore = null;
     let decidedCount = null;
@@ -30,6 +76,7 @@ const localRow = (draft) => {
     return {
         key: `local-${draft.id}`,
         id: draft.id,
+        kind: KIND_DUAL,
         source: 'local',
         matchDate: draft.matchDate,
         opponentSchool: draft.opponentSchool,
@@ -46,7 +93,19 @@ const localRow = (draft) => {
 const serverRow = (sheet) => ({
     key: `server-${sheet.scoresheet_id}`,
     id: sheet.scoresheet_id,
+    // Older APIs did not say; everything they returned was a dual.
+    kind: sheet.kind || KIND_DUAL,
     source: 'server',
+    tournament: sheet.tournament,
+    weight: sheet.weight,
+    wrestler: sheet.wrestler,
+    opponent: sheet.opponent,
+    result: sheet.result ?? null,
+    method: sheet.method ?? null,
+    period: sheet.period ?? null,
+    pointsFor: sheet.points_for ?? null,
+    pointsAgainst: sheet.points_against ?? null,
+    recorded: sheet.recorded,
     matchDate: String(sheet.match_date || '').slice(0, 10),
     opponentSchool: sheet.opponent_school,
     venue: sheet.venue,

@@ -19,6 +19,8 @@ import ScoresheetListContainer from './app/LiveScoresheet/ScoresheetListContaine
 import NewScoresheetContainer from './app/LiveScoresheet/NewScoresheetContainer';
 import ScoresheetWorkspaceContainer from './app/LiveScoresheet/ScoresheetWorkspaceContainer';
 import ScoresheetLogin from './app/LiveScoresheet/components/ScoresheetLogin';
+import NewTournamentContainer from './app/LiveScoresheet/NewTournamentContainer';
+import TournamentWorkspaceContainer from './app/LiveScoresheet/TournamentWorkspaceContainer';
 
 function App() {
     return (
@@ -55,6 +57,8 @@ function App() {
                 <Route path="/scoresheet" exact component={ScoresheetListContainer} />
                 <Route path="/scoresheet/login" exact component={ScoresheetLogin} />
                 <Route path="/scoresheet/new" exact component={NewScoresheetContainer} />
+                <Route path="/scoresheet/tournament/new" exact component={NewTournamentContainer} />
+                <Route path="/scoresheet/tournament/:id" exact component={TournamentWorkspaceContainer} />
                 <Route path="/scoresheet/:id" exact component={ScoresheetWorkspaceContainer} />
                 <Route path="/staff" exact component={Staff} />
                 <Route path="/wrestlers" exact component={WrestlerContainer} />

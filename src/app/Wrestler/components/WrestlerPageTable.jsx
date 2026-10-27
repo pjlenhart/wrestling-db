@@ -2,12 +2,16 @@ import React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import { parseCalendarDate } from '../../common/dates';
+import { useScoresheetColumn } from '../../LiveScoresheet/components/ScoresheetDialog';
 import { actionCountColumns, hasBreakdown } from '../../common/scoringBreakdown';
 
 const WrestlerPageTable = (props) => {
     const { data, type } = props;
+    // Leads every bout table, right after the selection checkboxes.
+    const { column: scoresheetColumn, dialog: scoresheetDialog } = useScoresheetColumn();
 
     const individualColumns = [
+        scoresheetColumn,
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
@@ -69,7 +73,13 @@ const WrestlerPageTable = (props) => {
             width: 100,
             headerAlign: 'center',
             align: 'center',
-            valueGetter: (params) => params.row.match_stats.match_time,
+            // Stored as a TIME, '00:03:42'. Most bouts have no time, which
+            // the column holds as all zeros -- shown blank, not as 0:00.
+            valueGetter: (params) => {
+                const match = /^00:(\d{2}):(\d{2})$/.exec(params.row.match_stats.match_time || '');
+                if (!match || (match[1] === '00' && match[2] === '00')) return '';
+                return `${Number(match[1])}:${match[2]}`;
+            },
         },
         {
             field: 'points_for',
@@ -109,6 +119,7 @@ const WrestlerPageTable = (props) => {
     ];
 
     const regularSeasonColumns = [
+        scoresheetColumn,
         {
             field: 'wrestler_name',
             headerName: 'Wrestler',
@@ -295,6 +306,7 @@ const WrestlerPageTable = (props) => {
             <Box sx={{ height, width: '100%' }}>
                 {renderTable()}
             </Box>
+            {scoresheetDialog}
         </Box>
     );
 };

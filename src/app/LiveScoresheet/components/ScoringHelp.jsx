@@ -50,8 +50,22 @@ const OUTCOMES = [
     ['Double forfeit', '0'],
 ];
 
-const ScoringHelp = ({ rules }) => {
-    const [open, setOpen] = useState(() => !seenBefore());
+/** The same walkthrough for a single tournament bout, which has no team score. */
+export const TOURNAMENT_STEPS = [
+    'Pick your wrestler, and fill in the opponent and their school.',
+    'Choose the period you are scoring in — it stays put until you change it.',
+    'Tap what happened, under whichever wrestler earned it.',
+    'Press “Bout final” when the bout ends, and add the time if it was a pin or tech.',
+    'Press “Record” at the top to put it on your wrestler’s record.',
+];
+
+/**
+ * `startOpen` overrides the first-time rule. A tournament passes false: its
+ * sheets are started a bout at a time, all day, and a panel that has to be
+ * closed on every one of them is in the way rather than helping.
+ */
+const ScoringHelp = ({ rules, steps = STEPS, showTeamPoints = true, startOpen }) => {
+    const [open, setOpen] = useState(() => (startOpen === undefined ? !seenBefore() : startOpen));
     const actions = buildScoringActions(rules);
 
     const toggle = (_event, expanded) => {
@@ -67,7 +81,7 @@ const ScoringHelp = ({ rules }) => {
             </AccordionSummary>
             <AccordionDetails className="ls-help-details">
                 <Box component="ol" className="ls-help-steps">
-                    {STEPS.map((step) => (
+                    {steps.map((step) => (
                         <li key={step}>{step}</li>
                     ))}
                 </Box>
@@ -87,15 +101,19 @@ const ScoringHelp = ({ rules }) => {
                     code beside each action is the shorthand written in the paper book.
                 </Typography>
 
-                <Typography className="ls-help-heading">What a win is worth</Typography>
-                <Box className="ls-help-legend">
-                    {OUTCOMES.map(([what, worth]) => (
-                        <Box key={what} className="ls-help-legend-row">
-                            <span className="ls-help-legend-name">{what}</span>
-                            <span className="ls-help-legend-points">{worth}</span>
+                {showTeamPoints && (
+                    <>
+                        <Typography className="ls-help-heading">What a win is worth</Typography>
+                        <Box className="ls-help-legend">
+                            {OUTCOMES.map(([what, worth]) => (
+                                <Box key={what} className="ls-help-legend-row">
+                                    <span className="ls-help-legend-name">{what}</span>
+                                    <span className="ls-help-legend-points">{worth}</span>
+                                </Box>
+                            ))}
                         </Box>
-                    ))}
-                </Box>
+                    </>
+                )}
                 <Typography variant="caption" color="text.secondary" className="ls-help-note">
                     The “Wins by” row sits under the <strong>winner</strong>. Tapping PIN under your wrestler
                     means your wrestler won by pin. You never add the score up yourself — it is worked out as you

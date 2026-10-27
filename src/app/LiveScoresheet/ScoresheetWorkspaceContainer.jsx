@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { getWrestlers } from '../services/rosterService';
-import { getDraft, saveDraft, deleteDraft, DraftStoreError } from './storage/draftStore';
+import { getDraft, saveDraft, deleteDraft, isTournamentDraft, DraftStoreError } from './storage/draftStore';
 import { readCachedRoster, writeCachedRoster } from './storage/rosterCache';
-import { getScoresheet, submitScoresheet, isServerId } from './services/scoresheetApi';
+import { getScoresheet, submitScoresheet, isServerId, dualSheetFromServer } from './services/scoresheetApi';
 import {
     addEvent,
     undoLastEvent,
@@ -16,22 +16,6 @@ import {
 } from './scoring/liveBout';
 import { canEditScoresheets } from './permissions';
 import ScoringWorkspace from './components/ScoringWorkspace';
-
-/** A stored sheet, shaped like the draft the workspace already knows how to render. */
-const sheetFromServer = (row) => ({
-    id: String(row.scoresheet_id),
-    matchDate: String(row.match_date || '').slice(0, 10),
-    opponentSchool: row.opponent_school,
-    opponentSchoolId: row.school_id,
-    venue: row.venue,
-    startingWeight: row.starting_weight,
-    status: row.status,
-    bouts: row.bouts || [],
-    officialOurScore: row.official_our_score,
-    officialOpponentScore: row.official_opponent_score,
-    report: row.report,
-    teamMatchId: row.team_match_id,
-});
 
 const ScoresheetWorkspaceContainer = () => {
     const { id } = useParams();
@@ -57,7 +41,12 @@ const ScoresheetWorkspaceContainer = () => {
                 try {
                     const { data } = await getScoresheet(id);
                     if (cancelled) return;
-                    const sheet = sheetFromServer(data);
+                    // One bout, not a dual: it has its own screen.
+                    if (data.kind === 'tournament') {
+                        history.replace(`/scoresheet/tournament/${id}`);
+                        return;
+                    }
+                    const sheet = dualSheetFromServer(data);
                     setDraft(sheet);
                     setActiveWeight(sheet.bouts.length ? sheet.bouts[0].weight : null);
                 } catch (err) {
@@ -74,6 +63,10 @@ const ScoresheetWorkspaceContainer = () => {
                     setNotFound(true);
                     return;
                 }
+                if (isTournamentDraft(found)) {
+                    history.replace(`/scoresheet/tournament/${id}`);
+                    return;
+                }
                 setDraft(found);
                 setActiveWeight(found.bouts.length ? found.bouts[0].weight : null);
             } catch (err) {
@@ -85,7 +78,7 @@ const ScoresheetWorkspaceContainer = () => {
         return () => {
             cancelled = true;
         };
-    }, [id, fromServer]);
+    }, [id, fromServer, history]);
 
     useEffect(() => {
         const loadRoster = async () => {
