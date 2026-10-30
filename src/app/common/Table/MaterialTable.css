@@ -6,6 +6,60 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/* Sticky headers. A header sticks to its nearest scrolling ancestor, so for it
+   to stick to the page (just under the floating navbar) nothing between the
+   table and the page may scroll: `clip` cuts off overflow without scrolling.
+   That works wherever the table fits its column. On a phone a wide table
+   needs to scroll sideways, so there it scrolls inside a box that fits the
+   window instead, header pinned to the top of the box. */
+@media (min-width: 700px) {
+    .material-table-sticky.table-responsive,
+    .material-table-sticky .MuiTableContainer-root {
+        overflow: visible;
+    }
+
+    .material-table-sticky .material-table-paper-modern {
+        overflow: clip;
+    }
+
+    .material-table-sticky thead th {
+        top: var(--navbar-bottom, 0px);
+    }
+}
+
+@media (max-width: 699px) {
+    .material-table-sticky .MuiTableContainer-root {
+        max-height: calc(100vh - var(--navbar-bottom, 6rem) - 1rem);
+        max-height: calc(100dvh - var(--navbar-bottom, 6rem) - 1rem);
+    }
+}
+
+/* Bout tables (MUI DataGrid 5): the grid grows to its page of rows, and its
+   header row sticks under the navbar as the page scrolls. The grid places the
+   header absolutely and pushes the rows down by its height; in the flow
+   instead, it can stick, and the rows follow it with no extra margin.
+   Sideways scrolling stays inside the grid, so nothing around it scrolls. */
+.bout-grid-frame .MuiDataGrid-main {
+    overflow: clip;
+}
+
+.bout-grid-frame .MuiDataGrid-columnHeaders {
+    position: sticky;
+    top: var(--navbar-bottom, 0px);
+    z-index: 3;
+}
+
+.bout-grid-frame .MuiDataGrid-virtualScroller {
+    margin-top: 0 !important;
+}
+
+/* DataGrid 5.10 pads each row with an empty filler cell (no data-field) to
+   the width it measured for the grid, which can be a stale, wider one: a few
+   pixels of sideways scroll for nothing. The columns already fill the row. */
+.bout-grid-frame .MuiDataGrid-row > .MuiDataGrid-cell:not([data-field]) {
+    display: none;
+}
+
 .material-table-paper-modern {
     overflow: hidden;
     border-radius: 12px !important;

@@ -1,4 +1,4 @@
-import { hasBreakdown, sumBreakdowns } from './scoringBreakdown';
+import { breakdownRows, hasBreakdown, sumBreakdowns } from './scoringBreakdown';
 
 // Shaped like the API's `match_stats` for each kind of match.
 const dualMeet = {
@@ -81,5 +81,29 @@ describe('sumBreakdowns', () => {
         // The 12-4 postseason score must not leak into the breakdown totals.
         expect(stats.total_points_for).toBe(7);
         expect(stats.total_points_against).toBe(3);
+    });
+});
+
+describe('breakdownRows', () => {
+    it('lists every action each way, with its points', () => {
+        const rows = breakdownRows(dualMeet);
+        expect(rows.map((r) => r.label)).toEqual([
+            'Takedowns',
+            'Reversals',
+            'Escapes',
+            'Near falls',
+            'Penalties',
+        ]);
+        expect(rows[0]).toEqual({ label: 'Takedowns', for: 2, forPoints: 6, against: 1, againstPoints: 3 });
+        expect(rows[1]).toEqual({ label: 'Reversals', for: 0, forPoints: 0, against: 0, againstPoints: 0 });
+    });
+
+    it('counts an escape as a point when its points were not stored', () => {
+        const rows = breakdownRows({ match_stats: { escapes_for: 2, escapes_against: 1 } });
+        expect(rows[2]).toMatchObject({ for: 2, forPoints: 2, against: 1, againstPoints: 1 });
+    });
+
+    it('copes with a match that has no stats at all', () => {
+        expect(breakdownRows({}).every((r) => r.for === 0 && r.againstPoints === 0)).toBe(true);
     });
 });

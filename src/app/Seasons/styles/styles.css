@@ -248,7 +248,9 @@
 /* Table container styling */
 .season-table-container {
     border-radius: 12px;
-    overflow: hidden;
+    /* clip, not hidden: hidden would make this the scroll box the table's
+       sticky header sticks to, instead of the page. */
+    overflow: clip;
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
 

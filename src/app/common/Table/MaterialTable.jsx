@@ -20,7 +20,9 @@ const MaterialTable = (props) => {
         minWidth,
         alignCell,
         alignHeaderCells,
-        sticky,
+        // The header stays in view while a long table scrolls. Pass
+        // sticky={false} for a table that should run the full page height.
+        sticky = true,
         compact,
     } = props;
 
@@ -30,7 +32,7 @@ const MaterialTable = (props) => {
     };
 
     return (
-        <Box className="table-responsive">
+        <Box className={`table-responsive${sticky ? ' material-table-sticky' : ''}`}>
             <Paper className="material-table-paper-modern">
                 <TableContainer>
                     <Table

@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import BoutGrid from './BoutGrid';
+import BoutSummaryDialog from './BoutSummaryDialog';
 import BoutPanel from './BoutPanel';
 import QuickResult from './QuickResult';
 import { getScoresheet, dualSheetFromServer, tournamentSheetFromServer } from '../services/scoresheetApi';
@@ -201,13 +202,14 @@ const ScoresheetDialog = ({ scoresheetId, weight, onClose }) => {
 /**
  * A Scoresheet column for a bout table, and the dialog it opens.
  *
- * Every table of bouts on the site gets the same first column, so this hands
- * back both halves: the column to put first, and the dialog to render once
- * beside the table. Bouts entered by hand have no sheet and show a dash, the
- * same as the team match list.
+ * Every table of bouts on the site gets the same column, so this hands back
+ * both halves: the column, and the dialogs to render once beside the table.
+ * A bout scored on a live scoresheet opens the sheet; one entered by hand
+ * opens its match summary, with the scoring breakdown when there is one.
  */
 export const useScoresheetColumn = () => {
     const [selected, setSelected] = useState(null);
+    const sheetId = selected?.scoresheet_id;
 
     const column = {
         field: 'scoresheet_id',
@@ -216,39 +218,41 @@ export const useScoresheetColumn = () => {
         sortable: false,
         filterable: false,
         disableColumnMenu: true,
+        disableExport: true,
         headerAlign: 'center',
         align: 'center',
-        renderCell: (params) =>
-            params.row.scoresheet_id ? (
-                <Tooltip title="View the scoresheet for this bout">
+        renderCell: (params) => {
+            const { row } = params;
+            const what = row.scoresheet_id ? 'scoresheet' : 'match summary';
+            return (
+                <Tooltip title={`View the ${what} for this bout`}>
                     <IconButton
                         size="small"
                         // Room for a thumb: the rows are taller than this anyway.
                         sx={{ width: 40, height: 40 }}
                         className="ls-sheet-link"
-                        aria-label={`View the scoresheet for ${params.row.wrestler_name} against ${
-                            params.row.opponent_name || 'the opponent'
+                        aria-label={`View the ${what} for ${row.wrestler_name} against ${
+                            row.opponent_name || 'the opponent'
                         }`}
                         onClick={(event) => {
                             // The grid would otherwise treat the press as a row click.
                             event.stopPropagation();
-                            setSelected({ id: params.row.scoresheet_id, weight: params.row.weight_class });
+                            setSelected(row);
                         }}
                     >
                         <DescriptionOutlinedIcon fontSize="small" />
                     </IconButton>
                 </Tooltip>
-            ) : (
-                <span className="ls-sheet-none">&mdash;</span>
-            ),
+            );
+        },
     };
 
+    const close = () => setSelected(null);
     const dialog = (
-        <ScoresheetDialog
-            scoresheetId={selected?.id}
-            weight={selected?.weight}
-            onClose={() => setSelected(null)}
-        />
+        <>
+            <ScoresheetDialog scoresheetId={sheetId} weight={selected?.weight_class} onClose={close} />
+            <BoutSummaryDialog match={selected && !sheetId ? selected : null} onClose={close} />
+        </>
     );
 
     return { column, dialog };

@@ -176,7 +176,8 @@
 
 /* Keep the dash for a dual with no sheet the same width as the link icon, so
    the scores still line up. */
-.match-list-item .match-scoresheet-none {
+.match-list-item .match-scoresheet-none,
+.match-list-item .video-none {
     width: 34px;
     text-align: center;
     flex-shrink: 0;

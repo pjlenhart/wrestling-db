@@ -5,6 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MaterialTable from '../../common/Table/MaterialTable';
+import { DualPlaylistLink } from '../../common/video/VideoLink';
 import '../styles/matchStyles.css';
 
 // 'win', 'loss', or null when the result isn't recorded as either.
@@ -35,7 +36,7 @@ const ScoresheetLink = ({ match }) =>
         <span className="match-scoresheet-none">&mdash;</span>
     );
 
-// On a phone, six columns can't fit without scrolling sideways, so each dual
+// On a phone, seven columns can't fit without scrolling sideways, so each dual
 // becomes one compact row: who and when on the left, the score and result on
 // the right.
 const MatchList = ({ matches }) => (
@@ -56,6 +57,7 @@ const MatchList = ({ matches }) => (
                             {match.team_score ?? '-'}&ndash;{match.opponent_score ?? '-'}
                         </span>
                     </div>
+                    <DualPlaylistLink teamMatchId={match.team_match_id} opponent={match.opponent_school} />
                     <ScoresheetLink match={match} />
                 </li>
             );
@@ -82,27 +84,27 @@ const MatchTable = (props) => {
         {
             path: 'opponent_school',
             label: 'Opponent',
-            width: '30%',
+            width: '28%',
         },
         {
             path: 'match_date_formatted',
             label: 'Date',
-            width: '18%',
+            width: '16%',
         },
         {
             path: 'team_score',
             label: 'Towson',
-            width: '12%',
+            width: '11%',
         },
         {
             path: 'opponent_score',
             label: 'Opponent',
-            width: '12%',
+            width: '11%',
         },
         {
             path: 'team_result',
             label: 'Result',
-            width: '14%',
+            width: '12%',
             content: (match) => {
                 const result = resultOf(match);
                 return (
@@ -117,9 +119,18 @@ const MatchTable = (props) => {
             },
         },
         {
+            // The YouTube playlist of every bout filmed at the dual.
+            path: 'video',
+            label: 'Video',
+            width: '10%',
+            content: (match) => (
+                <DualPlaylistLink teamMatchId={match.team_match_id} opponent={match.opponent_school} />
+            ),
+        },
+        {
             path: 'scoresheet_id',
             label: 'Scoresheet',
-            width: '14%',
+            width: '12%',
             content: (match) => <ScoresheetLink match={match} />,
         },
     ];

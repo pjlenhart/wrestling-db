@@ -77,39 +77,30 @@ export const sumBreakdowns = (matches) => {
     return stats;
 };
 
-const statColumn = (field, headerName, width) => ({
-    field,
-    headerName,
-    width,
-    headerAlign: 'center',
-    align: 'center',
-    valueGetter: (params) => params.row.match_stats?.[field],
-});
-
-// How many times each scoring action happened.
-export const actionCountColumns = [
-    statColumn('takedowns_for', 'TD For', 90),
-    statColumn('takedowns_against', 'TD Ag', 90),
-    statColumn('reversals_for', 'Rev For', 90),
-    statColumn('reversals_against', 'Rev Ag', 90),
-    statColumn('escapes_for', 'Esc For', 90),
-    statColumn('escapes_against', 'Esc Ag', 90),
-    statColumn('nearfall_for', 'NF For', 90),
-    statColumn('nearfall_against', 'NF Ag', 90),
+// One line per scoring action for a single match: how many times it happened
+// and what it was worth, each way. Only meaningful when the match has a
+// breakdown. Escapes fall back to a point apiece, as in sumBreakdowns.
+const ACTIONS = [
+    ['Takedowns', 'takedowns', 'takedown_points'],
+    ['Reversals', 'reversals', 'reversal_points'],
+    ['Escapes', 'escapes', 'escape_points'],
+    ['Near falls', 'nearfall', 'nearfall_points'],
+    ['Penalties', 'penalties', 'penalty_points'],
 ];
 
-// What those actions were worth, plus penalties.
-export const pointAndPenaltyColumns = [
-    statColumn('takedown_points_for', 'TD Pts For', 110),
-    statColumn('takedown_points_against', 'TD Pts Ag', 110),
-    statColumn('reversal_points_for', 'Rev Pts For', 110),
-    statColumn('reversal_points_against', 'Rev Pts Ag', 110),
-    statColumn('escape_points_for', 'Esc Pts For', 110),
-    statColumn('escape_points_against', 'Esc Pts Ag', 110),
-    statColumn('nearfall_points_for', 'NF Pts For', 110),
-    statColumn('nearfall_points_against', 'NF Pts Ag', 110),
-    statColumn('penalties_for', 'Pen For', 90),
-    statColumn('penalties_against', 'Pen Ag', 90),
-    statColumn('penalty_points_for', 'Pen Pts For', 110),
-    statColumn('penalty_points_against', 'Pen Pts Ag', 110),
-];
+export const breakdownRows = (match) => {
+    const ms = match?.match_stats || {};
+    const count = (field) => Number(ms[field]) || 0;
+    return ACTIONS.map(([label, counts, points]) => {
+        const forCount = count(`${counts}_for`);
+        const againstCount = count(`${counts}_against`);
+        const fallback = counts === 'escapes';
+        return {
+            label,
+            for: forCount,
+            forPoints: count(`${points}_for`) || (fallback ? forCount : 0),
+            against: againstCount,
+            againstPoints: count(`${points}_against`) || (fallback ? againstCount : 0),
+        };
+    });
+};
