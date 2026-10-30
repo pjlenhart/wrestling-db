@@ -116,6 +116,12 @@
     color: var(--color-gray-600);
 }
 
+/* A wrestler's season rows: italic, so they read as a breakdown of the
+   career row above them rather than wrestlers of their own. */
+.material-table-subrow td {
+    font-style: italic;
+}
+
 /* A season row, opened from a wrestler: indented under the name. */
 .record-season-label {
     padding-left: 1rem;
