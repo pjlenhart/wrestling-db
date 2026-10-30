@@ -15,6 +15,7 @@ const NavBar = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     const toolbarRef = useRef(null);
     const measureRef = useRef(null);
+    const appBarRef = useRef(null);
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
@@ -61,6 +62,23 @@ const NavBar = (props) => {
         return () => observer.disconnect();
     }, []);
 
+    // The bar floats over the page, so anything that sticks to the top of the
+    // window (table headers) has to stop at its bottom edge instead. Publish
+    // that edge as --navbar-bottom, kept current as the bar changes height.
+    useLayoutEffect(() => {
+        const bar = appBarRef.current;
+        if (!bar) return undefined;
+        const publish = () =>
+            document.documentElement.style.setProperty(
+                '--navbar-bottom',
+                `${Math.ceil(bar.getBoundingClientRect().bottom)}px`,
+            );
+        publish();
+        const observer = new ResizeObserver(publish);
+        observer.observe(bar);
+        return () => observer.disconnect();
+    }, []);
+
     const renderDesktopItems = () =>
         pages.map((page, index) => (
             <MenuItem key={index} className="navbar-menu-item">
@@ -77,7 +95,7 @@ const NavBar = (props) => {
     return (
         <>
             <div>
-                <AppBar position="fixed" className="navbar-appbar">
+                <AppBar position="fixed" className="navbar-appbar" ref={appBarRef}>
                     <Container maxWidth="lg">
                         <Toolbar
                             variant="regular"

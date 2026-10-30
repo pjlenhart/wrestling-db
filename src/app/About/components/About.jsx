@@ -11,7 +11,6 @@ import PageHero from '../../common/Header/PageHero';
 import InfoIcon from '@mui/icons-material/Info';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import StorageIcon from '@mui/icons-material/Storage';
-import SecurityIcon from '@mui/icons-material/Security';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 
@@ -34,12 +33,6 @@ const About = () => {
             header: 'How is the Data Obtained?',
             description:
                 'All data is obtained by manual scoring throughout the wrestling season by Towson High School student managers or Coach PJ. Individual and post-season data is scored by official tournament scorers and have been collected from TrackWrestling, which most tournaments use as an open platform to score and track matches for several individualized tournaments.',
-        },
-        {
-            icon: <SecurityIcon />,
-            header: 'Who Has Access to the Website?',
-            description:
-                'Only verified people with a login to this website will be granted access to browse the site past the home login page. All data will be protected to the best of my ability and login username/passwords will only be distributed to those affiliated with Towson High School Wrestling. If there are any concerns of security, do not hesistate to reach out',
         },
         {
             icon: <LightbulbIcon />,

@@ -201,8 +201,8 @@ const SeasonPage = (props) => {
                                     Dual Meet Matches
                                 </Typography>
                                 <Typography className="season-section-subtitle">
-                                    Dual meet matches with full scoring
-                                    breakdown
+                                    Every dual meet bout. Open a bout&rsquo;s
+                                    scoresheet for its scoring breakdown
                                 </Typography>
                             </Box>
                         </Box>
@@ -210,6 +210,7 @@ const SeasonPage = (props) => {
                             <SeasonTable
                                 data={regularSeasonDataFiltered}
                                 type="regularSeason"
+                                newestFirst={season === 'all'}
                             />
                         </Box>
                     </Box>
@@ -236,6 +237,7 @@ const SeasonPage = (props) => {
                             <SeasonTable
                                 data={individualDataFiltered}
                                 type="individual"
+                                newestFirst={season === 'all'}
                             />
                         </Box>
                     </Box>

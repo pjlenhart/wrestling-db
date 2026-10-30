@@ -1082,11 +1082,6 @@
     background-color: rgba(128, 0, 0, 0.08) !important;
 }
 
-/* Entered by hand: no sheet to open. */
-.ls-sheet-none {
-    color: #bdbdbd;
-}
-
 .ls-dialog-head {
     margin-bottom: var(--spacing-md);
 }
@@ -1139,4 +1134,21 @@
 .ls-submit-result {
     font-size: clamp(1.25rem, 6vw, 2rem) !important;
     line-height: 1.2 !important;
+}
+
+/* Match summary: the breakdown of a bout entered without a scoresheet. */
+.ls-summary-table th,
+.ls-summary-table td {
+    font-variant-numeric: tabular-nums;
+}
+
+.ls-summary-table thead .MuiTableCell-root {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-gray-700);
+}
+
+.ls-summary-total .MuiTableCell-root {
+    font-weight: 700;
+    border-bottom: 0;
 }

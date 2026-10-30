@@ -6,6 +6,60 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/* Sticky headers. A header sticks to its nearest scrolling ancestor, so for it
+   to stick to the page (just under the floating navbar) nothing between the
+   table and the page may scroll: `clip` cuts off overflow without scrolling.
+   That works wherever the table fits its column. On a phone a wide table
+   needs to scroll sideways, so there it scrolls inside a box that fits the
+   window instead, header pinned to the top of the box. */
+@media (min-width: 700px) {
+    .material-table-sticky.table-responsive,
+    .material-table-sticky .MuiTableContainer-root {
+        overflow: visible;
+    }
+
+    .material-table-sticky .material-table-paper-modern {
+        overflow: clip;
+    }
+
+    .material-table-sticky thead th {
+        top: var(--navbar-bottom, 0px);
+    }
+}
+
+@media (max-width: 699px) {
+    .material-table-sticky .MuiTableContainer-root {
+        max-height: calc(100vh - var(--navbar-bottom, 6rem) - 1rem);
+        max-height: calc(100dvh - var(--navbar-bottom, 6rem) - 1rem);
+    }
+}
+
+/* Bout tables (MUI DataGrid 5): the grid grows to its page of rows, and its
+   header row sticks under the navbar as the page scrolls. The grid places the
+   header absolutely and pushes the rows down by its height; in the flow
+   instead, it can stick, and the rows follow it with no extra margin.
+   Sideways scrolling stays inside the grid, so nothing around it scrolls. */
+.bout-grid-frame .MuiDataGrid-main {
+    overflow: clip;
+}
+
+.bout-grid-frame .MuiDataGrid-columnHeaders {
+    position: sticky;
+    top: var(--navbar-bottom, 0px);
+    z-index: 3;
+}
+
+.bout-grid-frame .MuiDataGrid-virtualScroller {
+    margin-top: 0 !important;
+}
+
+/* DataGrid 5.10 pads each row with an empty filler cell (no data-field) to
+   the width it measured for the grid, which can be a stale, wider one: a few
+   pixels of sideways scroll for nothing. The columns already fill the row. */
+.bout-grid-frame .MuiDataGrid-row > .MuiDataGrid-cell:not([data-field]) {
+    display: none;
+}
+
 .material-table-paper-modern {
     overflow: hidden;
     border-radius: 12px !important;
@@ -32,6 +86,30 @@
     transition: background-color 0.15s ease;
 }
 
+/* Accordion rows (getSubRows): the arrow turns when the row is open, and
+   the rows it opens sit on a faint maroon wash so they read as its own. */
+.material-table-row-modern.is-expandable {
+    cursor: pointer;
+}
+
+.material-table-expand-cell {
+    width: 48px;
+    text-align: center !important;
+}
+
+.material-table-expand-button {
+    color: var(--color-primary, #800000) !important;
+    transition: transform 0.2s ease;
+}
+
+.material-table-row-modern.is-open .material-table-expand-button {
+    transform: rotate(180deg);
+}
+
+.material-table-subrow td {
+    background-color: rgba(128, 0, 0, 0.035);
+}
+
 .material-table-row-modern:hover {
     background-color: rgba(128, 0, 0, 0.04) !important;
 }
@@ -47,7 +125,12 @@
         padding: 0.5rem 0.375rem !important;
     }
     
-    .material-table-row-modern td {
+    .material-table-expand-cell {
+        width: 36px !important;
+    }
+
+    .material-table-row-modern td,
+    .material-table-subrow td {
         font-size: 0.75rem !important;
         padding: 0.5rem 0.375rem !important;
     }

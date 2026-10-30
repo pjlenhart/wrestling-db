@@ -1,222 +1,79 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import '../../common/Table/MaterialTable.css';
 import { parseCalendarDate } from '../../common/dates';
 import { useScoresheetColumn } from '../../LiveScoresheet/components/ScoresheetDialog';
-import { actionCountColumns, hasBreakdown } from '../../common/scoringBreakdown';
+import { videoColumn } from '../../common/video/VideoLink';
+import { methodColumn, newestFirst, scoreColumn } from '../../common/boutColumns';
 
 const WrestlerPageTable = (props) => {
     const { data, type } = props;
-    // Leads every bout table, right after the selection checkboxes.
+    // A career reads best from the latest bout back.
+    const rows = useMemo(() => newestFirst(data), [data]);
+    // Video, then Scoresheet, lead every bout table right after the selection
+    // checkboxes. The scoring breakdown, period and fall time live in the
+    // scoresheet (or the match summary it opens), so the table stays narrow.
+    // It's all one wrestler's bouts, so there's no Wrestler column.
     const { column: scoresheetColumn, dialog: scoresheetDialog } = useScoresheetColumn();
 
-    const individualColumns = [
+    const leadingColumns = [
+        videoColumn,
         scoresheetColumn,
-        {
-            field: 'wrestler_name',
-            headerName: 'Wrestler',
-            width: 180,
-            sortable: true,
-            filterable: true,
-        },
         {
             field: 'season',
             headerName: 'Season',
-            width: 120,
-            sortable: true,
-            filterable: true,
+            width: 110,
         },
         {
             field: 'opponent_name',
             headerName: 'Opponent',
-            width: 180,
-            filterable: true,
+            minWidth: 120,
+            flex: 1,
         },
         {
             field: 'school_name',
             headerName: 'School',
-            width: 180,
-            sortable: true,
-            filterable: true,
+            minWidth: 120,
+            flex: 1,
         },
         {
             field: 'weight_class',
             headerName: 'Weight',
-            width: 100,
-            filterable: true,
+            width: 80,
         },
         {
             field: 'match_date',
             headerName: 'Date',
             type: 'date',
-            width: 120,
-            filterable: true,
+            width: 105,
             valueGetter: (params) => parseCalendarDate(params.row.match_date),
         },
+    ];
+
+    const resultColumns = [
+        {
+            field: 'match_result',
+            headerName: 'Result',
+            width: 75,
+        },
+        scoreColumn,
+        methodColumn,
+    ];
+
+    const individualColumns = [
+        ...leadingColumns,
         {
             field: 'tournament',
             headerName: 'Tournament',
-            width: 250,
-            sortable: true,
-            filterable: true,
+            minWidth: 170,
+            flex: 1.5,
             valueGetter: (params) => params.row.match_stats.tournament,
         },
-        {
-            field: 'match_result',
-            headerName: 'Result',
-            width: 80,
-            filterable: true,
-        },
-        {
-            field: 'match_time',
-            headerName: 'Time',
-            width: 100,
-            headerAlign: 'center',
-            align: 'center',
-            // Stored as a TIME, '00:03:42'. Most bouts have no time, which
-            // the column holds as all zeros -- shown blank, not as 0:00.
-            valueGetter: (params) => {
-                const match = /^00:(\d{2}):(\d{2})$/.exec(params.row.match_stats.match_time || '');
-                if (!match || (match[1] === '00' && match[2] === '00')) return '';
-                return `${Number(match[1])}:${match[2]}`;
-            },
-        },
-        {
-            field: 'points_for',
-            headerName: 'Pts For',
-            width: 100,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.points_for,
-        },
-        {
-            field: 'points_against',
-            headerName: 'Pts Against',
-            width: 120,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.points_against,
-        },
-        {
-            field: 'method_of_result',
-            headerName: 'Method',
-            width: 150,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.method_of_result,
-        },
-        {
-            field: 'period',
-            headerName: 'Period',
-            width: 80,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.period,
-        },
-        // Most postseason matches only have the score, so the breakdown
-        // columns appear only once at least one match in view has one.
-        ...(data.some(hasBreakdown) ? actionCountColumns : []),
+        ...resultColumns,
     ];
 
-    const regularSeasonColumns = [
-        scoresheetColumn,
-        {
-            field: 'wrestler_name',
-            headerName: 'Wrestler',
-            width: 150,
-            sortable: true,
-            filterable: true,
-        },
-        {
-            field: 'season',
-            headerName: 'Season',
-            width: 110,
-            sortable: true,
-            filterable: true,
-        },
-        {
-            field: 'opponent_name',
-            width: 150,
-            headerName: 'Opponent',
-            filterable: true,
-        },
-        {
-            field: 'school_name',
-            headerName: 'School',
-            width: 150,
-            sortable: true,
-            filterable: true,
-        },
-        {
-            field: 'weight_class',
-            headerName: 'Weight',
-            width: 90,
-            filterable: true,
-        },
-        {
-            field: 'match_date',
-            headerName: 'Date',
-            width: 110,
-            filterable: true,
-            type: 'date',
-            valueGetter: (params) => parseCalendarDate(params.row.match_date),
-        },
-        {
-            field: 'match_result',
-            headerName: 'Result',
-            width: 80,
-            filterable: true,
-        },
-        ...actionCountColumns,
-        {
-            field: 'total_points_for',
-            headerName: 'Total For',
-            width: 100,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.total_points_for,
-        },
-        {
-            field: 'total_points_against',
-            headerName: 'Total Ag',
-            width: 100,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.total_points_against,
-        },
-        {
-            field: 'point_margin',
-            headerName: 'Margin',
-            width: 90,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.point_margin,
-        },
-        {
-            field: 'method_of_result',
-            headerName: 'Method',
-            width: 120,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.method_of_result,
-        },
-        {
-            field: 'period',
-            headerName: 'Period',
-            width: 80,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.period,
-        },
-        {
-            field: 'team_points_earned',
-            headerName: 'Team Pts',
-            width: 100,
-            headerAlign: 'center',
-            align: 'center',
-            valueGetter: (params) => params.row.match_stats.team_points_earned,
-        },
-    ];
+    const regularSeasonColumns = [...leadingColumns, ...resultColumns];
 
     const gridStyles = {
         borderRadius: '12px',
@@ -271,7 +128,7 @@ const WrestlerPageTable = (props) => {
             <DataGrid
                 sx={gridStyles}
                 columns={columns}
-                rows={data}
+                rows={rows}
                 pageSize={20}
                 rowsPerPageOptions={[10, 20, 50]}
                 components={{ Toolbar: GridToolbar }}
@@ -295,17 +152,14 @@ const WrestlerPageTable = (props) => {
                 checkboxSelection
                 disableSelectionOnClick
                 density="comfortable"
+                autoHeight
             />
         );
     };
 
-    const height = type === 'regularSeason' ? 800 : 600;
-
     return (
-        <Box className="table-responsive" sx={{ width: '100%' }}>
-            <Box sx={{ height, width: '100%' }}>
-                {renderTable()}
-            </Box>
+        <Box className="bout-grid-frame">
+            {renderTable()}
             {scoresheetDialog}
         </Box>
     );
