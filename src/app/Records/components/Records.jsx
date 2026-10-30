@@ -18,6 +18,36 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HistoryIcon from '@mui/icons-material/History';
 
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
+// The API sends a row per wrestler per season, plus a 'Career' row with the
+// totals. The page lists wrestlers: the career row, carrying the seasons it
+// opens to, newest first. Bouts dated outside any season (a preseason club
+// tournament in October, say) come as a season of null; they count toward
+// the career, so they're listed last as the off-season.
+export const OFF_SEASON = 'Off-season';
+const bySeasonNewestFirst = (a, b) => {
+    if (a.season === OFF_SEASON) return 1;
+    if (b.season === OFF_SEASON) return -1;
+    return b.season.localeCompare(a.season);
+};
+
+export const groupByWrestler = (records) => {
+    const byId = new Map();
+    (records || []).forEach((r) => {
+        if (!byId.has(r.wrestler_id)) byId.set(r.wrestler_id, { career: null, seasons: [] });
+        const entry = byId.get(r.wrestler_id);
+        if (r.season === 'Career') entry.career = r;
+        else entry.seasons.push(r.season ? r : { ...r, season: OFF_SEASON });
+    });
+    return [...byId.values()]
+        .filter((entry) => entry.career)
+        .map(({ career, seasons }) => ({
+            ...career,
+            seasons: [...seasons].sort(bySeasonNewestFirst),
+        }));
+};
+
 const Records = (props) => {
     const { records, activeWrestlerIds } = props;
 
@@ -33,11 +63,13 @@ const Records = (props) => {
     // and the page behaves as it did before.
     const canSplitRoster = activeWrestlerIds instanceof Set;
 
+    const wrestlers = useMemo(() => groupByWrestler(records), [records]);
+
     const { activeRecords, alumniRecords } = useMemo(() => {
         if (!canSplitRoster) {
-            return { activeRecords: records || [], alumniRecords: [] };
+            return { activeRecords: wrestlers, alumniRecords: [] };
         }
-        const list = records || [];
+        const list = wrestlers;
         return {
             activeRecords: list.filter((r) =>
                 activeWrestlerIds.has(r.wrestler_id)
@@ -46,7 +78,7 @@ const Records = (props) => {
                 (r) => !activeWrestlerIds.has(r.wrestler_id)
             ),
         };
-    }, [records, activeWrestlerIds, canSplitRoster]);
+    }, [wrestlers, activeWrestlerIds, canSplitRoster]);
 
     const showingActive = rosterTab === 'active';
 
@@ -62,24 +94,22 @@ const Records = (props) => {
     // that would return nothing.
     const seasons = useMemo(() => {
         if (!rosterRecords || rosterRecords.length === 0) return [];
-        const uniqueSeasons = [...new Set(rosterRecords.map((r) => r.season))];
-        // Sort seasons in reverse order (newest first), but keep "Career" at the end
-        return uniqueSeasons.sort((a, b) => {
-            if (a === 'Career') return 1;
-            if (b === 'Career') return -1;
-            return b.localeCompare(a);
-        });
+        const uniqueSeasons = new Set();
+        rosterRecords.forEach((w) =>
+            w.seasons.forEach((s) => s.season !== OFF_SEASON && uniqueSeasons.add(s.season)),
+        );
+        return [...uniqueSeasons].sort((a, b) => b.localeCompare(a));
     }, [rosterRecords]);
 
-    // Filter records based on name and season
+    // A season narrows the list to the wrestlers who competed that season.
     const filteredRecords = useMemo(() => {
         if (!rosterRecords) return [];
 
         return rosterRecords.filter((record) => {
             const matchesName = nameFilter === '' || 
                 record.wrestler_name?.toLowerCase().includes(nameFilter.toLowerCase());
-            const matchesSeason = seasonFilter === '' || 
-                record.season === seasonFilter;
+            const matchesSeason =
+                seasonFilter === '' || record.seasons.some((s) => s.season === seasonFilter);
             return matchesName && matchesSeason;
         });
     }, [rosterRecords, nameFilter, seasonFilter]);
@@ -101,7 +131,7 @@ const Records = (props) => {
         <Box className="modern-page">
             <PageHero
                 title="Records"
-                subtitle="Career statistics and records for all Towson wrestlers by season"
+                subtitle="Career records for every Towson wrestler, season by season"
             />
 
             <Container maxWidth="lg" className="page-content">
@@ -143,7 +173,7 @@ const Records = (props) => {
                         <EmojiEventsIcon className="section-title-icon" />
                         <Typography className="section-title">
                             {!canSplitRoster
-                                ? 'Records by Wrestler, by Year'
+                                ? 'Records by Wrestler'
                                 : showingActive
                                 ? 'Active Roster Records'
                                 : 'Alumni Records'}
@@ -151,10 +181,10 @@ const Records = (props) => {
                     </Box>
                     <Typography className="section-subtitle">
                         {!canSplitRoster
-                            ? 'View wins, losses, pins, and team points earned for each wrestler across all seasons'
+                            ? 'Career wins, losses, pins, and team points. Open a wrestler for their record by season'
                             : showingActive
-                            ? 'Wins, losses, pins, and team points for wrestlers currently on the roster'
-                            : 'Wins, losses, pins, and team points for wrestlers who have finished their Towson careers'}
+                            ? 'Career wins, losses, pins, and team points for wrestlers on the roster. Open a wrestler for their record by season'
+                            : 'Career wins, losses, pins, and team points for wrestlers who have finished at Towson. Open a wrestler for their record by season'}
                     </Typography>
                     
                     {/* Filter Section - .app-fields carries the shared field styling,
@@ -211,11 +241,17 @@ const Records = (props) => {
 
                         <Typography className="records-filter-count">
                             Showing {filteredRecords.length} of{' '}
-                            {rosterRecords.length} records
+                            {plural(rosterRecords.length, 'wrestler')}
                         </Typography>
                     </Box>
 
-                    <RecordsTable records={filteredRecords} />
+                    {/* Remounted per season so a season filter opens every
+                        wrestler it shows, putting that season's record in view. */}
+                    <RecordsTable
+                        key={seasonFilter || 'all'}
+                        wrestlers={filteredRecords}
+                        expandAll={Boolean(seasonFilter)}
+                    />
                 </Paper>
             </Container>
         </Box>

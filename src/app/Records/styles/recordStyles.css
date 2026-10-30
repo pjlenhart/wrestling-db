@@ -107,3 +107,18 @@
         max-width: 100%;
     }
 }
+
+/* Under the name on a wrestler's row: how many seasons it opens to. */
+.record-season-count {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-gray-600);
+}
+
+/* A season row, opened from a wrestler: indented under the name. */
+.record-season-label {
+    padding-left: 1rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-gray-800);
+}
